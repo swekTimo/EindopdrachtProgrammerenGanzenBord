@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GanzenBord", "GanzenBord\GanzenBord.csproj", "{4EE97D81-6716-468F-9B77-1C67FB16D8BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EE97D81-6716-468F-9B77-1C67FB16D8BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EE97D81-6716-468F-9B77-1C67FB16D8BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EE97D81-6716-468F-9B77-1C67FB16D8BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EE97D81-6716-468F-9B77-1C67FB16D8BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18ED076A-5738-459F-ADE4-A606D4C5A677}
+	EndGlobalSection
+EndGlobal
