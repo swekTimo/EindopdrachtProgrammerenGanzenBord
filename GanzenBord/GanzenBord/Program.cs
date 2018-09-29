@@ -10,7 +10,7 @@ namespace GanzenBord
     {
         static void Main(string[] args)
         {
-            //PuhsTest 
+            
         }
     }
 }
