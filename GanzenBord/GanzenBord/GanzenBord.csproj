@@ -43,9 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientGanzenbord.cs" />
+    <Compile Include="GameLogics.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerGanzenbord.cs" />
+    <Compile Include="SpecialField.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
