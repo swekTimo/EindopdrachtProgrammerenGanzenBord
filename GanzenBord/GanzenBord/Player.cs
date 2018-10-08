@@ -29,8 +29,9 @@ namespace GanzenBord
             hasWon = false;
         }
 
-        public void MoveGoose(int amountOfSpaces)
+        public void MoveGoose()
         {
+            Logics.RollDice(out int amountOfSpaces);
             if (PlayNextTrun == false)
             {
                 if (Wait == false)
