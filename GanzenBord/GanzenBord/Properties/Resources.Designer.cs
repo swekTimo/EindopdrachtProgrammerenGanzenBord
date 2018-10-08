@@ -79,5 +79,25 @@ namespace GanzenBord.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansRood {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansRood", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansRoodEnGeelEnGroenEnBlauw {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

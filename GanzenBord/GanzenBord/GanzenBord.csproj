@@ -86,5 +86,11 @@
   <ItemGroup>
     <None Include="Resources\ganzenbord.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ganzenBordGansRood.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ganzenBordGansRoodEnGeelEnGroenEnBlauw.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
