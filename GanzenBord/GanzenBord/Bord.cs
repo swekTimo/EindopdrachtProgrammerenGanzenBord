@@ -42,5 +42,10 @@ namespace GanzenBord
         {
             RulesBox.Visible = false;
         }
+
+        private void playBoard_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

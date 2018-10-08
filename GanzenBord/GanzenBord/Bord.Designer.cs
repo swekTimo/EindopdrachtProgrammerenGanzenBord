@@ -46,6 +46,7 @@
             this.playBoard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.playBoard.TabIndex = 0;
             this.playBoard.TabStop = false;
+            this.playBoard.Click += new System.EventHandler(this.playBoard_Click);
             // 
             // label1
             // 
