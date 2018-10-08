@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GanzenBord
+namespace Server
 {
     class PlayerRanking
     {
@@ -25,7 +25,7 @@ namespace GanzenBord
 
             if (CanRankUp())
                 RankUp();
-            
+
         }
 
         private bool CanRankUp()

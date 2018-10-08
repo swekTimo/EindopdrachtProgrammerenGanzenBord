@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -8,10 +7,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
-
-namespace GanzenBord
+namespace Server
 {
     class ServerGanzenbord
     {
@@ -35,7 +32,7 @@ namespace GanzenBord
             {
                 TcpClient client = listener.AcceptTcpClient();
                 Console.WriteLine($"Accepted client at {DateTime.Now}");
-                
+
                 Thread thread = new Thread(HandleClient);
                 thread.Start(client);
                 Console.WriteLine("Een client heeft verbinding gemaakt en er is een thread voor gestart");
@@ -48,8 +45,8 @@ namespace GanzenBord
             TcpClient client = obj as TcpClient;
             WriteMessage(client, playerCount.ToString());
             //playerRanking = GetPlayerRanking("player{0}", playerCount);
-            WriteMessage(client, $"{playerRanking.Ranking}");
-            
+            //WriteMessage(client, $"{playerRanking.Ranking}");
+
             //hier moet nog een loop komen waar die in blijft
             // die loop houd bij hoeveel spelers er geconnect zijn
             //in de client gebeurd nog niks, totdat de server doorstuurt
@@ -94,8 +91,8 @@ namespace GanzenBord
                 }
                 WriteMessage(client, "notDone");
 
-                }
-            
+            }
+
 
 
             WriteMessage(client, "bye");
@@ -130,8 +127,8 @@ namespace GanzenBord
             {
                 Console.WriteLine("Er is een bestand gevonden met bestaande player rank");
                 string RankPlayer = File.ReadAllText(path);
-                ranking = JsonConvert.DeserializeObject<PlayerRanking>(RankPlayer);
-                
+                //ranking = JsonConvert.DeserializeObject<PlayerRanking>(RankPlayer);
+
             }
             return ranking;
         }

@@ -99,6 +99,7 @@ namespace GanzenBord
             this.startPictureBox = new System.Windows.Forms.PictureBox();
             this.sixtythreePictureBox = new System.Windows.Forms.PictureBox();
             this.sixtytwoPictureBox = new System.Windows.Forms.PictureBox();
+            howManyPlayersLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyonePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fiftyninePictureBox)).BeginInit();
@@ -801,11 +802,23 @@ namespace GanzenBord
             this.sixtytwoPictureBox.TabIndex = 68;
             this.sixtytwoPictureBox.TabStop = false;
             // 
+            // howManyPlayersLabel
+            // 
+            howManyPlayersLabel.AutoSize = true;
+            howManyPlayersLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            howManyPlayersLabel.Location = new System.Drawing.Point(191, 196);
+            howManyPlayersLabel.Name = "howManyPlayersLabel";
+            howManyPlayersLabel.Size = new System.Drawing.Size(394, 23);
+            howManyPlayersLabel.TabIndex = 69;
+            howManyPlayersLabel.Text = "With how many players do you wanna play?";
+            howManyPlayersLabel.Click += new System.EventHandler(this.howManyPlayersLabel_Click);
+            // 
             // Bord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(howManyPlayersLabel);
             this.Controls.Add(this.sixtytwoPictureBox);
             this.Controls.Add(this.sixtythreePictureBox);
             this.Controls.Add(this.startPictureBox);
@@ -1021,5 +1034,6 @@ namespace GanzenBord
         private System.Windows.Forms.PictureBox startPictureBox;
         private System.Windows.Forms.PictureBox sixtythreePictureBox;
         private System.Windows.Forms.PictureBox sixtytwoPictureBox;
+        public static System.Windows.Forms.Label howManyPlayersLabel;
     }
 }

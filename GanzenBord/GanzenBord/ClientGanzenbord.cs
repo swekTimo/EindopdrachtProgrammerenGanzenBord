@@ -16,12 +16,21 @@ namespace GanzenBord
         {
             string message;
             TcpClient client = new TcpClient(GetLocalIPAddress(), 6666);
+
             message = ReadMessage(client);
-            int.TryParse(message, out int value);
+            if (message == 1.ToString())
+            {
+                Bord.howManyPlayersLabel.BringToFront();
+            }
+
+            //int.TryParse(message, out int value);
+
+
+
             message = ReadMessage(client);
             int RankValue;
             int.TryParse(message, out RankValue);
-            player = new Player(value, RankValue);
+            //player = new Player(value, RankValue);
 
             int PlayerField = 0;
             bool done = false;

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4EE97D81-6716-468F-9B77-1C67FB16D8BF}</ProjectGuid>
+    <ProjectGuid>{46760E38-70BD-4BBC-8739-ECE22C634ED9}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GanzenBord</RootNamespace>
-    <AssemblyName>GanzenBord</AssemblyName>
+    <RootNamespace>Server</RootNamespace>
+    <AssemblyName>Server</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,13 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,48 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bord.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Bord.Designer.cs">
-      <DependentUpon>Bord.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ClientGanzenbord.cs" />
-    <Compile Include="GameLogics.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="PlayerRanking.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="SpecialField.cs" />
+    <Compile Include="ServerGanzenbord.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Bord.resx">
-      <DependentUpon>Bord.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="Resources\ganzenbordboard.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ganzenbord.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ganzenBordGansRood.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ganzenBordGansRoodEnGeelEnGroenEnBlauw.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

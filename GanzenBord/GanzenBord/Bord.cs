@@ -15,7 +15,16 @@ namespace GanzenBord
         public Bord()
         {
             InitializeComponent();
+
+
             RulesBox.Visible = false;
+            howManyPlayersLabel.SendToBack();
+
+
+
+
+
+
             startPictureBox.SendToBack();
             onePictureBox.SendToBack();
             twoPictureBox.SendToBack();
@@ -115,6 +124,11 @@ namespace GanzenBord
         }
 
         private void fiftytwoPictureBox_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void howManyPlayersLabel_Click(object sender, EventArgs e)
         {
 
         }
