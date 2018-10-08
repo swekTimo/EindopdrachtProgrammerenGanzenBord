@@ -11,11 +11,15 @@ namespace GanzenBord
 {
     class ClientGanzenbord
     {
-
+        Player player;
         public ClientGanzenbord()
         {
+            string message;
             TcpClient client = new TcpClient(GetLocalIPAddress(), 6666);
-            ReadMessage(client);
+            message = ReadMessage(client);
+            int value = 0;
+            int.TryParse(message, out value);
+            player = new Player(value);
         }
 
 

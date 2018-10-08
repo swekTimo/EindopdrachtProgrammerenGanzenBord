@@ -76,26 +76,111 @@ namespace GanzenBord
 
             bool done = false;
             string message;
+            string status = "Keep Playing";
             int tile = 0;
             while (!done)
             {
-                message = ReadMessage(client1);
-                //if (message)
-                int.TryParse(message, out tile);
-                player1Ranking.AddPoints(tile);
+                // player 1
+                WriteMessage(client1, status);
 
-                message = ReadMessage(client2);
-                int.TryParse(message, out tile);
-                Player2Ranking.AddPoints(tile);
+                message = ReadMessage(client1);
+                if (message != "SameTile")
+                {
+                    int.TryParse(message, out tile);
+                    player1Ranking.AddPoints(tile);
+                }
+
+                WriteMessage(client1, player1Ranking.Ranking.ToString());
+
+                message = ReadMessage(client1);
+                if (message == "endGame")
+                {
+                    done = true;
+                    status = "player 1 has won!";
+                }
+                WriteMessage(client1, "notDone");
+
+                // player 2
+                WriteMessage(client2, status);
+                if (!done)
+                {
+                    message = ReadMessage(client2);
+                    if (message != "SameTile")
+                    {
+                        int.TryParse(message, out tile);
+                        Player2Ranking.AddPoints(tile);
+                    }
+
+                    WriteMessage(client2, Player2Ranking.Ranking.ToString());
+
+                    message = ReadMessage(client2);
+                    if (message == "endGame")
+                    {
+                        done = true;
+                        status = "player 2 has won!";
+                    }
+                    WriteMessage(client2, "notDone");
+                }
+
+                // player 3
+                WriteMessage(client3, status);
 
                 message = ReadMessage(client3);
-                int.TryParse(message, out tile);
-                player3Ranking.AddPoints(tile);
+                if (!done)
+                {
+                    if (message != "SameTile")
+                    {
+                        int.TryParse(message, out tile);
+                        player3Ranking.AddPoints(tile);
+                    }
 
-                message = ReadMessage(client4);
-                int.TryParse(message, out tile);
-                Player4Ranking.AddPoints(tile);
+                    WriteMessage(client3, player3Ranking.Ranking.ToString());
+
+                    message = ReadMessage(client3);
+                    if (message == "endGame")
+                    {
+                        done = true;
+                        status = "player 3 has won!";
+                    }
+                    WriteMessage(client3, "notDone");
+                }
+
+                // player 4
+                WriteMessage(client4, status);
+                if (!done)
+                {
+                    message = ReadMessage(client4);
+
+                    if (message != "SameTile")
+                    {
+                        int.TryParse(message, out tile);
+                        Player4Ranking.AddPoints(tile);
+                    }
+
+                    WriteMessage(client4, Player4Ranking.Ranking.ToString());
+
+                    message = ReadMessage(client4);
+                    if (message == "endGame")
+                    {
+                        done = true;
+                        status = "player 4 has won!";
+                        WriteMessage(client4, "notDone");
+                    }
+                    WriteMessage(client4, "notDone");
+                }
             }
+
+            WriteMessage(client1, "bye");
+            client1.Close();
+
+            WriteMessage(client2, "bye");
+            client2.Close();
+
+            WriteMessage(client3, "bye");
+            client3.Close();
+
+            WriteMessage(client4, "bye");
+            client4.Close();
 
         }
 

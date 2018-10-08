@@ -10,16 +10,18 @@ namespace GanzenBord
     {
         public int PlayerID { get; }
         public int Field { get; set; }
+        public int Ranking { get; set; }
         private GameLogics Logics;
 
         private bool PlayNextTrun;
         public bool Wait { get; set; }
         public bool hasWon;
 
-        public Player(int playerID)
+        public Player(int playerID, int ranking)
         {
             this.PlayerID = playerID;
             this.Field = 0;
+            this.Ranking = ranking;
 
             Logics = GameLogics.GetInstance();
             PlayNextTrun = true;
