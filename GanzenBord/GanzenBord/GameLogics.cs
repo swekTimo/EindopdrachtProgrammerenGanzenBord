@@ -15,7 +15,7 @@ namespace GanzenBord
         private GameLogics()
         {
             SpecialFields = new List<SpecialField>();
-            generateSpecialFields();
+            GenerateSpecialFields();
             dice = new Random();
         }
 
@@ -32,7 +32,7 @@ namespace GanzenBord
             DiceResult = dice.Next(1,7);
         }
 
-        private void generateSpecialFields()
+        private void GenerateSpecialFields()
         {
             SpecialFields.Add(new SpecialField(6, "Bridge", "Continue to field 12.", SpecialField.CommandOptions.GoTO, 12));
             SpecialFields.Add(new SpecialField(19, "Inn", "Skip a trun.", SpecialField.CommandOptions.SkipTurn, 0));
