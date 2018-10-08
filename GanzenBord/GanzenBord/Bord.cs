@@ -16,6 +16,72 @@ namespace GanzenBord
         {
             InitializeComponent();
             RulesBox.Visible = false;
+            startPictureBox.SendToBack();
+            onePictureBox.SendToBack();
+            twoPictureBox.SendToBack();
+            threePictureBox.SendToBack();
+            fourPictureBox.SendToBack();
+            fivePictureBox.SendToBack();
+            sixPictureBox.SendToBack();
+            sevenPictureBox.SendToBack();
+            eightPictureBox.SendToBack();
+            ninePictureBox.SendToBack();
+            tenPictureBox.SendToBack();
+            elevenPictureBox.SendToBack();
+            twelvePictureBox.SendToBack();
+            thirteenPictureBox.SendToBack();
+            fourteenPictureBox.SendToBack();
+            fifteenPictureBox.SendToBack();
+            sixteenPictureBox.SendToBack();
+            seventeenPictureBox.SendToBack();
+            eightteenPictureBox.SendToBack();
+            nineteenPictureBox.SendToBack();
+            twentyPictureBox.SendToBack();
+            twentyonePictureBox.SendToBack();
+            twentytwoPictureBox.SendToBack();
+            twentrythreePictureBox.SendToBack();
+            twentyfourPictureBox.SendToBack();
+            twentyfivePictureBox.SendToBack();
+            twentysixPictureBox.SendToBack();
+            twentysevenPictureBox.SendToBack();
+            twentyeightPictureBox.SendToBack();
+            twentyninePictureBox.SendToBack();
+            thirtyPictureBox.SendToBack();
+            thirtyonePictureBox.SendToBack();
+            thirtytwoPictureBox.SendToBack();
+            thirtythreePictureBox.SendToBack();
+            thirtyfourPictureBox.SendToBack();
+            thirtyfivePictureBox.SendToBack();
+            thirtysixPictureBox.SendToBack();
+            thirtysevenPictureBox.SendToBack();
+            thirtyeightPictureBox.SendToBack();
+            thirtyninePictureBox.SendToBack();
+            fourtyPictureBox.SendToBack();
+            fourtyonePictureBox.SendToBack();
+            fourtytwoPictureBox.SendToBack();
+            fourtythreePictureBox.SendToBack();
+            fourtyfourPictureBox.SendToBack();
+            fourtyfivePictureBox.SendToBack();
+            fourtysixPictureBox.SendToBack();
+            fourtysevenPictureBox.SendToBack();
+            fourtyeightPictureBox.SendToBack();
+            fourtyninePictureBox.SendToBack();
+            fiftyPictureBox.SendToBack();
+            fiftyonePictureBox.SendToBack();
+            fiftytwoPictureBox.SendToBack();
+            fiftythreePictureBox.SendToBack();
+            fiftyfourPictureBox.SendToBack();
+            fiftyfivePictureBox.SendToBack();
+            fiftysixPictureBox.SendToBack();
+            fiftysevenPictureBox.SendToBack();
+            fiftyeightPictureBox.SendToBack();
+            fiftyninePictureBox.SendToBack();
+            sixtyPictureBox.SendToBack();
+            sixtyonePictureBox.SendToBack();
+            sixtytwoPictureBox.SendToBack();
+            sixtythreePictureBox.SendToBack();
+
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -44,6 +110,11 @@ namespace GanzenBord
         }
 
         private void playBoard_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fiftytwoPictureBox_Click(object sender, EventArgs e)
         {
 
         }
