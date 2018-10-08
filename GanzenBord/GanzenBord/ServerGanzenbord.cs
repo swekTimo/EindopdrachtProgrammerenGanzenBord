@@ -15,12 +15,10 @@ namespace GanzenBord
 {
     class ServerGanzenbord
     {
-        private PlayerRanking player1Ranking;
-        private PlayerRanking Player2Ranking;
-        private PlayerRanking player3Ranking;
-        private PlayerRanking Player4Ranking;
+        private PlayerRanking playerRanking;
 
         private int playerCount = 0;
+        private int howMuchPlayersDoesClientWant = 4;
 
 
         //luistert of er clients verbinding proberen te maken en start voor elk verbonden client een aparte thread
@@ -30,157 +28,78 @@ namespace GanzenBord
             //begint te luisteren of er IP adressen verbinding proberen te maken
             TcpListener listener = new TcpListener(IPAddress.Any, 6666);//moeten een poort afspreken
             listener.Start();
-          
-            while (true)
-            {
-                TcpClient client1 = listener.AcceptTcpClient();
-                Console.WriteLine($"Accepted client at {DateTime.Now}");
-                TcpClient client2 = listener.AcceptTcpClient();
-                Console.WriteLine($"Accepted client at {DateTime.Now}");
-                TcpClient client3 = listener.AcceptTcpClient();
-                Console.WriteLine($"Accepted client at {DateTime.Now}");
-                TcpClient client4 = listener.AcceptTcpClient();
-                Console.WriteLine($"Accepted client at {DateTime.Now}");
 
-                Thread thread = new Thread(unused => HandleClient(client1, client2, client3, client4));
-                thread.Start();
+            // er moet dan aan player 1 nog gevraagd worden hoeveel spelers hij wilt in zijn spel, en dan moet die variable aangepast worden
+            //hij moet wel op 4 beginnen want dat is het max aantal spelers
+            while (playerCount < howMuchPlayersDoesClientWant)
+            {
+                TcpClient client = listener.AcceptTcpClient();
+                Console.WriteLine($"Accepted client at {DateTime.Now}");
+                
+                Thread thread = new Thread(HandleClient);
+                thread.Start(client);
                 Console.WriteLine("Een client heeft verbinding gemaakt en er is een thread voor gestart");
             }
         }
 
-        public void HandleClient(object obj, object obj2, object obj3, object obj4)
+        public void HandleClient(object obj)
         {
             playerCount++;
-            TcpClient client1 = obj as TcpClient;
-            WriteMessage(client1, playerCount.ToString());
-            player1Ranking = GetPlayerRanking("player1");
-            WriteMessage(client1, $"{player1Ranking.Ranking}");
+            TcpClient client = obj as TcpClient;
+            WriteMessage(client, playerCount.ToString());
+            //playerRanking = GetPlayerRanking("player{0}", playerCount);
+            WriteMessage(client, $"{playerRanking.Ranking}");
+            
+            //hier moet nog een loop komen waar die in blijft
+            // die loop houd bij hoeveel spelers er geconnect zijn
+            //in de client gebeurd nog niks, totdat de server doorstuurt
+            //dat de game kan beginnen.
+            //dus de client moet wachten op een teken van de server dat het spel kan starten
+            //in de client kun je dan groot in beeld zetten:
+            //WACHTEN OP SPELERS...
 
-            playerCount++;
-            TcpClient client2 = obj2 as TcpClient;
-            WriteMessage(client2, playerCount.ToString());
-            Player2Ranking = GetPlayerRanking("player2");
-            WriteMessage(client2, $"{Player2Ranking.Ranking}");
 
-            playerCount++;
-            TcpClient client3 = obj3 as TcpClient;
-            WriteMessage(client3, playerCount.ToString());
-            player3Ranking = GetPlayerRanking("player3");
-            WriteMessage(client3, $"{player3Ranking.Ranking}");
-
-            playerCount++;
-            TcpClient client4 = obj4 as TcpClient;
-            WriteMessage(client4, playerCount.ToString());
-            Player4Ranking = GetPlayerRanking("player4");
-            WriteMessage(client4, $"{Player4Ranking.Ranking}");
-
+            //hier begint de game, er moet dus gekeken worden wie er aan de beurt is
+            // en dan struren dat diegene mag gooien
+            //hij krijgt terug van de client hoeveel die gegooid heeft.
+            //server verplaatst het aantal ogen, en stuurt naar alle clients
+            //de kleur en hoeveel die voorruit is gegaan, dit moet dan dus naar alle clients gedaan worden
+            //in de server moet bijgehouden worden welke kleur iedere client is
+            //we laten ze geen kleur kiezen, word te ingewikkeld, gewoon client 1 is rood, client 2 geel etc
+            //dan moet er nog een eindconditie komen, dus als iemand op 63 komt dat de game dan eindigd
+            //63 of hoger natuurlijk je kan ook over 63 gooien, maar dan win je
+            //we moeten nog ff beslissen of op welk valkje de client staat in de server of client bijgehouden word
             bool done = false;
             string message;
             string status = "Keep Playing";
             int tile = 0;
             while (!done)
             {
-                // player 1
-                WriteMessage(client1, status);
+                WriteMessage(client, status);
 
-                message = ReadMessage(client1);
+                message = ReadMessage(client);
                 if (message != "SameTile")
                 {
                     int.TryParse(message, out tile);
-                    player1Ranking.AddPoints(tile);
+                    playerRanking.AddPoints(tile);
                 }
 
-                WriteMessage(client1, player1Ranking.Ranking.ToString());
+                WriteMessage(client, playerRanking.Ranking.ToString());
 
-                message = ReadMessage(client1);
+                message = ReadMessage(client);
                 if (message == "endGame")
                 {
                     done = true;
                     status = "player 1 has won!";
                 }
-                WriteMessage(client1, "notDone");
+                WriteMessage(client, "notDone");
 
-                // player 2
-                WriteMessage(client2, status);
-                if (!done)
-                {
-                    message = ReadMessage(client2);
-                    if (message != "SameTile")
-                    {
-                        int.TryParse(message, out tile);
-                        Player2Ranking.AddPoints(tile);
-                    }
-
-                    WriteMessage(client2, Player2Ranking.Ranking.ToString());
-
-                    message = ReadMessage(client2);
-                    if (message == "endGame")
-                    {
-                        done = true;
-                        status = "player 2 has won!";
-                    }
-                    WriteMessage(client2, "notDone");
                 }
+            
 
-                // player 3
-                WriteMessage(client3, status);
 
-                message = ReadMessage(client3);
-                if (!done)
-                {
-                    if (message != "SameTile")
-                    {
-                        int.TryParse(message, out tile);
-                        player3Ranking.AddPoints(tile);
-                    }
-
-                    WriteMessage(client3, player3Ranking.Ranking.ToString());
-
-                    message = ReadMessage(client3);
-                    if (message == "endGame")
-                    {
-                        done = true;
-                        status = "player 3 has won!";
-                    }
-                    WriteMessage(client3, "notDone");
-                }
-
-                // player 4
-                WriteMessage(client4, status);
-                if (!done)
-                {
-                    message = ReadMessage(client4);
-
-                    if (message != "SameTile")
-                    {
-                        int.TryParse(message, out tile);
-                        Player4Ranking.AddPoints(tile);
-                    }
-
-                    WriteMessage(client4, Player4Ranking.Ranking.ToString());
-
-                    message = ReadMessage(client4);
-                    if (message == "endGame")
-                    {
-                        done = true;
-                        status = "player 4 has won!";
-                        WriteMessage(client4, "notDone");
-                    }
-                    WriteMessage(client4, "notDone");
-                }
-            }
-
-            WriteMessage(client1, "bye");
-            client1.Close();
-
-            WriteMessage(client2, "bye");
-            client2.Close();
-
-            WriteMessage(client3, "bye");
-            client3.Close();
-
-            WriteMessage(client4, "bye");
-            client4.Close();
+            WriteMessage(client, "bye");
+            client.Close();
 
         }
 
