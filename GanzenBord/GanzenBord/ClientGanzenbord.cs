@@ -14,10 +14,13 @@ namespace GanzenBord
         Player player;
         public ClientGanzenbord()
         {
+            Console.WriteLine("Hij komt nu in de client code");
             string message;
             TcpClient client = new TcpClient(GetLocalIPAddress(), 6666);
-
+            Console.WriteLine("Hij zou nu verbinding moeten hebben gemaakt met de server");
             message = ReadMessage(client);
+            Console.Write("de message van de server:  ");
+            Console.WriteLine(message);
             if (message == 1.ToString())
             {
                 Bord.howManyPlayersLabel.BringToFront();

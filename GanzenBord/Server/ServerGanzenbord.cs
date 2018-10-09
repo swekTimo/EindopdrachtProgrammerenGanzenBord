@@ -21,15 +21,17 @@ namespace Server
         //luistert of er clients verbinding proberen te maken en start voor elk verbonden client een aparte thread
         public ServerGanzenbord()
         {
-
+            Console.WriteLine("DIT IS DE SERVER");
             //begint te luisteren of er IP adressen verbinding proberen te maken
             TcpListener listener = new TcpListener(IPAddress.Any, 6666);//moeten een poort afspreken
             listener.Start();
+            Console.WriteLine("De server luistert nu naar clients");
 
             // er moet dan aan player 1 nog gevraagd worden hoeveel spelers hij wilt in zijn spel, en dan moet die variable aangepast worden
             //hij moet wel op 4 beginnen want dat is het max aantal spelers
             while (playerCount < howMuchPlayersDoesClientWant)
             {
+                Console.WriteLine("hij komt in de while loop en luistert nu of clients verbinding maken");
                 TcpClient client = listener.AcceptTcpClient();
                 Console.WriteLine($"Accepted client at {DateTime.Now}");
 
@@ -37,6 +39,7 @@ namespace Server
                 thread.Start(client);
                 Console.WriteLine("Een client heeft verbinding gemaakt en er is een thread voor gestart");
             }
+            Console.WriteLine("Hij is nu uit de while loop en luistert niet meer naar clients");
         }
 
         public void HandleClient(object obj)

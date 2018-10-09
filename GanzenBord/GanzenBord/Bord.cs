@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,12 +20,7 @@ namespace GanzenBord
 
             RulesBox.Visible = false;
             howManyPlayersLabel.SendToBack();
-
-
-
-
-
-
+            
             startPictureBox.SendToBack();
             onePictureBox.SendToBack();
             twoPictureBox.SendToBack();
@@ -90,12 +86,14 @@ namespace GanzenBord
             sixtytwoPictureBox.SendToBack();
             sixtythreePictureBox.SendToBack();
 
+            //DIT zorgt voor problemen want hij start hierdoor niet het bord op
+            ClientGanzenbord client = new ClientGanzenbord();
 
         }
-
+        
         private void label1_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -131,6 +129,12 @@ namespace GanzenBord
         private void howManyPlayersLabel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void sixtythreePictureBox_Click(object sender, EventArgs e)
+        {
+
+            
         }
     }
 }

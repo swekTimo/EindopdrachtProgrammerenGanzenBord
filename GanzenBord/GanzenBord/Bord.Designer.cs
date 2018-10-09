@@ -792,6 +792,7 @@ namespace GanzenBord
             this.sixtythreePictureBox.Size = new System.Drawing.Size(51, 63);
             this.sixtythreePictureBox.TabIndex = 67;
             this.sixtythreePictureBox.TabStop = false;
+            this.sixtythreePictureBox.Click += new System.EventHandler(this.sixtythreePictureBox_Click);
             // 
             // sixtytwoPictureBox
             // 
