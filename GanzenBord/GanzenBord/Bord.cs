@@ -13,6 +13,7 @@ namespace GanzenBord
 {
     public partial class Bord : Form
     {
+        ClientGanzenbord client;
         public Bord()
         {
             InitializeComponent();
@@ -87,7 +88,7 @@ namespace GanzenBord
             sixtythreePictureBox.SendToBack();
 
             //DIT zorgt voor problemen want hij start hierdoor niet het bord op
-            ClientGanzenbord client = new ClientGanzenbord();
+            client = new ClientGanzenbord(this);
 
         }
         

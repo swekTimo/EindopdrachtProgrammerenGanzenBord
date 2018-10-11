@@ -11,9 +11,11 @@ namespace GanzenBord
 {
     class ClientGanzenbord
     {
+        Bord bord;
         Player player;
-        public ClientGanzenbord()
+        public ClientGanzenbord(Bord bord)
         {
+            this.bord = bord;
             Console.WriteLine("Hij komt nu in de client code");
             string message;
             TcpClient client = new TcpClient(GetLocalIPAddress(), 6666);
@@ -23,7 +25,10 @@ namespace GanzenBord
             Console.WriteLine(message);
             if (message == 1.ToString())
             {
-                //Hij moet dit doen met een Invoke, maar ik krijg het niet werkend
+                //Hij moet dit doen met een Invoke, maar ik krijg het niet werken
+                bord.Focus();
+                //bord.Show();
+                bord.Refresh();
                 Bord.howManyPlayersLabel.BringToFront();
             }
 
