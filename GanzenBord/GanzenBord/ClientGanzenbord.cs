@@ -23,6 +23,7 @@ namespace GanzenBord
             Console.WriteLine(message);
             if (message == 1.ToString())
             {
+                //Hij moet dit doen met een Invoke, maar ik krijg het niet werkend
                 Bord.howManyPlayersLabel.BringToFront();
             }
 
