@@ -11,14 +11,31 @@ namespace GanzenBord
 {
     class ClientGanzenbord
     {
-        Bord bord;
+        TcpClient client;
+
         Player player;
-        public ClientGanzenbord(Bord bord)
+
+        public void makeConnectionWithTheServer()
         {
-            this.bord = bord;
+            client = new TcpClient(GetLocalIPAddress(), 6666);
+        }
+
+        public String getMessage()
+        {
+            return ReadMessage(client);
+        }
+
+        public void sendMessage(String message)
+        {
+            WriteMessage(client, message);
+        }
+
+        public void DitWasDeConstructorMaarDieGaanWeWegdoen(Bord bord)
+        {
+            //this.bord = bord;
             Console.WriteLine("Hij komt nu in de client code");
             string message;
-            TcpClient client = new TcpClient(GetLocalIPAddress(), 6666);
+            client = new TcpClient(GetLocalIPAddress(), 6666);
             Console.WriteLine("Hij zou nu verbinding moeten hebben gemaakt met de server");
             message = ReadMessage(client);
             Console.Write("de message van de server:  ");

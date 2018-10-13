@@ -28,9 +28,6 @@ namespace GanzenBord
 
             SendAllPicturesToBack();
             
-            //DIT zorgt voor problemen want hij start hierdoor niet het bord op
-            client = new ClientGanzenbord(this);
-
         }
 
         private void SendAllPicturesToBack()
@@ -111,7 +108,7 @@ namespace GanzenBord
         
         private void label1_Click(object sender, EventArgs e)
         {
-            
+            client = new ClientGanzenbord(this);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
