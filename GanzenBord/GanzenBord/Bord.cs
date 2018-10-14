@@ -108,7 +108,7 @@ namespace GanzenBord
         
         private void label1_Click(object sender, EventArgs e)
         {
-            client = new ClientGanzenbord(this);
+            client = new ClientGanzenbord();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
