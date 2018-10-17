@@ -30,8 +30,8 @@ namespace GanzenBord
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.playerNameLabel = new System.Windows.Forms.Label();
+            this.rulesButton = new System.Windows.Forms.Button();
             this.RulesBox = new System.Windows.Forms.GroupBox();
             this.sixtyonePictureBox = new System.Windows.Forms.PictureBox();
             this.sixtyPictureBox = new System.Windows.Forms.PictureBox();
@@ -101,6 +101,10 @@ namespace GanzenBord
             this.sixtytwoPictureBox = new System.Windows.Forms.PictureBox();
             this.howManyPlayersLabel = new System.Windows.Forms.Label();
             this.startGameButton = new System.Windows.Forms.Button();
+            this.twoPlayerGameButton = new System.Windows.Forms.Button();
+            this.threePlayerGameButton = new System.Windows.Forms.Button();
+            this.fourPlayerGameButton = new System.Windows.Forms.Button();
+            this.waitForAllPlayersLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyonePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fiftyninePictureBox)).BeginInit();
@@ -169,35 +173,35 @@ namespace GanzenBord
             ((System.ComponentModel.ISupportInitialize)(this.sixtytwoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // playerNameLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Teal;
-            this.label1.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "PlayerName";
+            this.playerNameLabel.AutoSize = true;
+            this.playerNameLabel.BackColor = System.Drawing.Color.Teal;
+            this.playerNameLabel.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playerNameLabel.Location = new System.Drawing.Point(12, 9);
+            this.playerNameLabel.Name = "playerNameLabel";
+            this.playerNameLabel.Size = new System.Drawing.Size(98, 20);
+            this.playerNameLabel.TabIndex = 1;
+            this.playerNameLabel.Text = "PlayerName";
             // 
-            // button1
+            // rulesButton
             // 
-            this.button1.BackColor = System.Drawing.Color.Teal;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(716, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 42);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Rules";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.MouseLeave += new System.EventHandler(this.button1_MouseLeave);
-            this.button1.MouseHover += new System.EventHandler(this.button1_MouseHover);
+            this.rulesButton.BackColor = System.Drawing.Color.Teal;
+            this.rulesButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rulesButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.rulesButton.FlatAppearance.BorderSize = 0;
+            this.rulesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rulesButton.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rulesButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.rulesButton.Location = new System.Drawing.Point(716, 0);
+            this.rulesButton.Margin = new System.Windows.Forms.Padding(0);
+            this.rulesButton.Name = "rulesButton";
+            this.rulesButton.Size = new System.Drawing.Size(84, 42);
+            this.rulesButton.TabIndex = 2;
+            this.rulesButton.Text = "Rules";
+            this.rulesButton.UseVisualStyleBackColor = false;
+            this.rulesButton.MouseLeave += new System.EventHandler(this.button1_MouseLeave);
+            this.rulesButton.MouseHover += new System.EventHandler(this.button1_MouseHover);
             // 
             // RulesBox
             // 
@@ -803,8 +807,9 @@ namespace GanzenBord
             // howManyPlayersLabel
             // 
             this.howManyPlayersLabel.AutoSize = true;
+            this.howManyPlayersLabel.BackColor = System.Drawing.Color.Teal;
             this.howManyPlayersLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.howManyPlayersLabel.Location = new System.Drawing.Point(191, 196);
+            this.howManyPlayersLabel.Location = new System.Drawing.Point(127, 9);
             this.howManyPlayersLabel.Name = "howManyPlayersLabel";
             this.howManyPlayersLabel.Size = new System.Drawing.Size(394, 23);
             this.howManyPlayersLabel.TabIndex = 69;
@@ -812,20 +817,73 @@ namespace GanzenBord
             // 
             // startGameButton
             // 
+            this.startGameButton.BackColor = System.Drawing.Color.Teal;
+            this.startGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.startGameButton.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
-            this.startGameButton.Location = new System.Drawing.Point(0, 47);
+            this.startGameButton.Location = new System.Drawing.Point(0, 0);
             this.startGameButton.Name = "startGameButton";
-            this.startGameButton.Size = new System.Drawing.Size(125, 45);
+            this.startGameButton.Size = new System.Drawing.Size(131, 50);
             this.startGameButton.TabIndex = 70;
             this.startGameButton.Text = "Start Game";
-            this.startGameButton.UseVisualStyleBackColor = true;
+            this.startGameButton.UseVisualStyleBackColor = false;
             this.startGameButton.Click += new System.EventHandler(this.startGameButton_Click);
+            // 
+            // twoPlayerGameButton
+            // 
+            this.twoPlayerGameButton.BackColor = System.Drawing.Color.Teal;
+            this.twoPlayerGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.twoPlayerGameButton.Location = new System.Drawing.Point(527, 9);
+            this.twoPlayerGameButton.Name = "twoPlayerGameButton";
+            this.twoPlayerGameButton.Size = new System.Drawing.Size(34, 26);
+            this.twoPlayerGameButton.TabIndex = 71;
+            this.twoPlayerGameButton.Text = "2";
+            this.twoPlayerGameButton.UseVisualStyleBackColor = false;
+            this.twoPlayerGameButton.Click += new System.EventHandler(this.twoPlayerGameButton_Click);
+            // 
+            // threePlayerGameButton
+            // 
+            this.threePlayerGameButton.BackColor = System.Drawing.Color.Teal;
+            this.threePlayerGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.threePlayerGameButton.Location = new System.Drawing.Point(567, 9);
+            this.threePlayerGameButton.Name = "threePlayerGameButton";
+            this.threePlayerGameButton.Size = new System.Drawing.Size(34, 26);
+            this.threePlayerGameButton.TabIndex = 72;
+            this.threePlayerGameButton.Text = "3";
+            this.threePlayerGameButton.UseVisualStyleBackColor = false;
+            this.threePlayerGameButton.Click += new System.EventHandler(this.threePlayerGameButton_Click);
+            // 
+            // fourPlayerGameButton
+            // 
+            this.fourPlayerGameButton.BackColor = System.Drawing.Color.Teal;
+            this.fourPlayerGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.fourPlayerGameButton.Location = new System.Drawing.Point(609, 9);
+            this.fourPlayerGameButton.Name = "fourPlayerGameButton";
+            this.fourPlayerGameButton.Size = new System.Drawing.Size(34, 26);
+            this.fourPlayerGameButton.TabIndex = 73;
+            this.fourPlayerGameButton.Text = "4";
+            this.fourPlayerGameButton.UseVisualStyleBackColor = false;
+            this.fourPlayerGameButton.Click += new System.EventHandler(this.fourPlayerGameButton_Click);
+            // 
+            // waitForAllPlayersLabel
+            // 
+            this.waitForAllPlayersLabel.AutoSize = true;
+            this.waitForAllPlayersLabel.BackColor = System.Drawing.Color.Teal;
+            this.waitForAllPlayersLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.waitForAllPlayersLabel.Location = new System.Drawing.Point(147, 9);
+            this.waitForAllPlayersLabel.Name = "waitForAllPlayersLabel";
+            this.waitForAllPlayersLabel.Size = new System.Drawing.Size(310, 23);
+            this.waitForAllPlayersLabel.TabIndex = 74;
+            this.waitForAllPlayersLabel.Text = "Wait for all the players to connect...";
             // 
             // Bord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.waitForAllPlayersLabel);
+            this.Controls.Add(this.fourPlayerGameButton);
+            this.Controls.Add(this.threePlayerGameButton);
+            this.Controls.Add(this.twoPlayerGameButton);
             this.Controls.Add(this.startGameButton);
             this.Controls.Add(this.howManyPlayersLabel);
             this.Controls.Add(this.sixtytwoPictureBox);
@@ -892,8 +950,8 @@ namespace GanzenBord
             this.Controls.Add(this.threePictureBox);
             this.Controls.Add(this.twoPictureBox);
             this.Controls.Add(this.onePictureBox);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.rulesButton);
+            this.Controls.Add(this.playerNameLabel);
             this.Controls.Add(this.RulesBox);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.playBoard);
@@ -975,8 +1033,8 @@ namespace GanzenBord
         #endregion
 
         private System.Windows.Forms.PictureBox playBoard;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label playerNameLabel;
+        private System.Windows.Forms.Button rulesButton;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox RulesBox;
         private System.Windows.Forms.PictureBox onePictureBox;
@@ -1045,5 +1103,9 @@ namespace GanzenBord
         private System.Windows.Forms.PictureBox sixtytwoPictureBox;
         private System.Windows.Forms.Button startGameButton;
         public System.Windows.Forms.Label howManyPlayersLabel;
+        private System.Windows.Forms.Button twoPlayerGameButton;
+        private System.Windows.Forms.Button threePlayerGameButton;
+        private System.Windows.Forms.Button fourPlayerGameButton;
+        public System.Windows.Forms.Label waitForAllPlayersLabel;
     }
 }

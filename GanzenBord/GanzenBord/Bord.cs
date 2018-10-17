@@ -23,12 +23,18 @@ namespace GanzenBord
             generatePictureList();
             RulesBox.Visible = false;
             howManyPlayersLabel.Visible = false;
+            playerNameLabel.Visible = false;
+            twoPlayerGameButton.Visible = false;
+            threePlayerGameButton.Visible = false;
+            fourPlayerGameButton.Visible = false;
+            waitForAllPlayersLabel.Visible = false;
+            rulesButton.Visible = false;
+
             SendAllPicturesToBack();
 
 
             client = new ClientGanzenbord();
             client.makeConnectionWithTheServer();
- 
         }
 
         private void SendAllPicturesToBack()
@@ -114,22 +120,76 @@ namespace GanzenBord
 
         private void startGameButton_Click(object sender, EventArgs e)
         {
-            playerNumber = Convert.ToInt32(client.getMessage());
-            if (playerNumber == 2)
-            {
-                howManyPlayersLabel.Visible = true; ;
-            }
+            playerNumber = Convert.ToInt32(client.ReadMessage());
+            playerNameLabel.Text = "Player " + playerNumber;
+            playerNameLabel.Visible = true;
             startGameButton.Visible = false;
+            howManyPlayersLabel.Visible = true;
+            if (playerNumber == 1)
+            {
+                twoPlayerGameButton.Visible = true;
+                threePlayerGameButton.Visible = true;
+                fourPlayerGameButton.Visible = true;
+            }
+            else
+            {
+                waitForAllPlayersLabel.Visible = true;
+                this.Update();
+                waitForGameToStart();
+            }
+ 
+        }
+
+        private void twoPlayerGameButton_Click(object sender, EventArgs e)
+        {
+            client.WriteMessage("2");
+            howManyPlayersLabel.Visible = false;
+            twoPlayerGameButton.Visible = false;
+            threePlayerGameButton.Visible = false;
+            fourPlayerGameButton.Visible = false;
+            waitForAllPlayersLabel.Visible = true;
+            this.Update();
+            waitForGameToStart();
+        }
+
+        private void threePlayerGameButton_Click(object sender, EventArgs e)
+        {
+            client.WriteMessage("3");
+            howManyPlayersLabel.Visible = false;
+            twoPlayerGameButton.Visible = false;
+            threePlayerGameButton.Visible = false;
+            fourPlayerGameButton.Visible = false;
+            waitForAllPlayersLabel.Visible = true;
+            this.Update();
+            waitForGameToStart();
+        }
+
+        private void fourPlayerGameButton_Click(object sender, EventArgs e)
+        {
+            client.WriteMessage("1");
+            howManyPlayersLabel.Visible = false;
+            twoPlayerGameButton.Visible = false;
+            threePlayerGameButton.Visible = false;
+            fourPlayerGameButton.Visible = false;
+            waitForAllPlayersLabel.Visible = true;
+            this.Update();
+            waitForGameToStart();
+
+        }
+
+        private void waitForGameToStart()
+        {
+            string message = client.ReadMessage();
+            if (message == "startGame")
+            {
+                rulesButton.Visible = true;
+                waitForAllPlayersLabel.Visible = false;
+            }
         }
 
         private void button1_MouseLeave(object sender, EventArgs e)
         {
             RulesBox.Visible = false;
-        }
-
-        public void ShowHowManyPLayersLabel()
-        {
-            howManyPlayersLabel.BringToFront();
         }
 
         public void MoveGoose(string DuckColour, int previousDuckTile, int nextDuckTile)

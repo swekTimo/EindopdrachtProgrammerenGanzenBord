@@ -12,29 +12,20 @@ namespace Server
 {
     class ServerGanzenbord
     {
-        private PlayerRanking playerRanking;
-
         private int playerCount = 0;
         private int howMuchPlayersDoesClientWant = 4;
 
         public ServerGanzenbord()
         {
-            Console.WriteLine("DIT IS DE SERVER");
             TcpListener listener = new TcpListener(IPAddress.Any, 6666);
             listener.Start();
-            Console.WriteLine("De server luistert nu naar clients");
 
             while (playerCount < howMuchPlayersDoesClientWant)
             {
-                Console.WriteLine("hij komt in de while loop en luistert nu of clients verbinding maken");
                 TcpClient client = listener.AcceptTcpClient();
-                Console.WriteLine("client connected");
-
                 Thread thread = new Thread(HandleClient);
                 thread.Start(client);
-                Console.WriteLine("Een client heeft verbinding gemaakt en er is een thread voor gestart");
             }
-            Console.WriteLine("Hij is nu uit de while loop en luistert niet meer naar clients");
         }
 
         public void HandleClient(object obj)
@@ -42,6 +33,28 @@ namespace Server
             playerCount++;
             TcpClient client = obj as TcpClient;
             WriteMessage(client, playerCount.ToString());
+
+            if (playerCount == 1)
+            {
+                howMuchPlayersDoesClientWant = Convert.ToInt32(ReadMessage(client));
+                Console.WriteLine(howMuchPlayersDoesClientWant);
+            }
+
+            bool waitingForAllThePlayers = true; 
+            while (waitingForAllThePlayers)
+            {
+                if (playerCount == howMuchPlayersDoesClientWant)
+                {
+                    WriteMessage(client, "startGame");
+                    waitingForAllThePlayers = false;
+                }
+            }
+
+
+
+
+
+
             //playerRanking = GetPlayerRanking("player{0}", playerCount);
             //WriteMessage(client, $"{playerRanking.Ranking}");
 
@@ -64,57 +77,17 @@ namespace Server
             //dan moet er nog een eindconditie komen, dus als iemand op 63 komt dat de game dan eindigd
             //63 of hoger natuurlijk je kan ook over 63 gooien, maar dan win je
             //we moeten nog ff beslissen of op welk valkje de client staat in de server of client bijgehouden word
-            bool done = false;
-            string message;
-            string status = "Keep Playing";
-            int tile = 0;
-            while (!done)
-            {
-                WriteMessage(client, status);
-
-                message = ReadMessage(client);
-                if (message != "SameTile")
-                {
-                    int.TryParse(message, out tile);
-                    playerRanking.AddPoints(tile);
-                }
-
-                WriteMessage(client, playerRanking.Ranking.ToString());
-
-                message = ReadMessage(client);
-                if (message == "endGame")
-                {
-                    done = true;
-                    status = "player 1 has won!";
-                }
-                WriteMessage(client, "notDone");
-
-            }
 
 
 
-            WriteMessage(client, "bye");
-            client.Close();
+            //client.Close();
 
-        }
-
-        private void WriteMessage(TcpClient client, string message)
-        {
-            StreamWriter streamWriter = new StreamWriter(client.GetStream(), Encoding.UTF8);
-            streamWriter.WriteLine(message);
-            streamWriter.Flush();
-        }
-
-        private string ReadMessage(TcpClient client)
-        {
-            StreamReader streamReader = new StreamReader(client.GetStream(), Encoding.UTF8);
-            return streamReader.ReadLine();
         }
 
         private PlayerRanking GetPlayerRanking(string playerID)
         {
             PlayerRanking ranking = new PlayerRanking();
-            var path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.ToString(), $"{playerID}.txt");
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), $"{playerID}.txt");
             if (!File.Exists(path))
             {
                 Console.WriteLine("Er is nog geen File gevonden waarin de playerRank staat, dus deze word aangemaakt!");
@@ -130,5 +103,20 @@ namespace Server
             }
             return ranking;
         }
+
+        private void WriteMessage(TcpClient client, string message)
+        {
+            StreamWriter streamWriter = new StreamWriter(client.GetStream(), Encoding.UTF8);
+            streamWriter.WriteLine(message);
+            streamWriter.Flush();
+        }
+
+        private string ReadMessage(TcpClient client)
+        {
+            StreamReader streamReader = new StreamReader(client.GetStream(), Encoding.UTF8);
+            return streamReader.ReadLine();
+        }
+
+        
     }
 }
