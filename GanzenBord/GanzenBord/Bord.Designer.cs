@@ -99,7 +99,8 @@ namespace GanzenBord
             this.startPictureBox = new System.Windows.Forms.PictureBox();
             this.sixtythreePictureBox = new System.Windows.Forms.PictureBox();
             this.sixtytwoPictureBox = new System.Windows.Forms.PictureBox();
-            howManyPlayersLabel = new System.Windows.Forms.Label();
+            this.howManyPlayersLabel = new System.Windows.Forms.Label();
+            this.startGameButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyonePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fiftyninePictureBox)).BeginInit();
@@ -178,7 +179,6 @@ namespace GanzenBord
             this.label1.Size = new System.Drawing.Size(98, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "PlayerName";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // button1
             // 
@@ -300,7 +300,6 @@ namespace GanzenBord
             this.fiftytwoPictureBox.Size = new System.Drawing.Size(51, 63);
             this.fiftytwoPictureBox.TabIndex = 56;
             this.fiftytwoPictureBox.TabStop = false;
-            this.fiftytwoPictureBox.Click += new System.EventHandler(this.fiftytwoPictureBox_Click);
             // 
             // fiftyonePictureBox
             // 
@@ -773,7 +772,6 @@ namespace GanzenBord
             this.playBoard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.playBoard.TabIndex = 0;
             this.playBoard.TabStop = false;
-            this.playBoard.Click += new System.EventHandler(this.playBoard_Click);
             // 
             // startPictureBox
             // 
@@ -792,7 +790,6 @@ namespace GanzenBord
             this.sixtythreePictureBox.Size = new System.Drawing.Size(51, 63);
             this.sixtythreePictureBox.TabIndex = 67;
             this.sixtythreePictureBox.TabStop = false;
-            this.sixtythreePictureBox.Click += new System.EventHandler(this.sixtythreePictureBox_Click);
             // 
             // sixtytwoPictureBox
             // 
@@ -805,21 +802,32 @@ namespace GanzenBord
             // 
             // howManyPlayersLabel
             // 
-            howManyPlayersLabel.AutoSize = true;
-            howManyPlayersLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            howManyPlayersLabel.Location = new System.Drawing.Point(191, 196);
-            howManyPlayersLabel.Name = "howManyPlayersLabel";
-            howManyPlayersLabel.Size = new System.Drawing.Size(394, 23);
-            howManyPlayersLabel.TabIndex = 69;
-            howManyPlayersLabel.Text = "With how many players do you wanna play?";
-            howManyPlayersLabel.Click += new System.EventHandler(this.howManyPlayersLabel_Click);
+            this.howManyPlayersLabel.AutoSize = true;
+            this.howManyPlayersLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.howManyPlayersLabel.Location = new System.Drawing.Point(191, 196);
+            this.howManyPlayersLabel.Name = "howManyPlayersLabel";
+            this.howManyPlayersLabel.Size = new System.Drawing.Size(394, 23);
+            this.howManyPlayersLabel.TabIndex = 69;
+            this.howManyPlayersLabel.Text = "With how many players do you wanna play?";
+            // 
+            // startGameButton
+            // 
+            this.startGameButton.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
+            this.startGameButton.Location = new System.Drawing.Point(0, 47);
+            this.startGameButton.Name = "startGameButton";
+            this.startGameButton.Size = new System.Drawing.Size(125, 45);
+            this.startGameButton.TabIndex = 70;
+            this.startGameButton.Text = "Start Game";
+            this.startGameButton.UseVisualStyleBackColor = true;
+            this.startGameButton.Click += new System.EventHandler(this.startGameButton_Click);
             // 
             // Bord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(howManyPlayersLabel);
+            this.Controls.Add(this.startGameButton);
+            this.Controls.Add(this.howManyPlayersLabel);
             this.Controls.Add(this.sixtytwoPictureBox);
             this.Controls.Add(this.sixtythreePictureBox);
             this.Controls.Add(this.startPictureBox);
@@ -1035,6 +1043,7 @@ namespace GanzenBord
         private System.Windows.Forms.PictureBox startPictureBox;
         private System.Windows.Forms.PictureBox sixtythreePictureBox;
         private System.Windows.Forms.PictureBox sixtytwoPictureBox;
-        public static System.Windows.Forms.Label howManyPlayersLabel;
+        private System.Windows.Forms.Button startGameButton;
+        public System.Windows.Forms.Label howManyPlayersLabel;
     }
 }

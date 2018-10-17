@@ -15,19 +15,20 @@ namespace GanzenBord
     {
         private List<PictureBox> pictures;
         ClientGanzenbord client;
+        int playerNumber = 0;
         public Bord()
         {
             InitializeComponent();
-
             pictures = new List<PictureBox>();
             generatePictureList();
-
-
             RulesBox.Visible = false;
-            howManyPlayersLabel.SendToBack();
-
+            howManyPlayersLabel.Visible = false;
             SendAllPicturesToBack();
-            
+
+
+            client = new ClientGanzenbord();
+            client.makeConnectionWithTheServer();
+ 
         }
 
         private void SendAllPicturesToBack()
@@ -106,50 +107,24 @@ namespace GanzenBord
             pictures.Add(sixtythreePictureBox);
         }
         
-        private void label1_Click(object sender, EventArgs e)
-        {
-            client = new ClientGanzenbord();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_MouseHover(object sender, EventArgs e)
         {
             RulesBox.Visible = true;
         }
 
+        private void startGameButton_Click(object sender, EventArgs e)
+        {
+            playerNumber = Convert.ToInt32(client.getMessage());
+            if (playerNumber == 2)
+            {
+                howManyPlayersLabel.Visible = true; ;
+            }
+            startGameButton.Visible = false;
+        }
+
         private void button1_MouseLeave(object sender, EventArgs e)
         {
             RulesBox.Visible = false;
-        }
-
-        private void playBoard_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void fiftytwoPictureBox_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void howManyPlayersLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void sixtythreePictureBox_Click(object sender, EventArgs e)
-        {
-
-            
         }
 
         public void ShowHowManyPLayersLabel()

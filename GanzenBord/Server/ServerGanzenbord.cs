@@ -17,23 +17,18 @@ namespace Server
         private int playerCount = 0;
         private int howMuchPlayersDoesClientWant = 4;
 
-
-        //luistert of er clients verbinding proberen te maken en start voor elk verbonden client een aparte thread
         public ServerGanzenbord()
         {
             Console.WriteLine("DIT IS DE SERVER");
-            //begint te luisteren of er IP adressen verbinding proberen te maken
-            TcpListener listener = new TcpListener(IPAddress.Any, 6666);//moeten een poort afspreken
+            TcpListener listener = new TcpListener(IPAddress.Any, 6666);
             listener.Start();
             Console.WriteLine("De server luistert nu naar clients");
 
-            // er moet dan aan player 1 nog gevraagd worden hoeveel spelers hij wilt in zijn spel, en dan moet die variable aangepast worden
-            //hij moet wel op 4 beginnen want dat is het max aantal spelers
             while (playerCount < howMuchPlayersDoesClientWant)
             {
                 Console.WriteLine("hij komt in de while loop en luistert nu of clients verbinding maken");
                 TcpClient client = listener.AcceptTcpClient();
-                Console.WriteLine($"Accepted client at {DateTime.Now}");
+                Console.WriteLine("client connected");
 
                 Thread thread = new Thread(HandleClient);
                 thread.Start(client);

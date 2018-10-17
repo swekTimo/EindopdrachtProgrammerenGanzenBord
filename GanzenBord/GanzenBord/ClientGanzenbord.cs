@@ -46,7 +46,7 @@ namespace GanzenBord
                 bord.Focus();
                 //bord.Show();
                 bord.Refresh();
-                Bord.howManyPlayersLabel.BringToFront();
+                //Bord.howManyPlayersLabel.BringToFront();
             }
 
             //int.TryParse(message, out int value);
