@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace GanzenBord
 {
@@ -25,6 +22,19 @@ namespace GanzenBord
         }
 
         public void WriteMessage(string message)
+        {
+            StreamWriter streamWriter = new StreamWriter(client.GetStream(), Encoding.UTF8);
+            streamWriter.WriteLine(message);
+            streamWriter.Flush();
+        }
+
+        public int ReadInteger()
+        {
+            StreamReader streamReader = new StreamReader(client.GetStream(), Encoding.UTF8);
+            return streamReader.Read();
+        }
+
+        public void WriteInteger(int message)
         {
             StreamWriter streamWriter = new StreamWriter(client.GetStream(), Encoding.UTF8);
             streamWriter.WriteLine(message);

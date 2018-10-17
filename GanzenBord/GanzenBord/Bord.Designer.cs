@@ -105,6 +105,8 @@ namespace GanzenBord
             this.threePlayerGameButton = new System.Windows.Forms.Button();
             this.fourPlayerGameButton = new System.Windows.Forms.Button();
             this.waitForAllPlayersLabel = new System.Windows.Forms.Label();
+            this.diceButton = new System.Windows.Forms.Button();
+            this.rollDiceButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyonePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fiftyninePictureBox)).BeginInit();
@@ -875,11 +877,35 @@ namespace GanzenBord
             this.waitForAllPlayersLabel.TabIndex = 74;
             this.waitForAllPlayersLabel.Text = "Wait for all the players to connect...";
             // 
+            // diceButton
+            // 
+            this.diceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.diceButton.Location = new System.Drawing.Point(738, 350);
+            this.diceButton.Name = "diceButton";
+            this.diceButton.Size = new System.Drawing.Size(50, 50);
+            this.diceButton.TabIndex = 75;
+            this.diceButton.Text = "1";
+            this.diceButton.UseVisualStyleBackColor = true;
+            this.diceButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // rollDiceButton
+            // 
+            this.rollDiceButton.Enabled = false;
+            this.rollDiceButton.Location = new System.Drawing.Point(738, 406);
+            this.rollDiceButton.Name = "rollDiceButton";
+            this.rollDiceButton.Size = new System.Drawing.Size(50, 23);
+            this.rollDiceButton.TabIndex = 76;
+            this.rollDiceButton.Text = "Roll";
+            this.rollDiceButton.UseVisualStyleBackColor = true;
+            this.rollDiceButton.Click += new System.EventHandler(this.rollDiceButton_Click);
+            // 
             // Bord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.rollDiceButton);
+            this.Controls.Add(this.diceButton);
             this.Controls.Add(this.waitForAllPlayersLabel);
             this.Controls.Add(this.fourPlayerGameButton);
             this.Controls.Add(this.threePlayerGameButton);
@@ -1107,5 +1133,7 @@ namespace GanzenBord
         private System.Windows.Forms.Button threePlayerGameButton;
         private System.Windows.Forms.Button fourPlayerGameButton;
         public System.Windows.Forms.Label waitForAllPlayersLabel;
+        private System.Windows.Forms.Button diceButton;
+        private System.Windows.Forms.Button rollDiceButton;
     }
 }

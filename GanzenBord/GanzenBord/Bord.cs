@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GanzenBord
@@ -15,7 +10,9 @@ namespace GanzenBord
     {
         private List<PictureBox> pictures;
         ClientGanzenbord client;
-        int playerNumber = 0;
+        private int playerNumber = 0;
+        private int currentPosition = 0;
+
         public Bord()
         {
             InitializeComponent();
@@ -172,7 +169,7 @@ namespace GanzenBord
             threePlayerGameButton.Visible = false;
             fourPlayerGameButton.Visible = false;
             waitForAllPlayersLabel.Visible = true;
-            this.Update();
+            Update();
             waitForGameToStart();
 
         }
@@ -184,6 +181,50 @@ namespace GanzenBord
             {
                 rulesButton.Visible = true;
                 waitForAllPlayersLabel.Visible = false;
+            }
+            Update();
+            game();
+        }
+
+        private void game()
+        {
+            bool WinnerFound = false;
+            while (WinnerFound == false)
+            {
+                string message = client.ReadMessage();
+                if (message == "yourTurn")
+                {
+                    diceButton.Enabled = true;
+                    //code om dobbelsteen te gooien
+                    //code om gans voorruit te zetten
+                    //code voor speciaal vakje indien nodig
+                    //code voor XP points
+                    client.WriteInteger(currentPosition);
+                }
+                else if (message == "turnPlayer1")
+                {
+                    int positionPlayer1 = client.ReadInteger();
+                    //move the goose from player 1 to the location
+                }
+                else if (message == "turnPlayer2")
+                {
+                    int positionPlayer2 = client.ReadInteger();
+                    //move the goose from player 2 to the location
+                }
+                else if (message == "turnPlayer3")
+                {
+                    int positionPlayer3 = client.ReadInteger();
+                    //move the goose from player 3 to the location
+                }
+                else if (message == "turnPlayer4")
+                {
+                    int positionPlayer4 = client.ReadInteger();
+                    //move the goose from player 4 to the location
+                }
+                else if (message == "gameFinished")
+                {
+                    WinnerFound = true;
+                }
             }
         }
 
@@ -407,6 +448,16 @@ namespace GanzenBord
 
             else if (duckTile.Image == null)
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rollDiceButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
