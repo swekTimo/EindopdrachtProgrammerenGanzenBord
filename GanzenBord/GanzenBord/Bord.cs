@@ -139,7 +139,7 @@ namespace GanzenBord
 
         private void twoPlayerGameButton_Click(object sender, EventArgs e)
         {
-            client.WriteMessage("2");
+            client.WriteInteger(2);
             howManyPlayersLabel.Visible = false;
             twoPlayerGameButton.Visible = false;
             threePlayerGameButton.Visible = false;
@@ -151,7 +151,7 @@ namespace GanzenBord
 
         private void threePlayerGameButton_Click(object sender, EventArgs e)
         {
-            client.WriteMessage("3");
+            client.WriteInteger(3);
             howManyPlayersLabel.Visible = false;
             twoPlayerGameButton.Visible = false;
             threePlayerGameButton.Visible = false;
@@ -163,7 +163,8 @@ namespace GanzenBord
 
         private void fourPlayerGameButton_Click(object sender, EventArgs e)
         {
-            client.WriteMessage("1");
+            //dit moet natuurlijk 4 zijn maar om te testen staat hier 1
+            client.WriteInteger(1);
             howManyPlayersLabel.Visible = false;
             twoPlayerGameButton.Visible = false;
             threePlayerGameButton.Visible = false;
@@ -182,7 +183,7 @@ namespace GanzenBord
                 rulesButton.Visible = true;
                 waitForAllPlayersLabel.Visible = false;
             }
-            Update();
+            this.Update();
             game();
         }
 

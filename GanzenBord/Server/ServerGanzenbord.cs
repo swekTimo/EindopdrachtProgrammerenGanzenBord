@@ -28,57 +28,53 @@ namespace Server
 
             while (playerCount < howMuchPlayersDoesClientWant)
             {
-                if (playerCount == 0)
+                TcpClient client = listener.AcceptTcpClient();
+                playerCount++;
+                if (playerCount == 1)
                 {
-                    TcpClient client = listener.AcceptTcpClient();
-                    playerCount++;
                     client1 = client;
-                    //vgm is threading niet nodig
                     Thread thread = new Thread(HandleClient);
-                    thread.Start(client);
+                    thread.Start(client1);
                 }
-                else if (playerCount == 1)
-                {
-                    TcpClient client = listener.AcceptTcpClient();
+                if (playerCount == 2)
+                { 
                     client2 = client;
-                    //vgm is threading niet nodig
-                    Thread thread = new Thread(HandleClient);
-                    thread.Start(client);
-                }
-                else if (playerCount == 2)
-                {
-                    TcpClient client = listener.AcceptTcpClient();
-                    client3 = client;
-                    //vgm is threading niet nodig
-                    Thread thread = new Thread(HandleClient);
-                    thread.Start(client);
-                }
-                else if (playerCount == 3)
-                {
-                    TcpClient client = listener.AcceptTcpClient();
-                    client4 = client;
-                    //vgm is threading niet nodig
-                    Thread thread = new Thread(HandleClient);
-                    thread.Start(client);
-                }
+                Thread thread = new Thread(HandleClient);
+                thread.Start(client2);
             }
+            if (playerCount == 3)
+                { 
+                    client3 = client;
+                Thread thread = new Thread(HandleClient);
+                thread.Start(client3);
+            }
+            if (playerCount == 4)
+                { 
+                    client4 = client;
+                Thread thread = new Thread(HandleClient);
+                thread.Start(client4);
+            }
+
+
+        }
         }
 
         public void HandleClient(object obj)
         {
 
             TcpClient client = obj as TcpClient;
-            WriteInteger(client, playerCount);
+            WriteInteger(client1, playerCount);
 
             if (playerCount == 1)
             {
-                howMuchPlayersDoesClientWant = ReadInteger(client);
+                howMuchPlayersDoesClientWant = Convert.ToInt32(ReadMessage(client1));
             }
 
             bool waitingForAllThePlayers = true;
             while (waitingForAllThePlayers)
             {
-                if (playerCount == howMuchPlayersDoesClientWant)
+                //if (playerCount == howMuchPlayersDoesClientWant)
+                if(howMuchPlayersDoesClientWant == 49)
                 {
                     writeClientsStartGame();
                     waitingForAllThePlayers = false;
@@ -91,7 +87,7 @@ namespace Server
                 turnPlayer1();
                 positionClient1 = ReadInteger(client1);
 
-                WriteInteger(client2, positionClient1);
+                //WriteInteger(client2, positionClient1);
                 if (playerCount == 3)
                     WriteInteger(client3, positionClient1);
                 if (playerCount == 4)
@@ -184,15 +180,15 @@ namespace Server
         public void writeClientsStartGame()
         {
             WriteMessage(client1, "startGame");
-            WriteMessage(client2, "startGame");
-            WriteMessage(client3, "startGame");
-            WriteMessage(client4, "startGame");
+            //WriteMessage(client2, "startGame");
+            //WriteMessage(client3, "startGame");
+            //WriteMessage(client4, "startGame");
         }
 
         public void turnPlayer1()
             {
                 WriteMessage(client1, "yourTurn");
-                WriteMessage(client2, "turnPlayer1");
+                //WriteMessage(client2, "turnPlayer1");
                 if (playerCount == 3)
                     WriteMessage(client3, "turnPlayer1");
                 if (playerCount == 4)

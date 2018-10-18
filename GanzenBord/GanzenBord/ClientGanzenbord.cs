@@ -37,7 +37,7 @@ namespace GanzenBord
         public void WriteInteger(int message)
         {
             StreamWriter streamWriter = new StreamWriter(client.GetStream(), Encoding.UTF8);
-            streamWriter.WriteLine(message);
+            streamWriter.Write(message);
             streamWriter.Flush();
         }
 
