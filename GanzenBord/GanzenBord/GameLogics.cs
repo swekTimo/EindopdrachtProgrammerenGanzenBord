@@ -32,7 +32,22 @@ namespace GanzenBord
             DiceResult = dice.Next(1,7);
         }
 
-        private void GenerateSpecialFields()
+        public Tuple<bool, SpecialField> IsSpecialField(int Field)
+        {
+            bool hasField = false;
+            SpecialField specialField = null;
+            foreach (SpecialField special in SpecialFields)
+            {
+                if (special.FieldNumber == Field)
+                {
+                    hasField = true;
+                    specialField = special;
+                }
+            }
+            return Tuple.Create(hasField, specialField);
+        }
+
+            private void GenerateSpecialFields()
         {
             SpecialFields.Add(new SpecialField(6, "Bridge", "Continue to field 12.", SpecialField.CommandOptions.GoTO, 12));
             SpecialFields.Add(new SpecialField(19, "Inn", "Skip a trun.", SpecialField.CommandOptions.SkipTurn, 0));

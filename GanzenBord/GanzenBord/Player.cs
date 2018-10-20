@@ -47,26 +47,10 @@ namespace GanzenBord
                 }
                 else
                     this.Field = Field + amountOfSpaces;
-                Tuple<bool, SpecialField> SpecialField = IsSpecialField();
+                Tuple<bool, SpecialField> SpecialField = Logics.IsSpecialField(Field);
                 if (SpecialField.Item1 == true)
                     ActionOfField(SpecialField.Item2);
             }
-        }
-
-        private Tuple<bool, SpecialField> IsSpecialField()
-        {
-            bool hasField = false;
-            SpecialField specialField = null;
-            foreach (SpecialField special in Logics.SpecialFields)
-            {
-                if (special.FieldNumber == Field)
-                {
-                    hasField = true;
-                    specialField = special;
-                }
-            }
-
-            return Tuple.Create(hasField, specialField);
         }
 
         private void ActionOfField(SpecialField special)

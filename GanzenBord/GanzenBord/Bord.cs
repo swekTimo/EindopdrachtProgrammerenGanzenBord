@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace GanzenBord
@@ -12,10 +13,24 @@ namespace GanzenBord
         ClientGanzenbord client;
         private int playerNumber = 0;
         private int currentPosition = 0;
+        private GameLogics gameLogics;
+
+        private int currentPositionPlayer1 = 0;
+        private int currentPositionPlayer2 = 0;
+        private int currentPositionPlayer3 = 0;
+        private int currentPositionPlayer4 = 0;
+
+        private int DiceNumber = -1;
+        private bool DiceRolled = false;
+        private bool waitForDice = false;
+        private Random random;
+        bool PlayNextTrun = true;
+        bool Wait = false;
 
         public Bord()
         {
             InitializeComponent();
+            GameLogics.GetInstance();
             pictures = new List<PictureBox>();
             generatePictureList();
             RulesBox.Visible = false;
@@ -26,6 +41,7 @@ namespace GanzenBord
             fourPlayerGameButton.Visible = false;
             waitForAllPlayersLabel.Visible = false;
             rulesButton.Visible = false;
+            random = new Random();
 
             SendAllPicturesToBack();
 
@@ -139,7 +155,7 @@ namespace GanzenBord
 
         private void twoPlayerGameButton_Click(object sender, EventArgs e)
         {
-            client.WriteInteger(2);
+            client.WriteMessage("2");
             howManyPlayersLabel.Visible = false;
             twoPlayerGameButton.Visible = false;
             threePlayerGameButton.Visible = false;
@@ -151,7 +167,7 @@ namespace GanzenBord
 
         private void threePlayerGameButton_Click(object sender, EventArgs e)
         {
-            client.WriteInteger(3);
+            client.WriteMessage("3");
             howManyPlayersLabel.Visible = false;
             twoPlayerGameButton.Visible = false;
             threePlayerGameButton.Visible = false;
@@ -164,7 +180,7 @@ namespace GanzenBord
         private void fourPlayerGameButton_Click(object sender, EventArgs e)
         {
             //dit moet natuurlijk 4 zijn maar om te testen staat hier 1
-            client.WriteInteger(1);
+            client.WriteMessage("1");
             howManyPlayersLabel.Visible = false;
             twoPlayerGameButton.Visible = false;
             threePlayerGameButton.Visible = false;
@@ -193,33 +209,80 @@ namespace GanzenBord
             while (WinnerFound == false)
             {
                 string message = client.ReadMessage();
-                if (message == "yourTurn")
+                if (message == "yourTurn" && waitForDice == false)
                 {
                     diceButton.Enabled = true;
+                    DiceRolled = false;
+                    waitForDice = true;
                     //code om dobbelsteen te gooien
                     //code om gans voorruit te zetten
                     //code voor speciaal vakje indien nodig
                     //code voor XP points
-                    client.WriteInteger(currentPosition);
+                    //client.WriteMessage(currentPosition.ToString());
+                }
+                if (message == "yourTurn" && waitForDice == true && DiceRolled == true)
+                {
+                    if (Wait)
+                    {
+                        if (currentPosition == currentPositionPlayer1
+                            || currentPosition == currentPositionPlayer2
+                            || currentPosition == currentPositionPlayer3
+                            || currentPosition == currentPositionPlayer4)
+                            Wait = false;
+                    }
+                    if (!PlayNextTrun)
+                        Wait = true;
+                    if (PlayNextTrun && !Wait)
+                    {
+                        int newPosition = currentPosition + DiceNumber;
+                        DiceNumber = -1;
+                        moveGoosePosition(playerNumber, currentPosition, newPosition, true);
+                        Tuple<bool, SpecialField> tuple = gameLogics.IsSpecialField(currentPosition);
+                        if (tuple.Item1)
+                        {
+                            SpecialField field = tuple.Item2;
+                            switch (field.Command)
+                            {
+                                case SpecialField.CommandOptions.GoTO:
+                                    moveGoosePosition(playerNumber, currentPosition, field.FieldNumber, false);
+                                    break;
+                                case SpecialField.CommandOptions.SkipTurn:
+                                    PlayNextTrun = false;
+                                    break;
+                                case SpecialField.CommandOptions.Wait:
+                                    Wait = true;
+                                    break;
+                                case SpecialField.CommandOptions.End:
+                                    //WinnerFound = true;
+                                    break;
+                            }
+                        }
+                    }
+                    if (Wait && !PlayNextTrun)
+                    {
+                        Wait = false;
+                        PlayNextTrun = true;
+                    }
+                    client.WriteMessage(currentPosition.ToString());
                 }
                 else if (message == "turnPlayer1")
                 {
-                    int positionPlayer1 = client.ReadInteger();
+                    int positionPlayer1 = Convert.ToInt32(client.ReadMessage());
                     //move the goose from player 1 to the location
                 }
                 else if (message == "turnPlayer2")
                 {
-                    int positionPlayer2 = client.ReadInteger();
+                    int positionPlayer2 = Convert.ToInt32(client.ReadInteger());
                     //move the goose from player 2 to the location
                 }
                 else if (message == "turnPlayer3")
                 {
-                    int positionPlayer3 = client.ReadInteger();
+                    int positionPlayer3 = Convert.ToInt32(client.ReadInteger());
                     //move the goose from player 3 to the location
                 }
                 else if (message == "turnPlayer4")
                 {
-                    int positionPlayer4 = client.ReadInteger();
+                    int positionPlayer4 = Convert.ToInt32(client.ReadInteger());
                     //move the goose from player 4 to the location
                 }
                 else if (message == "gameFinished")
@@ -233,8 +296,41 @@ namespace GanzenBord
         {
             RulesBox.Visible = false;
         }
+        public void moveGoosePosition(int player, int currentTile, int toTile, bool NormalPlay)
+        {
+            String DuckColour = "rood";
+            switch (player) {
+                case 1:
+                    DuckColour = "rood";
+                    break;
+                case 2:
+                    DuckColour = "blauw";
+                    break;
+                case 3:
+                    DuckColour = "geel";
+                    break;
+                case 4:
+                    DuckColour = "groen";
+                    break;
+            }
 
-        public void MoveGoose(string DuckColour, int previousDuckTile, int nextDuckTile)
+            if (NormalPlay)
+            {
+                while (currentTile != toTile)
+                {
+                    MoveGooseTile(DuckColour, currentTile, currentTile + 1);
+                    currentTile++;
+                    Thread.Sleep(1000);
+                }
+            }
+            else
+            {
+                MoveGooseTile(DuckColour, currentTile, toTile);
+                currentTile = toTile;
+            }
+        }
+
+        public void MoveGooseTile(string DuckColour, int previousDuckTile, int nextDuckTile)
         {
             //TODO: complete resources and change the naming of the ChangeDuck to and form tile classes
             PictureBox duckTile = pictures.ElementAt(previousDuckTile);
@@ -458,7 +554,8 @@ namespace GanzenBord
 
         private void rollDiceButton_Click(object sender, EventArgs e)
         {
-
+            gameLogics.RollDice(out DiceNumber);
+            DiceRolled = true;
         }
     }
 }

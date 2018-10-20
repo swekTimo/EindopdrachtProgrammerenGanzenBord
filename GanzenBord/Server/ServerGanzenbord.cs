@@ -68,13 +68,14 @@ namespace Server
             if (playerCount == 1)
             {
                 howMuchPlayersDoesClientWant = Convert.ToInt32(ReadMessage(client1));
+                Console.WriteLine(howMuchPlayersDoesClientWant);
             }
 
             bool waitingForAllThePlayers = true;
             while (waitingForAllThePlayers)
             {
-                //if (playerCount == howMuchPlayersDoesClientWant)
-                if(howMuchPlayersDoesClientWant == 49)
+                if (playerCount == howMuchPlayersDoesClientWant)
+                //if(howMuchPlayersDoesClientWant == 49)
                 {
                     writeClientsStartGame();
                     waitingForAllThePlayers = false;
@@ -85,15 +86,15 @@ namespace Server
             while (gameAlive)
             {
                 turnPlayer1();
-                positionClient1 = ReadInteger(client1);
+                positionClient1 = Convert.ToInt32(ReadMessage(client1));
 
                 //WriteInteger(client2, positionClient1);
                 if (playerCount == 3)
-                    WriteInteger(client3, positionClient1);
+                    WriteMessage(client3, positionClient1.ToString());
                 if (playerCount == 4)
                 {
-                    WriteInteger(client3, positionClient1);
-                    WriteInteger(client4, positionClient1);
+                    WriteMessage(client3, positionClient1.ToString());
+                    WriteMessage(client4, positionClient1.ToString());
                 }
 
                 checkForWinner();
@@ -101,15 +102,15 @@ namespace Server
 
 
                 turnPlayer2();
-                positionClient2 = ReadInteger(client2);
+                positionClient2 = Convert.ToInt32(ReadMessage(client2));
 
-                WriteInteger(client1, positionClient2);
+                WriteMessage(client1, positionClient2.ToString());
                 if (playerCount == 3)
-                    WriteInteger(client3, positionClient2);
+                    WriteMessage(client3, positionClient2.ToString());
                 if (playerCount == 4)
                 {
-                    WriteInteger(client3, positionClient2);
-                    WriteInteger(client4, positionClient2);
+                    WriteMessage(client3, positionClient2.ToString());
+                    WriteMessage(client4, positionClient2.ToString());
                 }
 
                 checkForWinner();
@@ -120,10 +121,10 @@ namespace Server
                 if (playerCount == 3)
                 {
                     turnPlayer3();
-                    positionClient3 = ReadInteger(client3);
+                    positionClient3 = Convert.ToInt32(ReadMessage(client3));
 
-                    WriteInteger(client1, positionClient3);
-                    WriteInteger(client2, positionClient3);
+                    WriteMessage(client1, positionClient3.ToString());
+                    WriteMessage(client2, positionClient3.ToString());
                 }
 
                 checkForWinner();
@@ -134,19 +135,19 @@ namespace Server
                 if (playerCount == 4)
                 {
                     turnPlayer3();
-                    positionClient3 = ReadInteger(client3);
+                    positionClient3 = Convert.ToInt32(ReadMessage(client3));
 
-                    WriteInteger(client1, positionClient3);
-                    WriteInteger(client2, positionClient3);
-                    WriteInteger(client4, positionClient3);
+                    WriteMessage(client1, positionClient3.ToString());
+                    WriteMessage(client2, positionClient3.ToString());
+                    WriteMessage(client4, positionClient3.ToString());
                     
 
                     turnPlayer4();
-                    positionClient4 = ReadInteger(client4);
+                    positionClient4 = Convert.ToInt32(ReadMessage(client4));
 
-                    WriteInteger(client1, positionClient4);
-                    WriteInteger(client2, positionClient4);
-                    WriteInteger(client3, positionClient4);
+                    WriteMessage(client1, positionClient4.ToString());
+                    WriteMessage(client2, positionClient4.ToString());
+                    WriteMessage(client3, positionClient4.ToString());
                 }
             }
         }
