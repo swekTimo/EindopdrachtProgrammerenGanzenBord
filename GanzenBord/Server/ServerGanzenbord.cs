@@ -67,15 +67,17 @@ namespace Server
 
             if (playerCount == 1)
             {
+
                 howMuchPlayersDoesClientWant = Convert.ToInt32(ReadMessage(client1));
+                Console.WriteLine("leest hier van de client hoeveel spelers hij mee wilt spelen: ");
                 Console.WriteLine(howMuchPlayersDoesClientWant);
+                Console.WriteLine(" ");
             }
 
             bool waitingForAllThePlayers = true;
             while (waitingForAllThePlayers)
             {
                 if (playerCount == howMuchPlayersDoesClientWant)
-                //if(howMuchPlayersDoesClientWant == 49)
                 {
                     writeClientsStartGame();
                     waitingForAllThePlayers = false;
@@ -85,8 +87,17 @@ namespace Server
             bool gameAlive = true;
             while (gameAlive)
             {
+                string isGameStarted = ReadMessage(client1);
+                if(isGameStarted == "gameCodeStarted")
+                {
+                    Console.WriteLine("hij heeft nu binnen gehad dat de game is gestart en gaat turnPlayer1Versturen:");
+                    Console.WriteLine("");
+                }
                 turnPlayer1();
                 positionClient1 = Convert.ToInt32(ReadMessage(client1));
+                Console.WriteLine("leest hier van de client wat zijn positie is na het gooien: ");
+                Console.WriteLine(positionClient1);
+                Console.WriteLine(" ");
 
                 //WriteInteger(client2, positionClient1);
                 if (playerCount == 3)
@@ -181,6 +192,9 @@ namespace Server
         public void writeClientsStartGame()
         {
             WriteMessage(client1, "startGame");
+            Console.WriteLine("stuurt hier naar de client1 dat de game kan beginnen : ");
+            Console.WriteLine("startGame");
+            Console.WriteLine(" ");
             //WriteMessage(client2, "startGame");
             //WriteMessage(client3, "startGame");
             //WriteMessage(client4, "startGame");
@@ -189,8 +203,11 @@ namespace Server
         public void turnPlayer1()
             {
                 WriteMessage(client1, "yourTurn");
-                //WriteMessage(client2, "turnPlayer1");
-                if (playerCount == 3)
+            Console.WriteLine("stuurt hier naar de client dat het zijn beurt is of van andere client: ");
+            Console.WriteLine("yourturn");
+            Console.WriteLine(" ");
+            //WriteMessage(client2, "turnPlayer1");
+            if (playerCount == 3)
                     WriteMessage(client3, "turnPlayer1");
                 if (playerCount == 4)
                 {

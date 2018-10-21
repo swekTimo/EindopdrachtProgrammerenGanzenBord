@@ -134,6 +134,9 @@ namespace GanzenBord
         private void startGameButton_Click(object sender, EventArgs e)
         {
             playerNumber = Convert.ToInt32(client.ReadMessage());
+            Console.WriteLine("leest hier van de server: welk nummer client we zijn: client nummer: ");
+            Console.Write(playerNumber);
+            Console.WriteLine(" ");
             playerNameLabel.Text = "Player " + playerNumber;
             playerNameLabel.Visible = true;
             startGameButton.Visible = false;
@@ -181,6 +184,9 @@ namespace GanzenBord
         {
             //dit moet natuurlijk 4 zijn maar om te testen staat hier 1
             client.WriteMessage("1");
+            Console.WriteLine("verstuurd naar de server met hoeveel spelers we willen spelen: ");
+            Console.WriteLine("1");
+            Console.WriteLine(" ");
             howManyPlayersLabel.Visible = false;
             twoPlayerGameButton.Visible = false;
             threePlayerGameButton.Visible = false;
@@ -194,6 +200,9 @@ namespace GanzenBord
         private void waitForGameToStart()
         {
             string message = client.ReadMessage();
+            Console.WriteLine("leest hier van de server de message wat er kan gaan gebeuren: ");
+            Console.WriteLine(message);
+            Console.WriteLine(" ");
             if (message == "startGame")
             {
                 rulesButton.Visible = true;
@@ -205,15 +214,32 @@ namespace GanzenBord
 
         private void game()
         {
+            //wat er hier nu fout gaat, we hebben de code in een loop gezet, hierdoor reageerd het bord niet meer op de knop
+
+            //de code om te kijken of er op de dobbelsteen word gegooid moet hierin
+            //ook de code om te kijken of er met de muis word gehovered moet hierin over rules
+                                          
+
+
+            client.WriteMessage("gameCodeStarted");
+            Console.WriteLine("schrijf hier naar de server dat de game code is gestart: ");
+            Console.WriteLine("gameCodeStarted");
+            Console.WriteLine(" ");
             bool WinnerFound = false;
             while (WinnerFound == false)
             {
                 string message = client.ReadMessage();
+                Console.WriteLine("leest hier van de server of het onze beurt is of van een andere client: ");
+                Console.WriteLine(message);
+                Console.WriteLine(" ");
                 if (message == "yourTurn" && waitForDice == false)
                 {
+
                     diceButton.Enabled = true;
                     DiceRolled = false;
                     waitForDice = true;
+                    diceButton.BackColor = Color.Orange;
+                    this.Update();
                     //code om dobbelsteen te gooien
                     //code om gans voorruit te zetten
                     //code voor speciaal vakje indien nodig
