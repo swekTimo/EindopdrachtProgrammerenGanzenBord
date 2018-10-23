@@ -65,7 +65,7 @@ namespace Server
             Console.WriteLine("");
 
             TcpClient client = obj as TcpClient;
-            WriteInteger(client1, playerCount);
+            WriteMessage(client1, playerCount.ToString());
 
             if (playerCount == 1)
             {
@@ -322,20 +322,5 @@ namespace Server
             StreamReader streamReader = new StreamReader(client.GetStream(), Encoding.UTF8);
             return streamReader.ReadLine();
         }
-
-        private void WriteInteger(TcpClient client, int message)
-        {
-            StreamWriter streamWriter = new StreamWriter(client.GetStream(), Encoding.UTF8);
-            streamWriter.WriteLine(message);
-            streamWriter.Flush();
-        }
-
-        private int ReadInteger(TcpClient client)
-        {
-            StreamReader streamReader = new StreamReader(client.GetStream(), Encoding.UTF8);
-            return streamReader.Read();
-        }
-
-
     }
 }

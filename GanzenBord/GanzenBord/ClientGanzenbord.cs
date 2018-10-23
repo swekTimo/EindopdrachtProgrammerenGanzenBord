@@ -29,19 +29,6 @@ namespace GanzenBord
             streamWriter.Flush();
         }
 
-        public int ReadInteger()
-        {
-            StreamReader streamReader = new StreamReader(client.GetStream(), Encoding.UTF8);
-            return streamReader.Read();
-        }
-
-        public void WriteInteger(int message)
-        {
-            StreamWriter streamWriter = new StreamWriter(client.GetStream(), Encoding.UTF8);
-            streamWriter.Write(message);
-            streamWriter.Flush();
-        }
-
         public static string GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());

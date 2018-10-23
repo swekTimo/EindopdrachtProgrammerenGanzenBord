@@ -43,7 +43,6 @@ namespace GanzenBord
             fourPlayerGameButton.Visible = false;
             waitForAllPlayersLabel.Visible = false;
             rulesButton.Visible = false;
-            random = new Random();
 
             SendAllPicturesToBack();
 
@@ -284,17 +283,17 @@ namespace GanzenBord
                 }
                 else if (message == "turnPlayer2")
                 {
-                    int positionPlayer2 = Convert.ToInt32(client.ReadInteger());
+                    int positionPlayer2 = Convert.ToInt32(client.ReadMessage());
                     //move the goose from player 2 to the location
                 }
                 else if (message == "turnPlayer3")
                 {
-                    int positionPlayer3 = Convert.ToInt32(client.ReadInteger());
+                    int positionPlayer3 = Convert.ToInt32(client.ReadMessage());
                     //move the goose from player 3 to the location
                 }
                 else if (message == "turnPlayer4")
                 {
-                    int positionPlayer4 = Convert.ToInt32(client.ReadInteger());
+                    int positionPlayer4 = Convert.ToInt32(client.ReadMessage());
                     //move the goose from player 4 to the location
                 }
                 else if (message == "gameFinished")
@@ -579,7 +578,8 @@ namespace GanzenBord
 
         private void rollDiceButton_Click(object sender, EventArgs e)
         {
-            diceButton.Text = rollDice().ToString();
+            int thrownDiceNumber = rollDice();
+            diceButton.Text = thrownDiceNumber.ToString();
             DiceRolled = true;
             //code om gans voorruit te zetten
             //code voor speciaal vakje indien nodig
