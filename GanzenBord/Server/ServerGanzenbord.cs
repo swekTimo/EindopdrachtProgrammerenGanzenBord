@@ -61,6 +61,8 @@ namespace Server
 
         public void HandleClient(object obj)
         {
+            Console.WriteLine("SERVER");
+            Console.WriteLine("");
 
             TcpClient client = obj as TcpClient;
             WriteInteger(client1, playerCount);
@@ -83,16 +85,16 @@ namespace Server
                     waitingForAllThePlayers = false;
                 }
             }
-
+            string isGameStarted = ReadMessage(client1);
+            if (isGameStarted == "gameCodeStarted")
+            {
+                Console.WriteLine("hij heeft nu binnen gehad dat de game is gestart en gaat de while loop in:");
+                Console.WriteLine("");
+            }
             bool gameAlive = true;
             while (gameAlive)
             {
-                string isGameStarted = ReadMessage(client1);
-                if(isGameStarted == "gameCodeStarted")
-                {
-                    Console.WriteLine("hij heeft nu binnen gehad dat de game is gestart en gaat turnPlayer1Versturen:");
-                    Console.WriteLine("");
-                }
+                
                 turnPlayer1();
                 positionClient1 = Convert.ToInt32(ReadMessage(client1));
                 Console.WriteLine("leest hier van de client wat zijn positie is na het gooien: ");
@@ -112,19 +114,19 @@ namespace Server
 
 
 
-                turnPlayer2();
-                positionClient2 = Convert.ToInt32(ReadMessage(client2));
+                //turnPlayer2();
+                //positionClient2 = Convert.ToInt32(ReadMessage(client2));
 
-                WriteMessage(client1, positionClient2.ToString());
-                if (playerCount == 3)
-                    WriteMessage(client3, positionClient2.ToString());
-                if (playerCount == 4)
-                {
-                    WriteMessage(client3, positionClient2.ToString());
-                    WriteMessage(client4, positionClient2.ToString());
-                }
+                //WriteMessage(client1, positionClient2.ToString());
+                //if (playerCount == 3)
+                //    WriteMessage(client3, positionClient2.ToString());
+                //if (playerCount == 4)
+                //{
+                //    WriteMessage(client3, positionClient2.ToString());
+                //    WriteMessage(client4, positionClient2.ToString());
+                //}
 
-                checkForWinner();
+                //checkForWinner();
 
 
 

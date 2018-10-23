@@ -202,8 +202,8 @@ namespace GanzenBord
             this.rulesButton.TabIndex = 2;
             this.rulesButton.Text = "Rules";
             this.rulesButton.UseVisualStyleBackColor = false;
-            this.rulesButton.MouseLeave += new System.EventHandler(this.button1_MouseLeave);
-            this.rulesButton.MouseHover += new System.EventHandler(this.button1_MouseHover);
+            this.rulesButton.MouseLeave += new System.EventHandler(this.rulesButton_MouseLeave);
+            this.rulesButton.MouseHover += new System.EventHandler(this.rulesButton_MouseHover);
             // 
             // RulesBox
             // 

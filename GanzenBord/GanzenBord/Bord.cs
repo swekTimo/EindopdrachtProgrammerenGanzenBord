@@ -29,6 +29,8 @@ namespace GanzenBord
 
         public Bord()
         {
+            Console.WriteLine("CLIENT");
+            Console.WriteLine("");
             InitializeComponent();
             GameLogics.GetInstance();
             pictures = new List<PictureBox>();
@@ -126,11 +128,7 @@ namespace GanzenBord
             pictures.Add(sixtythreePictureBox);
         }
         
-        private void button1_MouseHover(object sender, EventArgs e)
-        {
-            RulesBox.Visible = true;
-        }
-
+        
         private void startGameButton_Click(object sender, EventArgs e)
         {
             playerNumber = Convert.ToInt32(client.ReadMessage());
@@ -209,42 +207,30 @@ namespace GanzenBord
                 waitForAllPlayersLabel.Visible = false;
             }
             this.Update();
-            game();
-        }
-
-        private void game()
-        {
-            //wat er hier nu fout gaat, we hebben de code in een loop gezet, hierdoor reageerd het bord niet meer op de knop
-
-            //de code om te kijken of er op de dobbelsteen word gegooid moet hierin
-            //ook de code om te kijken of er met de muis word gehovered moet hierin over rules
-                                          
-
-
+            //Thread gameThread = new Thread(() => game(this));
+            //gameThread.Start();
             client.WriteMessage("gameCodeStarted");
             Console.WriteLine("schrijf hier naar de server dat de game code is gestart: ");
             Console.WriteLine("gameCodeStarted");
             Console.WriteLine(" ");
-            bool WinnerFound = false;
-            while (WinnerFound == false)
-            {
+            game();
+        }
+
+        //private void game(Bord bord)
+        private void game()
+        {
+            
+            //bool WinnerFound = false;
+            //while (WinnerFound == false)
+            //{
                 string message = client.ReadMessage();
                 Console.WriteLine("leest hier van de server of het onze beurt is of van een andere client: ");
                 Console.WriteLine(message);
                 Console.WriteLine(" ");
-                if (message == "yourTurn" && waitForDice == false)
+                if (message == "yourTurn")
                 {
-
-                    diceButton.Enabled = true;
-                    DiceRolled = false;
-                    waitForDice = true;
-                    diceButton.BackColor = Color.Orange;
-                    this.Update();
-                    //code om dobbelsteen te gooien
-                    //code om gans voorruit te zetten
-                    //code voor speciaal vakje indien nodig
-                    //code voor XP points
-                    //client.WriteMessage(currentPosition.ToString());
+                    rollDiceButton.Enabled = true;
+                   
                 }
                 if (message == "yourTurn" && waitForDice == true && DiceRolled == true)
                 {
@@ -313,12 +299,25 @@ namespace GanzenBord
                 }
                 else if (message == "gameFinished")
                 {
-                    WinnerFound = true;
+                    //WinnerFound = true;
                 }
-            }
+             }
+        //}
+
+        private void rulesButton_MouseHover(object sender, EventArgs e)
+        {
+            RulesBox.Visible = true;  
         }
 
-        private void button1_MouseLeave(object sender, EventArgs e)
+        public int rollDice()
+        {
+            Random rnd = new Random();
+            int diceNumber = rnd.Next(1, 7);
+            return diceNumber;
+        }
+
+
+        private void rulesButton_MouseLeave(object sender, EventArgs e)
         {
             RulesBox.Visible = false;
         }
@@ -580,8 +579,16 @@ namespace GanzenBord
 
         private void rollDiceButton_Click(object sender, EventArgs e)
         {
-            gameLogics.RollDice(out DiceNumber);
+            diceButton.Text = rollDice().ToString();
             DiceRolled = true;
+            //code om gans voorruit te zetten
+            //code voor speciaal vakje indien nodig
+            //code voor XP points
+            Console.WriteLine("stuur hier naar de server op welke positie de Client staat");
+            Console.WriteLine(currentPosition.ToString());
+            Console.WriteLine("");
+            client.WriteMessage(currentPosition.ToString());
+            game();
         }
     }
 }
