@@ -14,6 +14,7 @@ namespace GanzenBord
         private int playerNumber = 0;
         private int currentPosition = 0;
         private GameLogics gameLogics;
+        private PlayerRanking ranking;
 
         private int currentPositionPlayer1 = 0;
         private int currentPositionPlayer2 = 0;
@@ -23,7 +24,6 @@ namespace GanzenBord
         private int DiceNumber = -1;
         private bool DiceRolled = false;
         private bool waitForDice = false;
-        private Random random;
         bool PlayNextTrun = true;
         bool Wait = false;
 
@@ -32,7 +32,8 @@ namespace GanzenBord
             Console.WriteLine("CLIENT");
             Console.WriteLine("");
             InitializeComponent();
-            GameLogics.GetInstance();
+            gameLogics = GameLogics.GetInstance();
+            ranking = new PlayerRanking();
             pictures = new List<PictureBox>();
             generatePictureList();
             RulesBox.Visible = false;
@@ -233,47 +234,7 @@ namespace GanzenBord
                 }
                 if (message == "yourTurn" && waitForDice == true && DiceRolled == true)
                 {
-                    if (Wait)
-                    {
-                        if (currentPosition == currentPositionPlayer1
-                            || currentPosition == currentPositionPlayer2
-                            || currentPosition == currentPositionPlayer3
-                            || currentPosition == currentPositionPlayer4)
-                            Wait = false;
-                    }
-                    if (!PlayNextTrun)
-                        Wait = true;
-                    if (PlayNextTrun && !Wait)
-                    {
-                        int newPosition = currentPosition + DiceNumber;
-                        DiceNumber = -1;
-                        moveGoosePosition(playerNumber, currentPosition, newPosition, true);
-                        Tuple<bool, SpecialField> tuple = gameLogics.IsSpecialField(currentPosition);
-                        if (tuple.Item1)
-                        {
-                            SpecialField field = tuple.Item2;
-                            switch (field.Command)
-                            {
-                                case SpecialField.CommandOptions.GoTO:
-                                    moveGoosePosition(playerNumber, currentPosition, field.FieldNumber, false);
-                                    break;
-                                case SpecialField.CommandOptions.SkipTurn:
-                                    PlayNextTrun = false;
-                                    break;
-                                case SpecialField.CommandOptions.Wait:
-                                    Wait = true;
-                                    break;
-                                case SpecialField.CommandOptions.End:
-                                    //WinnerFound = true;
-                                    break;
-                            }
-                        }
-                    }
-                    if (Wait && !PlayNextTrun)
-                    {
-                        Wait = false;
-                        PlayNextTrun = true;
-                    }
+               
                     client.WriteMessage(currentPosition.ToString());
                 }
                 else if (message == "turnPlayer1")
@@ -306,13 +267,6 @@ namespace GanzenBord
         private void rulesButton_MouseHover(object sender, EventArgs e)
         {
             RulesBox.Visible = true;  
-        }
-
-        public int rollDice()
-        {
-            Random rnd = new Random();
-            int diceNumber = rnd.Next(1, 7);
-            return diceNumber;
         }
 
 
@@ -369,15 +323,7 @@ namespace GanzenBord
 
         private void ChangeDuckFromTile(string duckColour, PictureBox duckTile)
         {
-            if (duckColour == "rood")
-                RedDuckFromTile(duckTile);
-            else if (duckColour == "Blauw")
-                BlueDuckFromTile(duckTile);
-            else if (duckColour == "geel")
-                YellowDuckFromTile(duckTile);
-            else if (duckColour == "groen")
-                GreenDuckFromTile(duckTile);
-            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansBlauw")
+            if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansBlauw")
                 || duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeel")
                 || duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen")
                 || duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood"))
@@ -385,6 +331,15 @@ namespace GanzenBord
                 duckTile.Image = null;
                 duckTile.SendToBack();
             }
+            else if (duckColour == "rood")
+                RedDuckFromTile(duckTile);
+            else if (duckColour == "Blauw")
+                BlueDuckFromTile(duckTile);
+            else if (duckColour == "geel")
+                YellowDuckFromTile(duckTile);
+            else if (duckColour == "groen")
+                GreenDuckFromTile(duckTile);
+            
         }
 
         private void ChangeDuckToTile(string duckColour, PictureBox duckTile)
@@ -578,12 +533,59 @@ namespace GanzenBord
 
         private void rollDiceButton_Click(object sender, EventArgs e)
         {
-            int thrownDiceNumber = rollDice();
+            int thrownDiceNumber;
+            gameLogics.RollDice(out thrownDiceNumber);
             diceButton.Text = thrownDiceNumber.ToString();
             DiceRolled = true;
-            //code om gans voorruit te zetten
-            //code voor speciaal vakje indien nodig
-            //code voor XP points
+
+            Console.WriteLine("dice rolled");
+            if (Wait)
+            {
+                Console.WriteLine("waiting");
+                if (currentPosition == currentPositionPlayer1
+                        || currentPosition == currentPositionPlayer2
+                        || currentPosition == currentPositionPlayer3
+                        || currentPosition == currentPositionPlayer4)
+                    Wait = false;
+            }
+            if (!PlayNextTrun)
+                Wait = true;
+            if (PlayNextTrun && !Wait)
+            {
+                Console.WriteLine("Playing");
+                int newPosition = currentPosition + thrownDiceNumber;
+                moveGoosePosition(playerNumber, currentPosition, newPosition, true);
+                currentPosition = currentPosition + thrownDiceNumber;
+                DiceNumber = -1;
+
+                Tuple<bool, SpecialField> tuple = gameLogics.IsSpecialField(currentPosition);
+                if (tuple.Item1)
+                {
+                    SpecialField field = tuple.Item2;
+                    switch (field.Command)
+                    {
+                        case SpecialField.CommandOptions.GoTO:
+                            moveGoosePosition(playerNumber, currentPosition, field.FieldNumber, false);
+                            break;
+                        case SpecialField.CommandOptions.SkipTurn:
+                            PlayNextTrun = false;
+                            break;
+                        case SpecialField.CommandOptions.Wait:
+                            Wait = true;
+                            break;
+                        case SpecialField.CommandOptions.End:
+                            //WinnerFound = true;
+                            break;
+                    }
+                }
+            }
+            if (Wait && !PlayNextTrun)
+            {
+                Wait = false;
+                PlayNextTrun = true;
+            }
+
+            ranking.AddPoints(currentPosition);
             Console.WriteLine("stuur hier naar de server op welke positie de Client staat");
             Console.WriteLine(currentPosition.ToString());
             Console.WriteLine("");
