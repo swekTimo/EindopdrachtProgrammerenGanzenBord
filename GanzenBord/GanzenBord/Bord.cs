@@ -266,7 +266,8 @@ namespace GanzenBord
 
         private void rulesButton_MouseHover(object sender, EventArgs e)
         {
-            RulesBox.Visible = true;  
+            RulesBox.Visible = true;
+            RulesBox.BringToFront();
         }
 
 
