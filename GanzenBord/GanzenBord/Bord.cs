@@ -275,7 +275,7 @@ namespace GanzenBord
         {
             RulesBox.Visible = false;
         }
-        public void moveGoosePosition(int player, int currentTile, int toTile, bool NormalPlay)
+        public void moveGoosePosition(int player, int currentTile, int toTile)
         {
             String DuckColour = "rood";
             switch (player) {
@@ -293,20 +293,8 @@ namespace GanzenBord
                     break;
             }
 
-            if (NormalPlay)
-            {
-                while (currentTile != toTile)
-                {
-                    MoveGooseTile(DuckColour, currentTile, currentTile + 1);
-                    currentTile++;
-                    Thread.Sleep(1000);
-                }
-            }
-            else
-            {
-                MoveGooseTile(DuckColour, currentTile, toTile);
+              MoveGooseTile(DuckColour, currentTile, toTile);
                 currentTile = toTile;
-            }
         }
 
         public void MoveGooseTile(string DuckColour, int previousDuckTile, int nextDuckTile)
@@ -555,9 +543,13 @@ namespace GanzenBord
             {
                 Console.WriteLine("Playing");
                 int newPosition = currentPosition + thrownDiceNumber;
-                moveGoosePosition(playerNumber, currentPosition, newPosition, true);
-                currentPosition = currentPosition + thrownDiceNumber;
-                DiceNumber = -1;
+                if (newPosition > 63)
+                {
+                    newPosition = 63 - (thrownDiceNumber - (63 - currentPosition));
+                }
+                moveGoosePosition(playerNumber, currentPosition, newPosition);
+                currentPosition = newPosition;
+
 
                 Tuple<bool, SpecialField> tuple = gameLogics.IsSpecialField(currentPosition);
                 if (tuple.Item1)
@@ -566,7 +558,7 @@ namespace GanzenBord
                     switch (field.Command)
                     {
                         case SpecialField.CommandOptions.GoTO:
-                            moveGoosePosition(playerNumber, currentPosition, field.FieldNumber, false);
+                            moveGoosePosition(playerNumber, currentPosition, field.FieldNumber);
                             break;
                         case SpecialField.CommandOptions.SkipTurn:
                             PlayNextTrun = false;
