@@ -19,7 +19,12 @@ namespace Server
         private int positionClient2 = 0;
         private int positionClient3 = 0;
         private int positionClient4 = 0;
-        private String gameWinner = null;
+        private string userNameClient1;
+        private string userNameClient2;
+        private string userNameClient3;
+        private string userNameClient4;
+        private string gameWinner;
+        private string gameWinnerUsername;
 
         //server is AF, alleen alle player 2's  moeten uitgecomment worden
 
@@ -35,26 +40,54 @@ namespace Server
                 if (playerCount == 1)
                 {
                     client1 = client;
-                    Thread thread = new Thread(HandleClient);
+                    userNameClient1 = ReadMessage(client1);
+                    var path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient1 + ".txt");
+                    if (!File.Exists(path))
+                    {
+                        var myFile = File.Create(path);
+                        myFile.Close();
+                    }
+                        Thread thread = new Thread(HandleClient);
                     thread.Start(client1);
                 }
                 if (playerCount == 2)
                 { 
                     client2 = client;
-                Thread thread = new Thread(HandleClient);
-                thread.Start(client2);
+                    userNameClient2 = ReadMessage(client2);
+                    var path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient2 + ".txt");
+                    if (!File.Exists(path))
+                    {
+                        var myFile = File.Create(path);
+                        myFile.Close();
+                    }
+                    Thread thread = new Thread(HandleClient);
+                    thread.Start(client2);
             }
             if (playerCount == 3)
                 { 
                     client3 = client;
-                Thread thread = new Thread(HandleClient);
-                thread.Start(client3);
+                    userNameClient3 = ReadMessage(client3);
+                    var path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient3 + ".txt");
+                    if (!File.Exists(path))
+                    {
+                        var myFile = File.Create(path);
+                        myFile.Close();
+                    }
+                    Thread thread = new Thread(HandleClient);
+                    thread.Start(client3);
             }
             if (playerCount == 4)
                 { 
                     client4 = client;
-                Thread thread = new Thread(HandleClient);
-                thread.Start(client4);
+                    userNameClient4 = ReadMessage(client4);
+                    var path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient4 + ".txt");
+                    if (!File.Exists(path))
+                    {
+                        var myFile = File.Create(path);
+                        myFile.Close();
+                    }
+                    Thread thread = new Thread(HandleClient);
+                    thread.Start(client4);
             }
         }
     }
@@ -91,25 +124,43 @@ namespace Server
                 Console.WriteLine("hij heeft nu binnen gehad dat de game is gestart en gaat de while loop in:");
                 Console.WriteLine("");
             }
+
+
             bool gameAlive = true;
             while (gameAlive)
             {
                 turnPlayer1();
-                if (checkForWinner() == true){writeAllClients(gameWinner);}
+                if (checkForWinner() == true)
+                {
+                    writeAllClients(gameWinner);
+                    writeAllClients(gameWinnerUsername);
+                }
 
                 //turnPlayer2();
-                //if (checkForWinner() == true) { writeAllClients(gameWinner); }
+                //if (checkForWinner() == true) 
+                //{ 
+                //writeAllClients(gameWinner);
+                //writeAllClients(gameWinnerUsername);
+                //}
 
                 if (client3 != null)
                 {
                     turnPlayer3();
-                    if (checkForWinner() == true) { writeAllClients(gameWinner); }
+                    if (checkForWinner() == true)
+                    {
+                        writeAllClients(gameWinner);
+                        writeAllClients(gameWinnerUsername);
+                    }
                 }
 
                 if (client4 != null)
                 {
                     turnPlayer4();
-                    if (checkForWinner() == true) { writeAllClients(gameWinner); }
+                    if (checkForWinner() == true)
+                    {
+                        writeAllClients(gameWinner);
+                        writeAllClients(gameWinnerUsername);
+                    }
                 }
             }
         }
@@ -129,21 +180,25 @@ namespace Server
             {
                 winner = true;
                 gameWinner = "Winnerclient1";
+                gameWinnerUsername = userNameClient1;
             }
             if (positionClient2 == 63)
             {
                 winner = true;
                 gameWinner = "Winnerclient2";
+                gameWinnerUsername = userNameClient2;
             }
             if (positionClient3 == 63)
             {
                 winner = true;
                 gameWinner = "Winnerclient3";
+                gameWinnerUsername = userNameClient3;
             }
             if (positionClient4 == 63)
             {
                 winner = true;
                 gameWinner = "Winnerclient4";
+                gameWinnerUsername = userNameClient4;
             }
             return winner;
         }
@@ -169,6 +224,7 @@ namespace Server
             if (client3 != null) { WriteMessage(client3, "turnPlayer1"); }
             if (client4 != null) { WriteMessage(client4, "turnPlayer1"); }
 
+            //Hier moet die ranking ontvangen van het bord, en OVERSCHRIJVEN in de File
             positionClient1 = Convert.ToInt32(ReadMessage(client1));
             Console.WriteLine("leest hier van de client wat zijn positie is na het gooien: ");
             Console.WriteLine(positionClient1);

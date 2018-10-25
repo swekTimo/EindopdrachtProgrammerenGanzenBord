@@ -15,6 +15,8 @@ namespace GanzenBord
         private int currentPosition = 0;
         private GameLogics gameLogics;
         private PlayerRanking ranking;
+        private string userName;
+        private string winnerUserName;
 
         private int currentPositionPlayer1 = 0;
         private int currentPositionPlayer2 = 0;
@@ -46,6 +48,7 @@ namespace GanzenBord
             waitForAllPlayersLabel.Visible = false;
             rulesButton.Visible = false;
             beurtInfoLabel.Visible = false;
+            startGameButton.Visible = false;
 
             SendAllPicturesToBack();
 
@@ -137,7 +140,7 @@ namespace GanzenBord
             Console.WriteLine("leest hier van de server: welk nummer client we zijn: client nummer: ");
             Console.Write(playerNumber);
             Console.WriteLine(" ");
-            playerNameLabel.Text = "Player " + playerNumber;
+            playerNameLabel.Text = "Player " + playerNumber + "  :  " + userName;
             playerNameLabel.Visible = true;
             startGameButton.Visible = false;
             howManyPlayersLabel.Visible = true;
@@ -271,19 +274,23 @@ namespace GanzenBord
             }
             else if (message == "Winnerclient1")
             {
-                beurtInfoLabel.Text = "Player 1 has won the game";
+                winnerUserName = client.ReadMessage();
+                beurtInfoLabel.Text = "Player 1: " + winnerUserName + " has won the game";
             }
             else if (message == "Winnerclient2")
             {
-                beurtInfoLabel.Text = "Player 2 has won the game";
+                winnerUserName = client.ReadMessage();
+                beurtInfoLabel.Text = "Player 2: " + winnerUserName + " has won the game";
             }
             else if (message == "Winnerclient3")
             {
-                beurtInfoLabel.Text = "Player 3 has won the game";
+                winnerUserName = client.ReadMessage();
+                beurtInfoLabel.Text = "Player 3:"  + winnerUserName + " has won the game";
             }
             else if (message == "Winnerclient4")
             {
-                beurtInfoLabel.Text = "Player 4 has won the game";
+                winnerUserName = client.ReadMessage();
+                beurtInfoLabel.Text = "Player 4: " + winnerUserName + " has won the game";
             }
         }
 
@@ -571,12 +578,12 @@ namespace GanzenBord
                         Wait = true;
                         break;
                     case SpecialField.CommandOptions.End:
-                        //WinnerFound = true;
                         break;
                 }
             }
 
             ranking.AddPoints(currentPosition);
+            //schrijf de ranking naar de server
 
             Console.WriteLine("stuur hier naar de server op welke positie de Client staat");
             Console.WriteLine(currentPosition.ToString());
@@ -585,5 +592,14 @@ namespace GanzenBord
             game();
         }
 
+        private void userNameButton_Click(object sender, EventArgs e)
+        {
+            userName = userNameTextBox.Text;
+            userNameLabel.Visible = false;
+            userNameButton.Visible = false;
+            userNameTextBox.Visible = false;
+            startGameButton.Visible = true;
+            client.WriteMessage(userName);
+        }
     }
 }

@@ -108,6 +108,9 @@ namespace GanzenBord
             this.diceButton = new System.Windows.Forms.Button();
             this.rollDiceButton = new System.Windows.Forms.Button();
             this.beurtInfoLabel = new System.Windows.Forms.Label();
+            this.userNameTextBox = new System.Windows.Forms.TextBox();
+            this.userNameLabel = new System.Windows.Forms.Label();
+            this.userNameButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyonePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fiftyninePictureBox)).BeginInit();
@@ -180,10 +183,10 @@ namespace GanzenBord
             // 
             this.playerNameLabel.AutoSize = true;
             this.playerNameLabel.BackColor = System.Drawing.Color.Teal;
-            this.playerNameLabel.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playerNameLabel.Location = new System.Drawing.Point(12, 9);
+            this.playerNameLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
+            this.playerNameLabel.Location = new System.Drawing.Point(12, 12);
             this.playerNameLabel.Name = "playerNameLabel";
-            this.playerNameLabel.Size = new System.Drawing.Size(98, 20);
+            this.playerNameLabel.Size = new System.Drawing.Size(117, 23);
             this.playerNameLabel.TabIndex = 1;
             this.playerNameLabel.Text = "PlayerName";
             // 
@@ -875,7 +878,7 @@ namespace GanzenBord
             this.howManyPlayersLabel.AutoSize = true;
             this.howManyPlayersLabel.BackColor = System.Drawing.Color.Teal;
             this.howManyPlayersLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.howManyPlayersLabel.Location = new System.Drawing.Point(127, 9);
+            this.howManyPlayersLabel.Location = new System.Drawing.Point(259, 11);
             this.howManyPlayersLabel.Name = "howManyPlayersLabel";
             this.howManyPlayersLabel.Size = new System.Drawing.Size(394, 23);
             this.howManyPlayersLabel.TabIndex = 69;
@@ -898,7 +901,7 @@ namespace GanzenBord
             // 
             this.twoPlayerGameButton.BackColor = System.Drawing.Color.Teal;
             this.twoPlayerGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.twoPlayerGameButton.Location = new System.Drawing.Point(527, 9);
+            this.twoPlayerGameButton.Location = new System.Drawing.Point(659, 9);
             this.twoPlayerGameButton.Name = "twoPlayerGameButton";
             this.twoPlayerGameButton.Size = new System.Drawing.Size(34, 26);
             this.twoPlayerGameButton.TabIndex = 71;
@@ -910,7 +913,7 @@ namespace GanzenBord
             // 
             this.threePlayerGameButton.BackColor = System.Drawing.Color.Teal;
             this.threePlayerGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.threePlayerGameButton.Location = new System.Drawing.Point(567, 9);
+            this.threePlayerGameButton.Location = new System.Drawing.Point(698, 9);
             this.threePlayerGameButton.Name = "threePlayerGameButton";
             this.threePlayerGameButton.Size = new System.Drawing.Size(34, 26);
             this.threePlayerGameButton.TabIndex = 72;
@@ -922,7 +925,7 @@ namespace GanzenBord
             // 
             this.fourPlayerGameButton.BackColor = System.Drawing.Color.Teal;
             this.fourPlayerGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fourPlayerGameButton.Location = new System.Drawing.Point(609, 9);
+            this.fourPlayerGameButton.Location = new System.Drawing.Point(738, 9);
             this.fourPlayerGameButton.Name = "fourPlayerGameButton";
             this.fourPlayerGameButton.Size = new System.Drawing.Size(34, 26);
             this.fourPlayerGameButton.TabIndex = 73;
@@ -973,11 +976,46 @@ namespace GanzenBord
             this.beurtInfoLabel.TabIndex = 77;
             this.beurtInfoLabel.Text = "BeurtInformatie";
             // 
+            // userNameTextBox
+            // 
+            this.userNameTextBox.BackColor = System.Drawing.Color.Teal;
+            this.userNameTextBox.Location = new System.Drawing.Point(382, 14);
+            this.userNameTextBox.Name = "userNameTextBox";
+            this.userNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.userNameTextBox.TabIndex = 78;
+            // 
+            // userNameLabel
+            // 
+            this.userNameLabel.AutoSize = true;
+            this.userNameLabel.BackColor = System.Drawing.Color.Teal;
+            this.userNameLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
+            this.userNameLabel.Location = new System.Drawing.Point(147, 12);
+            this.userNameLabel.Name = "userNameLabel";
+            this.userNameLabel.Size = new System.Drawing.Size(217, 23);
+            this.userNameLabel.TabIndex = 79;
+            this.userNameLabel.Text = "What is your Username:";
+            // 
+            // userNameButton
+            // 
+            this.userNameButton.BackColor = System.Drawing.Color.Teal;
+            this.userNameButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.userNameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userNameButton.Location = new System.Drawing.Point(495, 14);
+            this.userNameButton.Name = "userNameButton";
+            this.userNameButton.Size = new System.Drawing.Size(74, 22);
+            this.userNameButton.TabIndex = 80;
+            this.userNameButton.Text = "OK";
+            this.userNameButton.UseVisualStyleBackColor = false;
+            this.userNameButton.Click += new System.EventHandler(this.userNameButton_Click);
+            // 
             // Bord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.userNameButton);
+            this.Controls.Add(this.userNameLabel);
+            this.Controls.Add(this.userNameTextBox);
             this.Controls.Add(this.beurtInfoLabel);
             this.Controls.Add(this.rollDiceButton);
             this.Controls.Add(this.diceButton);
@@ -1211,5 +1249,8 @@ namespace GanzenBord
         private System.Windows.Forms.Button diceButton;
         private System.Windows.Forms.Button rollDiceButton;
         private System.Windows.Forms.Label beurtInfoLabel;
+        private System.Windows.Forms.TextBox userNameTextBox;
+        private System.Windows.Forms.Label userNameLabel;
+        private System.Windows.Forms.Button userNameButton;
     }
 }
