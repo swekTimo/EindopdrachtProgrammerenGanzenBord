@@ -223,6 +223,7 @@ namespace GanzenBord
             this.sixtyonePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.sixtyonePictureBox.Name = "sixtyonePictureBox";
             this.sixtyonePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.sixtyonePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sixtyonePictureBox.TabIndex = 65;
             this.sixtyonePictureBox.TabStop = false;
             // 
@@ -232,6 +233,7 @@ namespace GanzenBord
             this.sixtyPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.sixtyPictureBox.Name = "sixtyPictureBox";
             this.sixtyPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.sixtyPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sixtyPictureBox.TabIndex = 64;
             this.sixtyPictureBox.TabStop = false;
             // 
@@ -241,6 +243,7 @@ namespace GanzenBord
             this.fiftyninePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fiftyninePictureBox.Name = "fiftyninePictureBox";
             this.fiftyninePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fiftyninePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fiftyninePictureBox.TabIndex = 63;
             this.fiftyninePictureBox.TabStop = false;
             // 
@@ -250,6 +253,7 @@ namespace GanzenBord
             this.fiftyeightPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fiftyeightPictureBox.Name = "fiftyeightPictureBox";
             this.fiftyeightPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fiftyeightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fiftyeightPictureBox.TabIndex = 62;
             this.fiftyeightPictureBox.TabStop = false;
             // 
@@ -259,6 +263,7 @@ namespace GanzenBord
             this.fiftysevenPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fiftysevenPictureBox.Name = "fiftysevenPictureBox";
             this.fiftysevenPictureBox.Size = new System.Drawing.Size(56, 63);
+            this.fiftysevenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fiftysevenPictureBox.TabIndex = 61;
             this.fiftysevenPictureBox.TabStop = false;
             // 
@@ -268,6 +273,7 @@ namespace GanzenBord
             this.fiftysixPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fiftysixPictureBox.Name = "fiftysixPictureBox";
             this.fiftysixPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fiftysixPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fiftysixPictureBox.TabIndex = 60;
             this.fiftysixPictureBox.TabStop = false;
             // 
@@ -277,6 +283,7 @@ namespace GanzenBord
             this.fiftyfivePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fiftyfivePictureBox.Name = "fiftyfivePictureBox";
             this.fiftyfivePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fiftyfivePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fiftyfivePictureBox.TabIndex = 59;
             this.fiftyfivePictureBox.TabStop = false;
             // 
@@ -286,6 +293,7 @@ namespace GanzenBord
             this.fiftyfourPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fiftyfourPictureBox.Name = "fiftyfourPictureBox";
             this.fiftyfourPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fiftyfourPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fiftyfourPictureBox.TabIndex = 58;
             this.fiftyfourPictureBox.TabStop = false;
             // 
@@ -295,6 +303,7 @@ namespace GanzenBord
             this.fiftythreePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fiftythreePictureBox.Name = "fiftythreePictureBox";
             this.fiftythreePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fiftythreePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fiftythreePictureBox.TabIndex = 57;
             this.fiftythreePictureBox.TabStop = false;
             // 
@@ -304,6 +313,7 @@ namespace GanzenBord
             this.fiftytwoPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fiftytwoPictureBox.Name = "fiftytwoPictureBox";
             this.fiftytwoPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fiftytwoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fiftytwoPictureBox.TabIndex = 56;
             this.fiftytwoPictureBox.TabStop = false;
             // 
@@ -313,6 +323,7 @@ namespace GanzenBord
             this.fiftyonePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fiftyonePictureBox.Name = "fiftyonePictureBox";
             this.fiftyonePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fiftyonePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fiftyonePictureBox.TabIndex = 55;
             this.fiftyonePictureBox.TabStop = false;
             // 
@@ -322,6 +333,7 @@ namespace GanzenBord
             this.fiftyPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fiftyPictureBox.Name = "fiftyPictureBox";
             this.fiftyPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fiftyPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fiftyPictureBox.TabIndex = 54;
             this.fiftyPictureBox.TabStop = false;
             // 
@@ -331,6 +343,7 @@ namespace GanzenBord
             this.fourtyninePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fourtyninePictureBox.Name = "fourtyninePictureBox";
             this.fourtyninePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fourtyninePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fourtyninePictureBox.TabIndex = 53;
             this.fourtyninePictureBox.TabStop = false;
             // 
@@ -340,6 +353,7 @@ namespace GanzenBord
             this.fourtyeightPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fourtyeightPictureBox.Name = "fourtyeightPictureBox";
             this.fourtyeightPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fourtyeightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fourtyeightPictureBox.TabIndex = 52;
             this.fourtyeightPictureBox.TabStop = false;
             // 
@@ -349,6 +363,7 @@ namespace GanzenBord
             this.fourtysevenPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fourtysevenPictureBox.Name = "fourtysevenPictureBox";
             this.fourtysevenPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fourtysevenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fourtysevenPictureBox.TabIndex = 51;
             this.fourtysevenPictureBox.TabStop = false;
             // 
@@ -358,6 +373,7 @@ namespace GanzenBord
             this.fourtysixPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fourtysixPictureBox.Name = "fourtysixPictureBox";
             this.fourtysixPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fourtysixPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fourtysixPictureBox.TabIndex = 50;
             this.fourtysixPictureBox.TabStop = false;
             // 
@@ -366,7 +382,8 @@ namespace GanzenBord
             this.fourtyfivePictureBox.Location = new System.Drawing.Point(591, 281);
             this.fourtyfivePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fourtyfivePictureBox.Name = "fourtyfivePictureBox";
-            this.fourtyfivePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fourtyfivePictureBox.Size = new System.Drawing.Size(52, 63);
+            this.fourtyfivePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fourtyfivePictureBox.TabIndex = 49;
             this.fourtyfivePictureBox.TabStop = false;
             // 
@@ -376,6 +393,7 @@ namespace GanzenBord
             this.fourtyfourPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fourtyfourPictureBox.Name = "fourtyfourPictureBox";
             this.fourtyfourPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fourtyfourPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fourtyfourPictureBox.TabIndex = 48;
             this.fourtyfourPictureBox.TabStop = false;
             // 
@@ -385,6 +403,7 @@ namespace GanzenBord
             this.fourtythreePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fourtythreePictureBox.Name = "fourtythreePictureBox";
             this.fourtythreePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fourtythreePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fourtythreePictureBox.TabIndex = 47;
             this.fourtythreePictureBox.TabStop = false;
             // 
@@ -394,6 +413,7 @@ namespace GanzenBord
             this.fourtytwoPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fourtytwoPictureBox.Name = "fourtytwoPictureBox";
             this.fourtytwoPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fourtytwoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fourtytwoPictureBox.TabIndex = 46;
             this.fourtytwoPictureBox.TabStop = false;
             // 
@@ -403,6 +423,7 @@ namespace GanzenBord
             this.fourtyonePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fourtyonePictureBox.Name = "fourtyonePictureBox";
             this.fourtyonePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fourtyonePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fourtyonePictureBox.TabIndex = 45;
             this.fourtyonePictureBox.TabStop = false;
             // 
@@ -412,6 +433,7 @@ namespace GanzenBord
             this.fourtyPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fourtyPictureBox.Name = "fourtyPictureBox";
             this.fourtyPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fourtyPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fourtyPictureBox.TabIndex = 44;
             this.fourtyPictureBox.TabStop = false;
             // 
@@ -421,6 +443,7 @@ namespace GanzenBord
             this.thirtyninePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.thirtyninePictureBox.Name = "thirtyninePictureBox";
             this.thirtyninePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.thirtyninePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.thirtyninePictureBox.TabIndex = 43;
             this.thirtyninePictureBox.TabStop = false;
             // 
@@ -430,6 +453,7 @@ namespace GanzenBord
             this.thirtyeightPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.thirtyeightPictureBox.Name = "thirtyeightPictureBox";
             this.thirtyeightPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.thirtyeightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.thirtyeightPictureBox.TabIndex = 42;
             this.thirtyeightPictureBox.TabStop = false;
             // 
@@ -439,6 +463,7 @@ namespace GanzenBord
             this.thirtysevenPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.thirtysevenPictureBox.Name = "thirtysevenPictureBox";
             this.thirtysevenPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.thirtysevenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.thirtysevenPictureBox.TabIndex = 41;
             this.thirtysevenPictureBox.TabStop = false;
             // 
@@ -448,6 +473,7 @@ namespace GanzenBord
             this.thirtysixPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.thirtysixPictureBox.Name = "thirtysixPictureBox";
             this.thirtysixPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.thirtysixPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.thirtysixPictureBox.TabIndex = 40;
             this.thirtysixPictureBox.TabStop = false;
             // 
@@ -457,6 +483,7 @@ namespace GanzenBord
             this.thirtyfivePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.thirtyfivePictureBox.Name = "thirtyfivePictureBox";
             this.thirtyfivePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.thirtyfivePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.thirtyfivePictureBox.TabIndex = 39;
             this.thirtyfivePictureBox.TabStop = false;
             // 
@@ -466,6 +493,7 @@ namespace GanzenBord
             this.thirtyfourPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.thirtyfourPictureBox.Name = "thirtyfourPictureBox";
             this.thirtyfourPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.thirtyfourPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.thirtyfourPictureBox.TabIndex = 38;
             this.thirtyfourPictureBox.TabStop = false;
             // 
@@ -475,6 +503,7 @@ namespace GanzenBord
             this.thirtythreePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.thirtythreePictureBox.Name = "thirtythreePictureBox";
             this.thirtythreePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.thirtythreePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.thirtythreePictureBox.TabIndex = 37;
             this.thirtythreePictureBox.TabStop = false;
             // 
@@ -484,6 +513,7 @@ namespace GanzenBord
             this.thirtytwoPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.thirtytwoPictureBox.Name = "thirtytwoPictureBox";
             this.thirtytwoPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.thirtytwoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.thirtytwoPictureBox.TabIndex = 36;
             this.thirtytwoPictureBox.TabStop = false;
             // 
@@ -493,6 +523,7 @@ namespace GanzenBord
             this.thirtyonePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.thirtyonePictureBox.Name = "thirtyonePictureBox";
             this.thirtyonePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.thirtyonePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.thirtyonePictureBox.TabIndex = 35;
             this.thirtyonePictureBox.TabStop = false;
             // 
@@ -502,6 +533,7 @@ namespace GanzenBord
             this.thirtyPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.thirtyPictureBox.Name = "thirtyPictureBox";
             this.thirtyPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.thirtyPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.thirtyPictureBox.TabIndex = 34;
             this.thirtyPictureBox.TabStop = false;
             // 
@@ -511,6 +543,7 @@ namespace GanzenBord
             this.twentyninePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.twentyninePictureBox.Name = "twentyninePictureBox";
             this.twentyninePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.twentyninePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.twentyninePictureBox.TabIndex = 33;
             this.twentyninePictureBox.TabStop = false;
             // 
@@ -520,6 +553,7 @@ namespace GanzenBord
             this.twentyeightPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.twentyeightPictureBox.Name = "twentyeightPictureBox";
             this.twentyeightPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.twentyeightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.twentyeightPictureBox.TabIndex = 32;
             this.twentyeightPictureBox.TabStop = false;
             // 
@@ -529,6 +563,7 @@ namespace GanzenBord
             this.twentysevenPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.twentysevenPictureBox.Name = "twentysevenPictureBox";
             this.twentysevenPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.twentysevenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.twentysevenPictureBox.TabIndex = 31;
             this.twentysevenPictureBox.TabStop = false;
             // 
@@ -538,6 +573,7 @@ namespace GanzenBord
             this.twentysixPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.twentysixPictureBox.Name = "twentysixPictureBox";
             this.twentysixPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.twentysixPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.twentysixPictureBox.TabIndex = 30;
             this.twentysixPictureBox.TabStop = false;
             // 
@@ -547,6 +583,7 @@ namespace GanzenBord
             this.twentyfivePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.twentyfivePictureBox.Name = "twentyfivePictureBox";
             this.twentyfivePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.twentyfivePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.twentyfivePictureBox.TabIndex = 29;
             this.twentyfivePictureBox.TabStop = false;
             // 
@@ -556,6 +593,7 @@ namespace GanzenBord
             this.twentyfourPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.twentyfourPictureBox.Name = "twentyfourPictureBox";
             this.twentyfourPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.twentyfourPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.twentyfourPictureBox.TabIndex = 28;
             this.twentyfourPictureBox.TabStop = false;
             // 
@@ -565,6 +603,7 @@ namespace GanzenBord
             this.twentrythreePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.twentrythreePictureBox.Name = "twentrythreePictureBox";
             this.twentrythreePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.twentrythreePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.twentrythreePictureBox.TabIndex = 27;
             this.twentrythreePictureBox.TabStop = false;
             // 
@@ -574,6 +613,7 @@ namespace GanzenBord
             this.twentytwoPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.twentytwoPictureBox.Name = "twentytwoPictureBox";
             this.twentytwoPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.twentytwoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.twentytwoPictureBox.TabIndex = 26;
             this.twentytwoPictureBox.TabStop = false;
             // 
@@ -583,6 +623,7 @@ namespace GanzenBord
             this.twentyonePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.twentyonePictureBox.Name = "twentyonePictureBox";
             this.twentyonePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.twentyonePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.twentyonePictureBox.TabIndex = 25;
             this.twentyonePictureBox.TabStop = false;
             // 
@@ -592,6 +633,7 @@ namespace GanzenBord
             this.twentyPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.twentyPictureBox.Name = "twentyPictureBox";
             this.twentyPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.twentyPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.twentyPictureBox.TabIndex = 24;
             this.twentyPictureBox.TabStop = false;
             // 
@@ -601,6 +643,7 @@ namespace GanzenBord
             this.nineteenPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.nineteenPictureBox.Name = "nineteenPictureBox";
             this.nineteenPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.nineteenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.nineteenPictureBox.TabIndex = 23;
             this.nineteenPictureBox.TabStop = false;
             // 
@@ -610,6 +653,7 @@ namespace GanzenBord
             this.eightteenPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.eightteenPictureBox.Name = "eightteenPictureBox";
             this.eightteenPictureBox.Size = new System.Drawing.Size(60, 63);
+            this.eightteenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.eightteenPictureBox.TabIndex = 22;
             this.eightteenPictureBox.TabStop = false;
             // 
@@ -619,6 +663,7 @@ namespace GanzenBord
             this.seventeenPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.seventeenPictureBox.Name = "seventeenPictureBox";
             this.seventeenPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.seventeenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.seventeenPictureBox.TabIndex = 21;
             this.seventeenPictureBox.TabStop = false;
             // 
@@ -628,6 +673,7 @@ namespace GanzenBord
             this.sixteenPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.sixteenPictureBox.Name = "sixteenPictureBox";
             this.sixteenPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.sixteenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sixteenPictureBox.TabIndex = 20;
             this.sixteenPictureBox.TabStop = false;
             // 
@@ -637,6 +683,7 @@ namespace GanzenBord
             this.fifteenPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fifteenPictureBox.Name = "fifteenPictureBox";
             this.fifteenPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fifteenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fifteenPictureBox.TabIndex = 19;
             this.fifteenPictureBox.TabStop = false;
             // 
@@ -646,6 +693,7 @@ namespace GanzenBord
             this.fourteenPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.fourteenPictureBox.Name = "fourteenPictureBox";
             this.fourteenPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fourteenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fourteenPictureBox.TabIndex = 18;
             this.fourteenPictureBox.TabStop = false;
             // 
@@ -664,6 +712,7 @@ namespace GanzenBord
             this.twelvePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.twelvePictureBox.Name = "twelvePictureBox";
             this.twelvePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.twelvePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.twelvePictureBox.TabIndex = 16;
             this.twelvePictureBox.TabStop = false;
             // 
@@ -673,6 +722,7 @@ namespace GanzenBord
             this.elevenPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.elevenPictureBox.Name = "elevenPictureBox";
             this.elevenPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.elevenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.elevenPictureBox.TabIndex = 15;
             this.elevenPictureBox.TabStop = false;
             // 
@@ -682,6 +732,7 @@ namespace GanzenBord
             this.tenPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.tenPictureBox.Name = "tenPictureBox";
             this.tenPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.tenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.tenPictureBox.TabIndex = 14;
             this.tenPictureBox.TabStop = false;
             // 
@@ -691,6 +742,7 @@ namespace GanzenBord
             this.ninePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.ninePictureBox.Name = "ninePictureBox";
             this.ninePictureBox.Size = new System.Drawing.Size(56, 63);
+            this.ninePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ninePictureBox.TabIndex = 13;
             this.ninePictureBox.TabStop = false;
             // 
@@ -700,6 +752,7 @@ namespace GanzenBord
             this.eightPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.eightPictureBox.Name = "eightPictureBox";
             this.eightPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.eightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.eightPictureBox.TabIndex = 12;
             this.eightPictureBox.TabStop = false;
             // 
@@ -708,6 +761,7 @@ namespace GanzenBord
             this.sevenPictureBox.Location = new System.Drawing.Point(495, 378);
             this.sevenPictureBox.Name = "sevenPictureBox";
             this.sevenPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.sevenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sevenPictureBox.TabIndex = 11;
             this.sevenPictureBox.TabStop = false;
             // 
@@ -716,6 +770,7 @@ namespace GanzenBord
             this.sixPictureBox.Location = new System.Drawing.Point(433, 378);
             this.sixPictureBox.Name = "sixPictureBox";
             this.sixPictureBox.Size = new System.Drawing.Size(63, 63);
+            this.sixPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sixPictureBox.TabIndex = 10;
             this.sixPictureBox.TabStop = false;
             // 
@@ -724,6 +779,7 @@ namespace GanzenBord
             this.fivePictureBox.Location = new System.Drawing.Point(382, 378);
             this.fivePictureBox.Name = "fivePictureBox";
             this.fivePictureBox.Size = new System.Drawing.Size(56, 63);
+            this.fivePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fivePictureBox.TabIndex = 9;
             this.fivePictureBox.TabStop = false;
             // 
@@ -732,6 +788,7 @@ namespace GanzenBord
             this.fourPictureBox.Location = new System.Drawing.Point(335, 378);
             this.fourPictureBox.Name = "fourPictureBox";
             this.fourPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.fourPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.fourPictureBox.TabIndex = 8;
             this.fourPictureBox.TabStop = false;
             // 
@@ -740,6 +797,7 @@ namespace GanzenBord
             this.threePictureBox.Location = new System.Drawing.Point(290, 378);
             this.threePictureBox.Name = "threePictureBox";
             this.threePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.threePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.threePictureBox.TabIndex = 7;
             this.threePictureBox.TabStop = false;
             // 
@@ -748,6 +806,7 @@ namespace GanzenBord
             this.twoPictureBox.Location = new System.Drawing.Point(243, 378);
             this.twoPictureBox.Name = "twoPictureBox";
             this.twoPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.twoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.twoPictureBox.TabIndex = 6;
             this.twoPictureBox.TabStop = false;
             // 
@@ -785,6 +844,7 @@ namespace GanzenBord
             this.startPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.startPictureBox.Name = "startPictureBox";
             this.startPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.startPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.startPictureBox.TabIndex = 66;
             this.startPictureBox.TabStop = false;
             // 
@@ -794,6 +854,7 @@ namespace GanzenBord
             this.sixtythreePictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.sixtythreePictureBox.Name = "sixtythreePictureBox";
             this.sixtythreePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.sixtythreePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sixtythreePictureBox.TabIndex = 67;
             this.sixtythreePictureBox.TabStop = false;
             // 
@@ -803,6 +864,7 @@ namespace GanzenBord
             this.sixtytwoPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.sixtytwoPictureBox.Name = "sixtytwoPictureBox";
             this.sixtytwoPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.sixtytwoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sixtytwoPictureBox.TabIndex = 68;
             this.sixtytwoPictureBox.TabStop = false;
             // 
