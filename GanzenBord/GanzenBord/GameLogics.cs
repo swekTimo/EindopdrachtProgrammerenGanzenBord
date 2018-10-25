@@ -27,9 +27,9 @@ namespace GanzenBord
             return Instance;
         }
 
-        public void RollDice(out int DiceResult)
+        public int RollDice()
         {
-            DiceResult = dice.Next(1,7);
+            return dice.Next(1,7);
         }
 
         public Tuple<bool, SpecialField> IsSpecialField(int Field)

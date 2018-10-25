@@ -107,6 +107,7 @@ namespace GanzenBord
             this.waitForAllPlayersLabel = new System.Windows.Forms.Label();
             this.diceButton = new System.Windows.Forms.Button();
             this.rollDiceButton = new System.Windows.Forms.Button();
+            this.beurtInfoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyonePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fiftyninePictureBox)).BeginInit();
@@ -703,6 +704,7 @@ namespace GanzenBord
             this.thirteenPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.thirteenPictureBox.Name = "thirteenPictureBox";
             this.thirteenPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.thirteenPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.thirteenPictureBox.TabIndex = 17;
             this.thirteenPictureBox.TabStop = false;
             // 
@@ -948,7 +950,6 @@ namespace GanzenBord
             this.diceButton.TabIndex = 75;
             this.diceButton.Text = "1";
             this.diceButton.UseVisualStyleBackColor = true;
-            this.diceButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // rollDiceButton
             // 
@@ -961,11 +962,23 @@ namespace GanzenBord
             this.rollDiceButton.UseVisualStyleBackColor = true;
             this.rollDiceButton.Click += new System.EventHandler(this.rollDiceButton_Click);
             // 
+            // beurtInfoLabel
+            // 
+            this.beurtInfoLabel.AutoSize = true;
+            this.beurtInfoLabel.BackColor = System.Drawing.Color.Teal;
+            this.beurtInfoLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
+            this.beurtInfoLabel.Location = new System.Drawing.Point(295, 12);
+            this.beurtInfoLabel.Name = "beurtInfoLabel";
+            this.beurtInfoLabel.Size = new System.Drawing.Size(145, 23);
+            this.beurtInfoLabel.TabIndex = 77;
+            this.beurtInfoLabel.Text = "BeurtInformatie";
+            // 
             // Bord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.beurtInfoLabel);
             this.Controls.Add(this.rollDiceButton);
             this.Controls.Add(this.diceButton);
             this.Controls.Add(this.waitForAllPlayersLabel);
@@ -1197,5 +1210,6 @@ namespace GanzenBord
         public System.Windows.Forms.Label waitForAllPlayersLabel;
         private System.Windows.Forms.Button diceButton;
         private System.Windows.Forms.Button rollDiceButton;
+        private System.Windows.Forms.Label beurtInfoLabel;
     }
 }

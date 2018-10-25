@@ -21,6 +21,8 @@ namespace Server
         private int positionClient4 = 0;
         private String gameWinner = null;
 
+        //server is AF, alleen alle player 2's  moeten uitgecomment worden
+
         public ServerGanzenbord()
         {
             TcpListener listener = new TcpListener(IPAddress.Any, 6666);
@@ -54,10 +56,8 @@ namespace Server
                 Thread thread = new Thread(HandleClient);
                 thread.Start(client4);
             }
-
-
         }
-        }
+    }
 
         public void HandleClient(object obj)
         {
@@ -94,99 +94,56 @@ namespace Server
             bool gameAlive = true;
             while (gameAlive)
             {
-                
                 turnPlayer1();
-                positionClient1 = Convert.ToInt32(ReadMessage(client1));
-                Console.WriteLine("leest hier van de client wat zijn positie is na het gooien: ");
-                Console.WriteLine(positionClient1);
-                Console.WriteLine(" ");
-
-                //WriteInteger(client2, positionClient1);
-                if (playerCount == 3)
-                    WriteMessage(client3, positionClient1.ToString());
-                if (playerCount == 4)
-                {
-                    WriteMessage(client3, positionClient1.ToString());
-                    WriteMessage(client4, positionClient1.ToString());
-                }
-
-                checkForWinner();
-
-
+                if (checkForWinner() == true){writeAllClients(gameWinner);}
 
                 //turnPlayer2();
-                //positionClient2 = Convert.ToInt32(ReadMessage(client2));
+                //if (checkForWinner() == true) { writeAllClients(gameWinner); }
 
-                //WriteMessage(client1, positionClient2.ToString());
-                //if (playerCount == 3)
-                //    WriteMessage(client3, positionClient2.ToString());
-                //if (playerCount == 4)
-                //{
-                //    WriteMessage(client3, positionClient2.ToString());
-                //    WriteMessage(client4, positionClient2.ToString());
-                //}
-
-                //checkForWinner();
-
-
-
-
-                if (playerCount == 3)
+                if (client3 != null)
                 {
                     turnPlayer3();
-                    positionClient3 = Convert.ToInt32(ReadMessage(client3));
-
-                    WriteMessage(client1, positionClient3.ToString());
-                    WriteMessage(client2, positionClient3.ToString());
+                    if (checkForWinner() == true) { writeAllClients(gameWinner); }
                 }
 
-                checkForWinner();
-
-
-
-
-                if (playerCount == 4)
+                if (client4 != null)
                 {
-                    turnPlayer3();
-                    positionClient3 = Convert.ToInt32(ReadMessage(client3));
-
-                    WriteMessage(client1, positionClient3.ToString());
-                    WriteMessage(client2, positionClient3.ToString());
-                    WriteMessage(client4, positionClient3.ToString());
-                    
-
                     turnPlayer4();
-                    positionClient4 = Convert.ToInt32(ReadMessage(client4));
-
-                    WriteMessage(client1, positionClient4.ToString());
-                    WriteMessage(client2, positionClient4.ToString());
-                    WriteMessage(client3, positionClient4.ToString());
+                    if (checkForWinner() == true) { writeAllClients(gameWinner); }
                 }
             }
+        }
+
+        public void writeAllClients(string message)
+        {
+            WriteMessage(client1, message);
+            //WriteMessage(client2, message);
+            if (client3 != null) WriteMessage(client3, message);
+            if (client4 != null) WriteMessage(client4, message);
         }
 
         public bool checkForWinner()
         {
             bool winner = false;
-            if (positionClient1 >= 63)
+            if (positionClient1 == 63)
             {
                 winner = true;
-                gameWinner = "client1";
+                gameWinner = "Winnerclient1";
             }
-            if (positionClient2 >= 63)
+            if (positionClient2 == 63)
             {
                 winner = true;
-                gameWinner = "client2";
+                gameWinner = "Winnerclient2";
             }
-            if (positionClient3 >= 63)
+            if (positionClient3 == 63)
             {
                 winner = true;
-                gameWinner = "client3";
+                gameWinner = "Winnerclient3";
             }
-            if (positionClient4 >= 63)
+            if (positionClient4 == 63)
             {
                 winner = true;
-                gameWinner = "client4";
+                gameWinner = "Winnerclient4";
             }
             return winner;
         }
@@ -198,97 +155,93 @@ namespace Server
             Console.WriteLine("startGame");
             Console.WriteLine(" ");
             //WriteMessage(client2, "startGame");
-            //WriteMessage(client3, "startGame");
-            //WriteMessage(client4, "startGame");
+            //if (client3 != null) WriteMessage(client3, "startGame");
+            //if (client4 != null) WriteMessage(client4, "startGame");
         }
 
         public void turnPlayer1()
             {
-                WriteMessage(client1, "yourTurn");
+            WriteMessage(client1, "yourTurn");
             Console.WriteLine("stuurt hier naar de client dat het zijn beurt is of van andere client: ");
             Console.WriteLine("yourturn");
             Console.WriteLine(" ");
             //WriteMessage(client2, "turnPlayer1");
-            if (playerCount == 3)
-                    WriteMessage(client3, "turnPlayer1");
-                if (playerCount == 4)
-                {
-                    WriteMessage(client3, "turnPlayer1");
-                    WriteMessage(client4, "turnPlayer1");
-                }
-            }
+            if (client3 != null) { WriteMessage(client3, "turnPlayer1"); }
+            if (client4 != null) { WriteMessage(client4, "turnPlayer1"); }
+
+            positionClient1 = Convert.ToInt32(ReadMessage(client1));
+            Console.WriteLine("leest hier van de client wat zijn positie is na het gooien: ");
+            Console.WriteLine(positionClient1);
+            Console.WriteLine(" ");
+
+            //WriteMessage(client2, positionClient1.ToString());
+            if (client3 != null) { WriteMessage(client3, positionClient1.ToString()); }
+            if (client4 != null) { WriteMessage(client4, positionClient1.ToString()); }
+
+
+            //if (ReadMessage(client2) == "DONE") { Console.WriteLine("client2 heeft succesvol de positie van clinent 1 ontvangen"); }
+            if (client3 != null)
+                if (ReadMessage(client3) == "DONE") { Console.WriteLine("client3 heeft succesvol de positie van clinent 1 ontvangen"); }
+            if (client4 != null)
+                if (ReadMessage(client4) == "DONE") { Console.WriteLine("client4 heeft succesvol de positie van clinent 1 ontvangen"); }
+        }
 
         public void turnPlayer2()
         {
             WriteMessage(client1, "turnPlayer2");
             WriteMessage(client2, "yourTurn");
-            if (playerCount == 3)
-                WriteMessage(client3, "turnPlayer2");
-            if (playerCount == 4)
-            {
-                WriteMessage(client3, "turnPlayer2");
-                WriteMessage(client4, "turnPlayer2");
-            }
+            if (client3 != null) { WriteMessage(client3, "turnPlayer2"); }
+            if (client4 != null) { WriteMessage(client4, "turnPlayer2"); }
+
+            positionClient2 = Convert.ToInt32(ReadMessage(client2));
+
+            WriteMessage(client1, positionClient2.ToString());
+            if (client3 != null) { WriteMessage(client3, positionClient1.ToString()); }
+            if (client4 != null) { WriteMessage(client4, positionClient1.ToString()); }
+
+            if (ReadMessage(client1) == "DONE") { Console.WriteLine("client1 heeft succesvol de positie van clinent 2 ontvangen"); }
+            if (client3 != null)
+                if (ReadMessage(client3) == "DONE") { Console.WriteLine("client3 heeft succesvol de positie van clinent 2 ontvangen"); }
+            if (client4 != null)
+                if (ReadMessage(client4) == "DONE") { Console.WriteLine("client4 heeft succesvol de positie van clinent 2 ontvangen"); }
         }
 
         public void turnPlayer3()
         {
             WriteMessage(client1, "turnPlayer3");
             WriteMessage(client2, "turnPlayer3");
-            if (playerCount == 3)
-                WriteMessage(client3, "yourTurn");
-            if (playerCount == 4)
-            {
-                WriteMessage(client3, "turnPlayer3");
-                WriteMessage(client4, "turnPlayer3");
-            }
+            if (client3 != null) { WriteMessage(client3, "yourTurn"); }
+            if (client4 != null) { WriteMessage(client4, "turnPlayer3"); }
+
+            positionClient3 = Convert.ToInt32(ReadMessage(client3));
+
+            WriteMessage(client1, positionClient3.ToString());
+            WriteMessage(client2, positionClient3.ToString());
+            if (client4 != null) { WriteMessage(client4, positionClient3.ToString()); }
+
+            if (ReadMessage(client1) == "DONE") { Console.WriteLine("client1 heeft succesvol de positie van clinent 3 ontvangen"); }
+            if (ReadMessage(client2) == "DONE") { Console.WriteLine("client2 heeft succesvol de positie van clinent 3 ontvangen"); }
+            if (client4 != null)
+                if (ReadMessage(client4) == "DONE") { Console.WriteLine("client4 heeft succesvol de positie van clinent 3 ontvangen"); }
         }
 
         public void turnPlayer4()
         {
             WriteMessage(client1, "turnPlayer4");
             WriteMessage(client2, "turnPlayer4");
-            if (playerCount == 3)
-                WriteMessage(client3, "turnPlayer4");
-            if (playerCount == 4)
-            {
-                WriteMessage(client3, "turnPlayer4");
-                WriteMessage(client4, "yourTurn");
-            }
+            if (client3 != null) { WriteMessage(client3, "turnPlayer4"); }
+            if (client4 != null) { WriteMessage(client4, "yourTurn"); }
+
+            positionClient4 = Convert.ToInt32(ReadMessage(client4));
+
+            WriteMessage(client1, positionClient4.ToString());
+            WriteMessage(client2, positionClient4.ToString());
+            WriteMessage(client3, positionClient4.ToString());
+
+            if (ReadMessage(client1) == "DONE") { Console.WriteLine("client1 heeft succesvol de positie van clinent 4 ontvangen"); }
+            if (ReadMessage(client2) == "DONE") { Console.WriteLine("client2 heeft succesvol de positie van clinent 4 ontvangen"); }
+            if (ReadMessage(client3) == "DONE") { Console.WriteLine("client3 heeft succesvol de positie van clinent 4 ontvangen"); }
         }
-
-
-
-
-
-        //playerRanking = GetPlayerRanking("player{0}", playerCount);
-        //WriteMessage(client, $"{playerRanking.Ranking}");
-
-        //hier moet nog een loop komen waar die in blijft
-        // die loop houd bij hoeveel spelers er geconnect zijn
-        //in de client gebeurd nog niks, totdat de server doorstuurt
-        //dat de game kan beginnen.
-        //dus de client moet wachten op een teken van de server dat het spel kan starten
-        //in de client kun je dan groot in beeld zetten:
-        //WACHTEN OP SPELERS...
-
-
-        //hier begint de game, er moet dus gekeken worden wie er aan de beurt is
-        // en dan struren dat diegene mag gooien
-        //hij krijgt terug van de client hoeveel die gegooid heeft.
-        //server verplaatst het aantal ogen, en stuurt naar alle clients
-        //de kleur en hoeveel die voorruit is gegaan, dit moet dan dus naar alle clients gedaan worden
-        //in de server moet bijgehouden worden welke kleur iedere client is
-        //we laten ze geen kleur kiezen, word te ingewikkeld, gewoon client 1 is rood, client 2 geel etc
-        //dan moet er nog een eindconditie komen, dus als iemand op 63 komt dat de game dan eindigd
-        //63 of hoger natuurlijk je kan ook over 63 gooien, maar dan win je
-        //we moeten nog ff beslissen of op welk valkje de client staat in de server of client bijgehouden word
-
-
-
-        //client.Close();
-
-
 
         private PlayerRanking GetPlayerRanking(string playerID)
         {
@@ -322,5 +275,6 @@ namespace Server
             StreamReader streamReader = new StreamReader(client.GetStream(), Encoding.UTF8);
             return streamReader.ReadLine();
         }
+
     }
 }

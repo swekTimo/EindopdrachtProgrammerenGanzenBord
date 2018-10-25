@@ -21,7 +21,8 @@ namespace GanzenBord
         private int currentPositionPlayer3 = 0;
         private int currentPositionPlayer4 = 0;
 
-        private int DiceNumber = -1;
+        private string playerColor;
+
         private bool DiceRolled = false;
         private bool waitForDice = false;
         bool PlayNextTrun = true;
@@ -44,6 +45,7 @@ namespace GanzenBord
             fourPlayerGameButton.Visible = false;
             waitForAllPlayersLabel.Visible = false;
             rulesButton.Visible = false;
+            beurtInfoLabel.Visible = false;
 
             SendAllPicturesToBack();
 
@@ -54,7 +56,7 @@ namespace GanzenBord
 
         private void SendAllPicturesToBack()
         {
-            foreach(PictureBox picture in pictures)
+            foreach (PictureBox picture in pictures)
             {
                 picture.SendToBack();
             }
@@ -127,8 +129,8 @@ namespace GanzenBord
             pictures.Add(sixtytwoPictureBox);
             pictures.Add(sixtythreePictureBox);
         }
-        
-        
+
+
         private void startGameButton_Click(object sender, EventArgs e)
         {
             playerNumber = Convert.ToInt32(client.ReadMessage());
@@ -144,14 +146,18 @@ namespace GanzenBord
                 twoPlayerGameButton.Visible = true;
                 threePlayerGameButton.Visible = true;
                 fourPlayerGameButton.Visible = true;
+                playerColor = "red";
             }
             else
             {
+                if (playerNumber == 2) { playerColor = "green"; }
+                if (playerNumber == 3) { playerColor = "blue"; }
+                if (playerNumber == 4) { playerColor = "yellow"; }
                 waitForAllPlayersLabel.Visible = true;
                 this.Update();
                 waitForGameToStart();
             }
- 
+
         }
 
         private void twoPlayerGameButton_Click(object sender, EventArgs e)
@@ -207,8 +213,6 @@ namespace GanzenBord
                 waitForAllPlayersLabel.Visible = false;
             }
             this.Update();
-            //Thread gameThread = new Thread(() => game(this));
-            //gameThread.Start();
             client.WriteMessage("gameCodeStarted");
             Console.WriteLine("schrijf hier naar de server dat de game code is gestart: ");
             Console.WriteLine("gameCodeStarted");
@@ -216,53 +220,72 @@ namespace GanzenBord
             game();
         }
 
-        //private void game(Bord bord)
         private void game()
         {
-            
-            //bool WinnerFound = false;
-            //while (WinnerFound == false)
-            //{
-                string message = client.ReadMessage();
-                Console.WriteLine("leest hier van de server of het onze beurt is of van een andere client: ");
-                Console.WriteLine(message);
-                Console.WriteLine(" ");
-                if (message == "yourTurn")
-                {
-                    rollDiceButton.Enabled = true;
-                   
-                }
-                if (message == "yourTurn" && waitForDice == true && DiceRolled == true)
-                {
-               
-                    client.WriteMessage(currentPosition.ToString());
-                }
-                else if (message == "turnPlayer1")
-                {
-                    int positionPlayer1 = Convert.ToInt32(client.ReadMessage());
-                    //move the goose from player 1 to the location
-                }
-                else if (message == "turnPlayer2")
-                {
-                    int positionPlayer2 = Convert.ToInt32(client.ReadMessage());
-                    //move the goose from player 2 to the location
-                }
-                else if (message == "turnPlayer3")
-                {
-                    int positionPlayer3 = Convert.ToInt32(client.ReadMessage());
-                    //move the goose from player 3 to the location
-                }
-                else if (message == "turnPlayer4")
-                {
-                    int positionPlayer4 = Convert.ToInt32(client.ReadMessage());
-                    //move the goose from player 4 to the location
-                }
-                else if (message == "gameFinished")
-                {
-                    //WinnerFound = true;
-                }
-             }
-        //}
+            string message = client.ReadMessage();
+            Console.WriteLine("leest hier van de server of het onze beurt is of van een andere client: ");
+            Console.WriteLine(message);
+            Console.WriteLine(" ");
+            if (message == "yourTurn")
+            {
+                rollDiceButton.Enabled = true;
+                beurtInfoLabel.Text = "Its your turn to throw";
+                beurtInfoLabel.Visible = true;
+            }
+            else if (message == "turnPlayer1")
+            {
+                beurtInfoLabel.Text = "Player 1 is now throwing";
+                int positionPlayer1 = Convert.ToInt32(client.ReadMessage());
+                //move de rode gans naar het nummer wat door komt
+
+
+                client.WriteMessage("DONE");
+                //hij moet hier iets sturen anders doen de read/write het niet meer
+            }
+            else if (message == "turnPlayer2")
+            {
+                beurtInfoLabel.Text = "Player 2 is now throwing";
+                int positionPlayer2 = Convert.ToInt32(client.ReadMessage());
+                //move de groene gans naar het nummer wat door komt
+
+                client.WriteMessage("DONE");
+                //hij moet hier iets sturen anders doen de read/write het niet meer
+            }
+            else if (message == "turnPlayer3")
+            {
+                beurtInfoLabel.Text = "Player 3 is now throwing";
+                int positionPlayer3 = Convert.ToInt32(client.ReadMessage());
+                //move de blauwe gans naar het nummer wat doorkomt
+
+                client.WriteMessage("DONE");
+                //hij moet hier iets sturen anders doen de read/write het niet meer
+            }
+            else if (message == "turnPlayer4")
+            {
+                beurtInfoLabel.Text = "Player 4 is now throwing";
+                int positionPlayer4 = Convert.ToInt32(client.ReadMessage());
+                //move de gele gans naar het nummer wat doorkomt
+
+                client.WriteMessage("DONE");
+                //hij moet hier iets sturen anders doen de read/write het niet meer
+            }
+            else if (message == "Winnerclient1")
+            {
+                beurtInfoLabel.Text = "Player 1 has won the game";
+            }
+            else if (message == "Winnerclient2")
+            {
+                beurtInfoLabel.Text = "Player 2 has won the game";
+            }
+            else if (message == "Winnerclient3")
+            {
+                beurtInfoLabel.Text = "Player 3 has won the game";
+            }
+            else if (message == "Winnerclient4")
+            {
+                beurtInfoLabel.Text = "Player 4 has won the game";
+            }
+        }
 
         private void rulesButton_MouseHover(object sender, EventArgs e)
         {
@@ -270,11 +293,11 @@ namespace GanzenBord
             RulesBox.BringToFront();
         }
 
-
         private void rulesButton_MouseLeave(object sender, EventArgs e)
         {
             RulesBox.Visible = false;
         }
+
         public void moveGoosePosition(int player, int currentTile, int toTile)
         {
             String DuckColour = "rood";
@@ -293,8 +316,8 @@ namespace GanzenBord
                     break;
             }
 
-              MoveGooseTile(DuckColour, currentTile, toTile);
-                currentTile = toTile;
+            MoveGooseTile(DuckColour, currentTile, toTile);
+            currentTile = toTile;
         }
 
         public void MoveGooseTile(string DuckColour, int previousDuckTile, int nextDuckTile)
@@ -328,7 +351,7 @@ namespace GanzenBord
                 YellowDuckFromTile(duckTile);
             else if (duckColour == "groen")
                 GreenDuckFromTile(duckTile);
-            
+
         }
 
         private void ChangeDuckToTile(string duckColour, PictureBox duckTile)
@@ -515,75 +538,52 @@ namespace GanzenBord
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen");
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void rollDiceButton_Click(object sender, EventArgs e)
         {
+            rollDiceButton.Enabled = false;
             int thrownDiceNumber;
-            gameLogics.RollDice(out thrownDiceNumber);
+            thrownDiceNumber = gameLogics.RollDice();
             diceButton.Text = thrownDiceNumber.ToString();
-            DiceRolled = true;
-
             Console.WriteLine("dice rolled");
-            if (Wait)
+
+            int newPosition = currentPosition + thrownDiceNumber;
+            if (newPosition > 63)
             {
-                Console.WriteLine("waiting");
-                if (currentPosition == currentPositionPlayer1
-                        || currentPosition == currentPositionPlayer2
-                        || currentPosition == currentPositionPlayer3
-                        || currentPosition == currentPositionPlayer4)
-                    Wait = false;
+                newPosition = 63;
             }
-            if (!PlayNextTrun)
-                Wait = true;
-            if (PlayNextTrun && !Wait)
-            {
-                Console.WriteLine("Playing");
-                int newPosition = currentPosition + thrownDiceNumber;
-                if (newPosition > 63)
-                {
-                    newPosition = 63 - (thrownDiceNumber - (63 - currentPosition));
-                }
-                moveGoosePosition(playerNumber, currentPosition, newPosition);
-                currentPosition = newPosition;
+            moveGoosePosition(playerNumber, currentPosition, newPosition);
+            currentPosition = newPosition;
 
 
-                Tuple<bool, SpecialField> tuple = gameLogics.IsSpecialField(currentPosition);
-                if (tuple.Item1)
-                {
-                    SpecialField field = tuple.Item2;
-                    switch (field.Command)
-                    {
-                        case SpecialField.CommandOptions.GoTO:
-                            moveGoosePosition(playerNumber, currentPosition, field.FieldNumber);
-                            break;
-                        case SpecialField.CommandOptions.SkipTurn:
-                            PlayNextTrun = false;
-                            break;
-                        case SpecialField.CommandOptions.Wait:
-                            Wait = true;
-                            break;
-                        case SpecialField.CommandOptions.End:
-                            //WinnerFound = true;
-                            break;
-                    }
-                }
-            }
-            if (Wait && !PlayNextTrun)
+            Tuple<bool, SpecialField> tuple = gameLogics.IsSpecialField(currentPosition);
+            if (tuple.Item1)
             {
-                Wait = false;
-                PlayNextTrun = true;
+                SpecialField field = tuple.Item2;
+                switch (field.Command)
+                {
+                    case SpecialField.CommandOptions.GoTO:
+                        moveGoosePosition(playerNumber, currentPosition, field.FieldNumber);
+                        break;
+                    case SpecialField.CommandOptions.SkipTurn:
+                        PlayNextTrun = false;
+                        break;
+                    case SpecialField.CommandOptions.Wait:
+                        Wait = true;
+                        break;
+                    case SpecialField.CommandOptions.End:
+                        //WinnerFound = true;
+                        break;
+                }
             }
 
             ranking.AddPoints(currentPosition);
+
             Console.WriteLine("stuur hier naar de server op welke positie de Client staat");
             Console.WriteLine(currentPosition.ToString());
             Console.WriteLine("");
             client.WriteMessage(currentPosition.ToString());
             game();
         }
+
     }
 }
