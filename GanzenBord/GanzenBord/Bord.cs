@@ -245,46 +245,37 @@ namespace GanzenBord
             {
                 beurtInfoLabel.Text = "Player 1 is now throwing";
                 int positionPlayer1 = Convert.ToInt32(client.ReadMessage());
-                //move de rode gans naar het nummer wat door komt
+                //dit werkt dus nieet
                 MoveGooseTile("red", currentPositionPlayer1, positionPlayer1);
                 currentPositionPlayer1 = positionPlayer1;
-
-
                 client.WriteMessage("DONE");
-                //hij moet hier iets sturen anders doen de read/write het niet meer
             }
             else if (message == "turnPlayer2")
             {
                 beurtInfoLabel.Text = "Player 2 is now throwing";
                 int positionPlayer2 = Convert.ToInt32(client.ReadMessage());
-                //move de groene gans naar het nummer wat door komt
+                //werkt niet
                 MoveGooseTile("green", currentPositionPlayer2, positionPlayer2);
                 currentPositionPlayer2 = positionPlayer2;
-
                 client.WriteMessage("DONE");
-                //hij moet hier iets sturen anders doen de read/write het niet meer
             }
             else if (message == "turnPlayer3")
             {
                 beurtInfoLabel.Text = "Player 3 is now throwing";
                 int positionPlayer3 = Convert.ToInt32(client.ReadMessage());
-                //move de blauwe gans naar het nummer wat doorkomt
+                //werkt niet
                 MoveGooseTile("blue", currentPositionPlayer3, positionPlayer3);
                 currentPositionPlayer3 = positionPlayer3;
-
                 client.WriteMessage("DONE");
-                //hij moet hier iets sturen anders doen de read/write het niet meer
             }
             else if (message == "turnPlayer4")
             {
                 beurtInfoLabel.Text = "Player 4 is now throwing";
                 int positionPlayer4 = Convert.ToInt32(client.ReadMessage());
-                //move de gele gans naar het nummer wat doorkomt
+                //werkt niet
                 MoveGooseTile("yellow", currentPositionPlayer4, positionPlayer4);
                 currentPositionPlayer4 = positionPlayer4;
-
                 client.WriteMessage("DONE");
-                //hij moet hier iets sturen anders doen de read/write het niet meer
             }
             else if (message == "Winnerclient1")
             {
@@ -564,37 +555,100 @@ namespace GanzenBord
             diceButton.Text = thrownDiceNumber.ToString();
             Console.WriteLine("dice rolled");
 
-            if (Wait == true)
+            if (playerNumber == 1)
             {
-                if (!isSameTile())
-                    PlayNextTrun = false;
-                else Wait = false;
-            }
-
-            if (PlayNextTrun)
-            {
-                int newPosition = currentPosition + thrownDiceNumber;
-                if (newPosition > 63)
-                {
-                    newPosition = 63 - (thrownDiceNumber - (63 - currentPosition));
-                }
-                moveGoosePosition(playerColour, currentPosition, newPosition);
-                currentPosition = newPosition;
+                pictures[currentPositionPlayer1].SendToBack();
+                currentPositionPlayer1 = currentPositionPlayer1 + thrownDiceNumber;
+                if (currentPositionPlayer1 > 63)
+                        {
+                            currentPositionPlayer1 = 63;
+                        }
                 specialFieldAction();
-
-
-
+                    pictures[currentPositionPlayer1].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood");
+                pictures[currentPositionPlayer1].BringToFront();
+                //deze plaatjes moeten allemaal nog aangepast worden
+                if (currentPositionPlayer1 == currentPositionPlayer2) { pictures[currentPositionPlayer1].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroen1"); }
+                if (currentPositionPlayer1 == currentPositionPlayer3) { pictures[currentPositionPlayer1].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnBlauw1"); }
+                if (currentPositionPlayer1 == currentPositionPlayer4) { pictures[currentPositionPlayer1].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeel1"); }
+                if (currentPositionPlayer1 == currentPositionPlayer2 && currentPositionPlayer1 == currentPositionPlayer3) { pictures[currentPositionPlayer1].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroenEnBlauw"); }
+                if (currentPositionPlayer1 == currentPositionPlayer2 && currentPositionPlayer1 == currentPositionPlayer4) { pictures[currentPositionPlayer1].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood"); }
+                if (currentPositionPlayer1 == currentPositionPlayer3 && currentPositionPlayer1 == currentPositionPlayer4) { pictures[currentPositionPlayer1].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood"); }
+                if (currentPositionPlayer1 == currentPositionPlayer2 && currentPositionPlayer1 == currentPositionPlayer3 && currentPositionPlayer1 == currentPositionPlayer4) { }
                 ranking.AddPoints(currentPosition);
+                client.WriteMessage(ranking.Ranking.ToString());
+                Console.WriteLine("stuur hier naar de server op welke positie de Client staat");
+                Console.WriteLine(currentPositionPlayer1.ToString());
+                Console.WriteLine("");
+                client.WriteMessage(currentPositionPlayer1.ToString());
             }
-            else
-                PlayNextTrun = true;
+            if (playerNumber == 2)
+            {
+                pictures[currentPositionPlayer2].SendToBack();
+                currentPositionPlayer2 = currentPositionPlayer2 + thrownDiceNumber;
+                if (currentPositionPlayer2 > 63)
+                {
+                    currentPositionPlayer2 = 63;
+                }
+                //specialFieldAction();
+                pictures[currentPositionPlayer2].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen");
+                pictures[currentPositionPlayer2].BringToFront();
+                //deze plaatjes moeten allemaal nog aangepast worden
+                if (currentPositionPlayer2 == currentPositionPlayer1) { pictures[currentPositionPlayer2].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroen1"); }
+                if (currentPositionPlayer2 == currentPositionPlayer3) { pictures[currentPositionPlayer2].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnBlauw1"); }
+                if (currentPositionPlayer2 == currentPositionPlayer4) { pictures[currentPositionPlayer2].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeel1"); }
+                if (currentPositionPlayer2 == currentPositionPlayer1 && currentPositionPlayer2 == currentPositionPlayer3) { pictures[currentPositionPlayer2].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroenEnBlauw"); }
+                if (currentPositionPlayer2 == currentPositionPlayer3 && currentPositionPlayer2 == currentPositionPlayer4) { pictures[currentPositionPlayer2].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood"); }
+                if (currentPositionPlayer2 == currentPositionPlayer1 && currentPositionPlayer2 == currentPositionPlayer4) { pictures[currentPositionPlayer2].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood"); }
+                if (currentPositionPlayer2 == currentPositionPlayer1 && currentPositionPlayer2 == currentPositionPlayer3 && currentPositionPlayer2 == currentPositionPlayer4) { }
+                ranking.AddPoints(currentPosition);
+                client.WriteMessage(ranking.Ranking.ToString());
+                Console.WriteLine("stuur hier naar de server op welke positie de Client staat");
+                Console.WriteLine(currentPositionPlayer2.ToString());
+                Console.WriteLine("");
+                client.WriteMessage(currentPositionPlayer2.ToString());
+            }
+            if (playerNumber == 3)
+            {
+                pictures[currentPositionPlayer3].SendToBack();
+                currentPositionPlayer1 = currentPositionPlayer1 + thrownDiceNumber;
+                pictures[currentPositionPlayer3].BringToFront();
+            }
+            if (playerNumber == 4)
+            {
+                pictures[currentPositionPlayer4].SendToBack();
+                currentPositionPlayer1 = currentPositionPlayer1 + thrownDiceNumber;
+                pictures[currentPositionPlayer4].BringToFront();
+            }
 
-            client.WriteMessage(ranking.Ranking.ToString());
 
-            Console.WriteLine("stuur hier naar de server op welke positie de Client staat");
-            Console.WriteLine(currentPosition.ToString());
-            Console.WriteLine("");
-            client.WriteMessage(currentPosition.ToString());
+                            //if (Wait == true)
+                            //{
+                            //    if (!isSameTile())
+                            //        PlayNextTrun = false;
+                            //    else Wait = false;
+                            //}
+
+                            //if (PlayNextTrun)
+                            //{
+                            //    int newPosition = currentPosition + thrownDiceNumber;
+                            //    if (newPosition > 63)
+                            //    {
+                            //        newPosition = 63 - (thrownDiceNumber - (63 - currentPosition));
+                            //    }
+                            //    moveGoosePosition(playerColour, currentPosition, newPosition);
+                            //    currentPosition = newPosition;
+                            //    specialFieldAction();
+
+
+
+                            //    ranking.AddPoints(currentPosition);
+                            //}
+                            //else
+                            //    PlayNextTrun = true;
+
+                            //client.WriteMessage(ranking.Ranking.ToString());
+
+
             game();
         }
 

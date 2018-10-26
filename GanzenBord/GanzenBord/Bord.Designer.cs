@@ -33,6 +33,21 @@ namespace GanzenBord
             this.playerNameLabel = new System.Windows.Forms.Label();
             this.rulesButton = new System.Windows.Forms.Button();
             this.RulesBox = new System.Windows.Forms.GroupBox();
+            this.howManyPlayersLabel = new System.Windows.Forms.Label();
+            this.startGameButton = new System.Windows.Forms.Button();
+            this.twoPlayerGameButton = new System.Windows.Forms.Button();
+            this.threePlayerGameButton = new System.Windows.Forms.Button();
+            this.fourPlayerGameButton = new System.Windows.Forms.Button();
+            this.waitForAllPlayersLabel = new System.Windows.Forms.Label();
+            this.diceButton = new System.Windows.Forms.Button();
+            this.rollDiceButton = new System.Windows.Forms.Button();
+            this.beurtInfoLabel = new System.Windows.Forms.Label();
+            this.userNameTextBox = new System.Windows.Forms.TextBox();
+            this.userNameLabel = new System.Windows.Forms.Label();
+            this.userNameButton = new System.Windows.Forms.Button();
+            this.sixtytwoPictureBox = new System.Windows.Forms.PictureBox();
+            this.sixtythreePictureBox = new System.Windows.Forms.PictureBox();
+            this.startPictureBox = new System.Windows.Forms.PictureBox();
             this.sixtyonePictureBox = new System.Windows.Forms.PictureBox();
             this.sixtyPictureBox = new System.Windows.Forms.PictureBox();
             this.fiftyninePictureBox = new System.Windows.Forms.PictureBox();
@@ -96,21 +111,9 @@ namespace GanzenBord
             this.onePictureBox = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.playBoard = new System.Windows.Forms.PictureBox();
-            this.startPictureBox = new System.Windows.Forms.PictureBox();
-            this.sixtythreePictureBox = new System.Windows.Forms.PictureBox();
-            this.sixtytwoPictureBox = new System.Windows.Forms.PictureBox();
-            this.howManyPlayersLabel = new System.Windows.Forms.Label();
-            this.startGameButton = new System.Windows.Forms.Button();
-            this.twoPlayerGameButton = new System.Windows.Forms.Button();
-            this.threePlayerGameButton = new System.Windows.Forms.Button();
-            this.fourPlayerGameButton = new System.Windows.Forms.Button();
-            this.waitForAllPlayersLabel = new System.Windows.Forms.Label();
-            this.diceButton = new System.Windows.Forms.Button();
-            this.rollDiceButton = new System.Windows.Forms.Button();
-            this.beurtInfoLabel = new System.Windows.Forms.Label();
-            this.userNameTextBox = new System.Windows.Forms.TextBox();
-            this.userNameLabel = new System.Windows.Forms.Label();
-            this.userNameButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.sixtytwoPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sixtythreePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyonePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fiftyninePictureBox)).BeginInit();
@@ -174,9 +177,6 @@ namespace GanzenBord
             ((System.ComponentModel.ISupportInitialize)(this.onePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.playBoard)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.startPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sixtythreePictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sixtytwoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // playerNameLabel
@@ -220,6 +220,171 @@ namespace GanzenBord
             this.RulesBox.TabIndex = 4;
             this.RulesBox.TabStop = false;
             this.RulesBox.Text = "Rules:";
+            // 
+            // howManyPlayersLabel
+            // 
+            this.howManyPlayersLabel.AutoSize = true;
+            this.howManyPlayersLabel.BackColor = System.Drawing.Color.Teal;
+            this.howManyPlayersLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.howManyPlayersLabel.Location = new System.Drawing.Point(259, 11);
+            this.howManyPlayersLabel.Name = "howManyPlayersLabel";
+            this.howManyPlayersLabel.Size = new System.Drawing.Size(394, 23);
+            this.howManyPlayersLabel.TabIndex = 69;
+            this.howManyPlayersLabel.Text = "With how many players do you wanna play?";
+            // 
+            // startGameButton
+            // 
+            this.startGameButton.BackColor = System.Drawing.Color.Teal;
+            this.startGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.startGameButton.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
+            this.startGameButton.Location = new System.Drawing.Point(0, 0);
+            this.startGameButton.Name = "startGameButton";
+            this.startGameButton.Size = new System.Drawing.Size(131, 50);
+            this.startGameButton.TabIndex = 70;
+            this.startGameButton.Text = "Start Game";
+            this.startGameButton.UseVisualStyleBackColor = false;
+            this.startGameButton.Click += new System.EventHandler(this.startGameButton_Click);
+            // 
+            // twoPlayerGameButton
+            // 
+            this.twoPlayerGameButton.BackColor = System.Drawing.Color.Teal;
+            this.twoPlayerGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.twoPlayerGameButton.Location = new System.Drawing.Point(659, 9);
+            this.twoPlayerGameButton.Name = "twoPlayerGameButton";
+            this.twoPlayerGameButton.Size = new System.Drawing.Size(34, 26);
+            this.twoPlayerGameButton.TabIndex = 71;
+            this.twoPlayerGameButton.Text = "2";
+            this.twoPlayerGameButton.UseVisualStyleBackColor = false;
+            this.twoPlayerGameButton.Click += new System.EventHandler(this.twoPlayerGameButton_Click);
+            // 
+            // threePlayerGameButton
+            // 
+            this.threePlayerGameButton.BackColor = System.Drawing.Color.Teal;
+            this.threePlayerGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.threePlayerGameButton.Location = new System.Drawing.Point(698, 9);
+            this.threePlayerGameButton.Name = "threePlayerGameButton";
+            this.threePlayerGameButton.Size = new System.Drawing.Size(34, 26);
+            this.threePlayerGameButton.TabIndex = 72;
+            this.threePlayerGameButton.Text = "3";
+            this.threePlayerGameButton.UseVisualStyleBackColor = false;
+            this.threePlayerGameButton.Click += new System.EventHandler(this.threePlayerGameButton_Click);
+            // 
+            // fourPlayerGameButton
+            // 
+            this.fourPlayerGameButton.BackColor = System.Drawing.Color.Teal;
+            this.fourPlayerGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.fourPlayerGameButton.Location = new System.Drawing.Point(738, 9);
+            this.fourPlayerGameButton.Name = "fourPlayerGameButton";
+            this.fourPlayerGameButton.Size = new System.Drawing.Size(34, 26);
+            this.fourPlayerGameButton.TabIndex = 73;
+            this.fourPlayerGameButton.Text = "4";
+            this.fourPlayerGameButton.UseVisualStyleBackColor = false;
+            this.fourPlayerGameButton.Click += new System.EventHandler(this.fourPlayerGameButton_Click);
+            // 
+            // waitForAllPlayersLabel
+            // 
+            this.waitForAllPlayersLabel.AutoSize = true;
+            this.waitForAllPlayersLabel.BackColor = System.Drawing.Color.Teal;
+            this.waitForAllPlayersLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.waitForAllPlayersLabel.Location = new System.Drawing.Point(147, 9);
+            this.waitForAllPlayersLabel.Name = "waitForAllPlayersLabel";
+            this.waitForAllPlayersLabel.Size = new System.Drawing.Size(310, 23);
+            this.waitForAllPlayersLabel.TabIndex = 74;
+            this.waitForAllPlayersLabel.Text = "Wait for all the players to connect...";
+            // 
+            // diceButton
+            // 
+            this.diceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.diceButton.Location = new System.Drawing.Point(738, 350);
+            this.diceButton.Name = "diceButton";
+            this.diceButton.Size = new System.Drawing.Size(50, 50);
+            this.diceButton.TabIndex = 75;
+            this.diceButton.Text = "1";
+            this.diceButton.UseVisualStyleBackColor = true;
+            // 
+            // rollDiceButton
+            // 
+            this.rollDiceButton.Enabled = false;
+            this.rollDiceButton.Location = new System.Drawing.Point(738, 406);
+            this.rollDiceButton.Name = "rollDiceButton";
+            this.rollDiceButton.Size = new System.Drawing.Size(50, 23);
+            this.rollDiceButton.TabIndex = 76;
+            this.rollDiceButton.Text = "Roll";
+            this.rollDiceButton.UseVisualStyleBackColor = true;
+            this.rollDiceButton.Click += new System.EventHandler(this.rollDiceButton_Click);
+            // 
+            // beurtInfoLabel
+            // 
+            this.beurtInfoLabel.AutoSize = true;
+            this.beurtInfoLabel.BackColor = System.Drawing.Color.Teal;
+            this.beurtInfoLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
+            this.beurtInfoLabel.Location = new System.Drawing.Point(295, 12);
+            this.beurtInfoLabel.Name = "beurtInfoLabel";
+            this.beurtInfoLabel.Size = new System.Drawing.Size(145, 23);
+            this.beurtInfoLabel.TabIndex = 77;
+            this.beurtInfoLabel.Text = "BeurtInformatie";
+            // 
+            // userNameTextBox
+            // 
+            this.userNameTextBox.BackColor = System.Drawing.Color.Teal;
+            this.userNameTextBox.Location = new System.Drawing.Point(382, 14);
+            this.userNameTextBox.Name = "userNameTextBox";
+            this.userNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.userNameTextBox.TabIndex = 78;
+            // 
+            // userNameLabel
+            // 
+            this.userNameLabel.AutoSize = true;
+            this.userNameLabel.BackColor = System.Drawing.Color.Teal;
+            this.userNameLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
+            this.userNameLabel.Location = new System.Drawing.Point(147, 12);
+            this.userNameLabel.Name = "userNameLabel";
+            this.userNameLabel.Size = new System.Drawing.Size(217, 23);
+            this.userNameLabel.TabIndex = 79;
+            this.userNameLabel.Text = "What is your Username:";
+            // 
+            // userNameButton
+            // 
+            this.userNameButton.BackColor = System.Drawing.Color.Teal;
+            this.userNameButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.userNameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userNameButton.Location = new System.Drawing.Point(495, 14);
+            this.userNameButton.Name = "userNameButton";
+            this.userNameButton.Size = new System.Drawing.Size(74, 22);
+            this.userNameButton.TabIndex = 80;
+            this.userNameButton.Text = "OK";
+            this.userNameButton.UseVisualStyleBackColor = false;
+            this.userNameButton.Click += new System.EventHandler(this.userNameButton_Click);
+            // 
+            // sixtytwoPictureBox
+            // 
+            this.sixtytwoPictureBox.Location = new System.Drawing.Point(197, 262);
+            this.sixtytwoPictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.sixtytwoPictureBox.Name = "sixtytwoPictureBox";
+            this.sixtytwoPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.sixtytwoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.sixtytwoPictureBox.TabIndex = 68;
+            this.sixtytwoPictureBox.TabStop = false;
+            // 
+            // sixtythreePictureBox
+            // 
+            this.sixtythreePictureBox.Location = new System.Drawing.Point(406, 227);
+            this.sixtythreePictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.sixtythreePictureBox.Name = "sixtythreePictureBox";
+            this.sixtythreePictureBox.Size = new System.Drawing.Size(51, 63);
+            this.sixtythreePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.sixtythreePictureBox.TabIndex = 67;
+            this.sixtythreePictureBox.TabStop = false;
+            // 
+            // startPictureBox
+            // 
+            this.startPictureBox.Location = new System.Drawing.Point(59, 378);
+            this.startPictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.startPictureBox.Name = "startPictureBox";
+            this.startPictureBox.Size = new System.Drawing.Size(51, 63);
+            this.startPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.startPictureBox.TabIndex = 66;
+            this.startPictureBox.TabStop = false;
             // 
             // sixtyonePictureBox
             // 
@@ -843,171 +1008,6 @@ namespace GanzenBord
             this.playBoard.TabIndex = 0;
             this.playBoard.TabStop = false;
             // 
-            // startPictureBox
-            // 
-            this.startPictureBox.Location = new System.Drawing.Point(59, 378);
-            this.startPictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.startPictureBox.Name = "startPictureBox";
-            this.startPictureBox.Size = new System.Drawing.Size(51, 63);
-            this.startPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.startPictureBox.TabIndex = 66;
-            this.startPictureBox.TabStop = false;
-            // 
-            // sixtythreePictureBox
-            // 
-            this.sixtythreePictureBox.Location = new System.Drawing.Point(406, 227);
-            this.sixtythreePictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.sixtythreePictureBox.Name = "sixtythreePictureBox";
-            this.sixtythreePictureBox.Size = new System.Drawing.Size(51, 63);
-            this.sixtythreePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sixtythreePictureBox.TabIndex = 67;
-            this.sixtythreePictureBox.TabStop = false;
-            // 
-            // sixtytwoPictureBox
-            // 
-            this.sixtytwoPictureBox.Location = new System.Drawing.Point(197, 262);
-            this.sixtytwoPictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.sixtytwoPictureBox.Name = "sixtytwoPictureBox";
-            this.sixtytwoPictureBox.Size = new System.Drawing.Size(51, 63);
-            this.sixtytwoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sixtytwoPictureBox.TabIndex = 68;
-            this.sixtytwoPictureBox.TabStop = false;
-            // 
-            // howManyPlayersLabel
-            // 
-            this.howManyPlayersLabel.AutoSize = true;
-            this.howManyPlayersLabel.BackColor = System.Drawing.Color.Teal;
-            this.howManyPlayersLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.howManyPlayersLabel.Location = new System.Drawing.Point(259, 11);
-            this.howManyPlayersLabel.Name = "howManyPlayersLabel";
-            this.howManyPlayersLabel.Size = new System.Drawing.Size(394, 23);
-            this.howManyPlayersLabel.TabIndex = 69;
-            this.howManyPlayersLabel.Text = "With how many players do you wanna play?";
-            // 
-            // startGameButton
-            // 
-            this.startGameButton.BackColor = System.Drawing.Color.Teal;
-            this.startGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.startGameButton.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
-            this.startGameButton.Location = new System.Drawing.Point(0, 0);
-            this.startGameButton.Name = "startGameButton";
-            this.startGameButton.Size = new System.Drawing.Size(131, 50);
-            this.startGameButton.TabIndex = 70;
-            this.startGameButton.Text = "Start Game";
-            this.startGameButton.UseVisualStyleBackColor = false;
-            this.startGameButton.Click += new System.EventHandler(this.startGameButton_Click);
-            // 
-            // twoPlayerGameButton
-            // 
-            this.twoPlayerGameButton.BackColor = System.Drawing.Color.Teal;
-            this.twoPlayerGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.twoPlayerGameButton.Location = new System.Drawing.Point(659, 9);
-            this.twoPlayerGameButton.Name = "twoPlayerGameButton";
-            this.twoPlayerGameButton.Size = new System.Drawing.Size(34, 26);
-            this.twoPlayerGameButton.TabIndex = 71;
-            this.twoPlayerGameButton.Text = "2";
-            this.twoPlayerGameButton.UseVisualStyleBackColor = false;
-            this.twoPlayerGameButton.Click += new System.EventHandler(this.twoPlayerGameButton_Click);
-            // 
-            // threePlayerGameButton
-            // 
-            this.threePlayerGameButton.BackColor = System.Drawing.Color.Teal;
-            this.threePlayerGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.threePlayerGameButton.Location = new System.Drawing.Point(698, 9);
-            this.threePlayerGameButton.Name = "threePlayerGameButton";
-            this.threePlayerGameButton.Size = new System.Drawing.Size(34, 26);
-            this.threePlayerGameButton.TabIndex = 72;
-            this.threePlayerGameButton.Text = "3";
-            this.threePlayerGameButton.UseVisualStyleBackColor = false;
-            this.threePlayerGameButton.Click += new System.EventHandler(this.threePlayerGameButton_Click);
-            // 
-            // fourPlayerGameButton
-            // 
-            this.fourPlayerGameButton.BackColor = System.Drawing.Color.Teal;
-            this.fourPlayerGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fourPlayerGameButton.Location = new System.Drawing.Point(738, 9);
-            this.fourPlayerGameButton.Name = "fourPlayerGameButton";
-            this.fourPlayerGameButton.Size = new System.Drawing.Size(34, 26);
-            this.fourPlayerGameButton.TabIndex = 73;
-            this.fourPlayerGameButton.Text = "4";
-            this.fourPlayerGameButton.UseVisualStyleBackColor = false;
-            this.fourPlayerGameButton.Click += new System.EventHandler(this.fourPlayerGameButton_Click);
-            // 
-            // waitForAllPlayersLabel
-            // 
-            this.waitForAllPlayersLabel.AutoSize = true;
-            this.waitForAllPlayersLabel.BackColor = System.Drawing.Color.Teal;
-            this.waitForAllPlayersLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.waitForAllPlayersLabel.Location = new System.Drawing.Point(147, 9);
-            this.waitForAllPlayersLabel.Name = "waitForAllPlayersLabel";
-            this.waitForAllPlayersLabel.Size = new System.Drawing.Size(310, 23);
-            this.waitForAllPlayersLabel.TabIndex = 74;
-            this.waitForAllPlayersLabel.Text = "Wait for all the players to connect...";
-            // 
-            // diceButton
-            // 
-            this.diceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.diceButton.Location = new System.Drawing.Point(738, 350);
-            this.diceButton.Name = "diceButton";
-            this.diceButton.Size = new System.Drawing.Size(50, 50);
-            this.diceButton.TabIndex = 75;
-            this.diceButton.Text = "1";
-            this.diceButton.UseVisualStyleBackColor = true;
-            // 
-            // rollDiceButton
-            // 
-            this.rollDiceButton.Enabled = false;
-            this.rollDiceButton.Location = new System.Drawing.Point(738, 406);
-            this.rollDiceButton.Name = "rollDiceButton";
-            this.rollDiceButton.Size = new System.Drawing.Size(50, 23);
-            this.rollDiceButton.TabIndex = 76;
-            this.rollDiceButton.Text = "Roll";
-            this.rollDiceButton.UseVisualStyleBackColor = true;
-            this.rollDiceButton.Click += new System.EventHandler(this.rollDiceButton_Click);
-            // 
-            // beurtInfoLabel
-            // 
-            this.beurtInfoLabel.AutoSize = true;
-            this.beurtInfoLabel.BackColor = System.Drawing.Color.Teal;
-            this.beurtInfoLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
-            this.beurtInfoLabel.Location = new System.Drawing.Point(295, 12);
-            this.beurtInfoLabel.Name = "beurtInfoLabel";
-            this.beurtInfoLabel.Size = new System.Drawing.Size(145, 23);
-            this.beurtInfoLabel.TabIndex = 77;
-            this.beurtInfoLabel.Text = "BeurtInformatie";
-            // 
-            // userNameTextBox
-            // 
-            this.userNameTextBox.BackColor = System.Drawing.Color.Teal;
-            this.userNameTextBox.Location = new System.Drawing.Point(382, 14);
-            this.userNameTextBox.Name = "userNameTextBox";
-            this.userNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.userNameTextBox.TabIndex = 78;
-            // 
-            // userNameLabel
-            // 
-            this.userNameLabel.AutoSize = true;
-            this.userNameLabel.BackColor = System.Drawing.Color.Teal;
-            this.userNameLabel.Font = new System.Drawing.Font("Book Antiqua", 14.25F);
-            this.userNameLabel.Location = new System.Drawing.Point(147, 12);
-            this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(217, 23);
-            this.userNameLabel.TabIndex = 79;
-            this.userNameLabel.Text = "What is your Username:";
-            // 
-            // userNameButton
-            // 
-            this.userNameButton.BackColor = System.Drawing.Color.Teal;
-            this.userNameButton.Cursor = System.Windows.Forms.Cursors.Default;
-            this.userNameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.userNameButton.Location = new System.Drawing.Point(495, 14);
-            this.userNameButton.Name = "userNameButton";
-            this.userNameButton.Size = new System.Drawing.Size(74, 22);
-            this.userNameButton.TabIndex = 80;
-            this.userNameButton.Text = "OK";
-            this.userNameButton.UseVisualStyleBackColor = false;
-            this.userNameButton.Click += new System.EventHandler(this.userNameButton_Click);
-            // 
             // Bord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1098,6 +1098,9 @@ namespace GanzenBord
             this.MaximizeBox = false;
             this.Name = "Bord";
             this.Text = "Bord";
+            ((System.ComponentModel.ISupportInitialize)(this.sixtytwoPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sixtythreePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyonePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sixtyPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fiftyninePictureBox)).EndInit();
@@ -1161,9 +1164,6 @@ namespace GanzenBord
             ((System.ComponentModel.ISupportInitialize)(this.onePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.playBoard)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.startPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sixtythreePictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sixtytwoPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

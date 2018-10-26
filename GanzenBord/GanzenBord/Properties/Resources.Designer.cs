@@ -83,6 +83,86 @@ namespace GanzenBord.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansBlauw {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansBlauw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansGeel {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansGeel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansGeelEnBlauw {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansGeelEnBlauw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansGeelEnGroen {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansGeelEnGroen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansGeelEnGroenEnBlauw {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansGeelEnGroenEnBlauw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansGroen {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansGroen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansGroenEnBlauw {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansGroenEnBlauw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansGroenEnBlauwEnRood {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansGroenEnBlauwEnRood", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ganzenBordGansRood {
             get {
                 object obj = ResourceManager.GetObject("ganzenBordGansRood", resourceCulture);
@@ -93,9 +173,79 @@ namespace GanzenBord.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansRood1 {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansRood1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansRoodEnBlauw {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansRoodEnBlauw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansRoodEnGeel {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansRoodEnGeel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansRoodEnGeelEnBlauw {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnBlauw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansRoodEnGeelEnGroen {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ganzenBordGansRoodEnGeelEnGroenEnBlauw {
             get {
                 object obj = ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansRoodEnGeelEnGroenEnBlauw1 {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ganzenBordGansRoodEnGroen {
+            get {
+                object obj = ResourceManager.GetObject("ganzenBordGansRoodEnGroen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

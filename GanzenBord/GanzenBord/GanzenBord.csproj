@@ -93,17 +93,32 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\ganzenBordGansBlauw.png" />
+    <None Include="Resources\ganzenBordGansBlauw1.png" />
     <Content Include="Resources\ganzenBordGansGeel.png" />
+    <None Include="Resources\ganzenBordGansGeel1.png" />
     <Content Include="Resources\ganzenBordGansGeelEnBlauw.png" />
+    <None Include="Resources\ganzenBordGansGeelEnBlauw1.png" />
     <Content Include="Resources\ganzenBordGansGeelEnGroen.png" />
+    <None Include="Resources\ganzenBordGansGeelEnGroen1.png" />
     <Content Include="Resources\ganzenBordGansGeelEnGroenEnBlauw.png" />
+    <None Include="Resources\ganzenBordGansGeelEnGroenEnBlauw1.png" />
     <Content Include="Resources\ganzenBordGansGroen.png" />
+    <None Include="Resources\ganzenBordGansGroen1.png" />
     <Content Include="Resources\ganzenBordGansGroenEnBlauw.png" />
+    <None Include="Resources\ganzenBordGansGroenEnBlauw1.png" />
+    <None Include="Resources\ganzenBordGansGroenEnBlauwEnRood.png" />
+    <None Include="Resources\ganzenBordGansRood1.png" />
     <Content Include="Resources\ganzenBordGansRoodEnBlauw.png" />
+    <None Include="Resources\ganzenBordGansRoodEnBlauw1.png" />
     <Content Include="Resources\ganzenBordGansRoodEnGeel.png" />
+    <None Include="Resources\ganzenBordGansRoodEnGeel1.png" />
     <Content Include="Resources\ganzenBordGansRoodEnGeelEnBlauw.png" />
+    <None Include="Resources\ganzenBordGansRoodEnGeelEnBlauw1.png" />
     <Content Include="Resources\ganzenBordGansRoodEnGeelEnGroen.png" />
+    <None Include="Resources\ganzenBordGansRoodEnGeelEnGroen1.png" />
+    <None Include="Resources\ganzenBordGansRoodEnGeelEnGroenEnBlauw1.png" />
     <Content Include="Resources\ganzenBordGansRoodEnGroen.png" />
+    <None Include="Resources\ganzenBordGansRoodEnGroen1.png" />
     <Content Include="Resources\ganzenBordGansRoodEnGroenEnBlauw.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
