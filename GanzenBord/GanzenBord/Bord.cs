@@ -690,8 +690,18 @@ namespace GanzenBord
                         //moveGoosePosition(playerColour, currentPosition, field.FieldNumber);
                         switch (playerPosition)
                         {
-                           // case 1:
-                                
+                            case 1:
+                                currentPositionPlayer1 = field.GoToFIeld;
+                                break;
+                            case 2:
+                                currentPositionPlayer2 = field.GoToFIeld;
+                                break;
+                            case 3:
+                                currentPositionPlayer3 = field.GoToFIeld;
+                                break;
+                            case 4:
+                                currentPositionPlayer4 = field.GoToFIeld;
+                                break;                                
                         }
                         break;
                     case SpecialField.CommandOptions.SkipTurn:

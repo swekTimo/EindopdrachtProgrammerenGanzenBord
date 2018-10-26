@@ -13,7 +13,8 @@ namespace GanzenBord
 
         public void makeConnectionWithTheServer()
         {
-            client = new TcpClient("145.49.18.89", 6666);
+            client = new TcpClient(GetLocalIPAddress(), 6666);
+                //"145.49.18.89", 6666);
         }
 
         public string ReadMessage()
