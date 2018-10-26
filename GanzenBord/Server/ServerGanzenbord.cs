@@ -136,12 +136,12 @@ namespace Server
                     writeAllClients(gameWinnerUsername);
                 }
 
-                //turnPlayer2();
-                //if (checkForWinner() == true) 
-                //{ 
-                //writeAllClients(gameWinner);
-                //writeAllClients(gameWinnerUsername);
-                //}
+                turnPlayer2();
+                if (checkForWinner() == true) 
+                { 
+                writeAllClients(gameWinner);
+                writeAllClients(gameWinnerUsername);
+                }
 
                 if (client3 != null)
                 {
@@ -168,7 +168,7 @@ namespace Server
         public void writeAllClients(string message)
         {
             WriteMessage(client1, message);
-            //WriteMessage(client2, message);
+            WriteMessage(client2, message);
             if (client3 != null) WriteMessage(client3, message);
             if (client4 != null) WriteMessage(client4, message);
         }
@@ -209,9 +209,9 @@ namespace Server
             Console.WriteLine("stuurt hier naar de client1 dat de game kan beginnen : ");
             Console.WriteLine("startGame");
             Console.WriteLine(" ");
-            //WriteMessage(client2, "startGame");
-            //if (client3 != null) WriteMessage(client3, "startGame");
-            //if (client4 != null) WriteMessage(client4, "startGame");
+            WriteMessage(client2, "startGame");
+            if (client3 != null) WriteMessage(client3, "startGame");
+            if (client4 != null) WriteMessage(client4, "startGame");
         }
 
         public void turnPlayer1()
@@ -220,7 +220,7 @@ namespace Server
             Console.WriteLine("stuurt hier naar de client dat het zijn beurt is of van andere client: ");
             Console.WriteLine("yourturn");
             Console.WriteLine(" ");
-            //WriteMessage(client2, "turnPlayer1");
+            WriteMessage(client2, "turnPlayer1");
             if (client3 != null) { WriteMessage(client3, "turnPlayer1"); }
             if (client4 != null) { WriteMessage(client4, "turnPlayer1"); }
 
@@ -233,12 +233,12 @@ namespace Server
             Console.WriteLine(positionClient1);
             Console.WriteLine(" ");
 
-            //WriteMessage(client2, positionClient1.ToString());
+            WriteMessage(client2, positionClient1.ToString());
             if (client3 != null) { WriteMessage(client3, positionClient1.ToString()); }
             if (client4 != null) { WriteMessage(client4, positionClient1.ToString()); }
 
 
-            //if (ReadMessage(client2) == "DONE") { Console.WriteLine("client2 heeft succesvol de positie van clinent 1 ontvangen"); }
+            if (ReadMessage(client2) == "DONE") { Console.WriteLine("client2 heeft succesvol de positie van clinent 1 ontvangen"); }
             if (client3 != null)
                 if (ReadMessage(client3) == "DONE") { Console.WriteLine("client3 heeft succesvol de positie van clinent 1 ontvangen"); }
             if (client4 != null)

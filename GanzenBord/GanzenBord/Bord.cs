@@ -707,8 +707,12 @@ namespace GanzenBord
             userNameLabel.Visible = false;
             userNameButton.Visible = false;
             userNameTextBox.Visible = false;
-            startGameButton.Visible = true;
-            client.WriteMessage(userName);
+            if (playerNumber == 1)
+            {
+                startGameButton.Visible = true;
+            }
+                client.WriteMessage(userName);
+            
         }
     }
 }
