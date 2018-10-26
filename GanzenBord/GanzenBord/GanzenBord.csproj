@@ -91,5 +91,20 @@
   <ItemGroup>
     <None Include="Resources\ganzenBordGansRoodEnGeelEnGroenEnBlauw.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ganzenBordGansBlauw.png" />
+    <Content Include="Resources\ganzenBordGansGeel.png" />
+    <Content Include="Resources\ganzenBordGansGeelEnBlauw.png" />
+    <Content Include="Resources\ganzenBordGansGeelEnGroen.png" />
+    <Content Include="Resources\ganzenBordGansGeelEnGroenEnBlauw.png" />
+    <Content Include="Resources\ganzenBordGansGroen.png" />
+    <Content Include="Resources\ganzenBordGansGroenEnBlauw.png" />
+    <Content Include="Resources\ganzenBordGansRoodEnBlauw.png" />
+    <Content Include="Resources\ganzenBordGansRoodEnGeel.png" />
+    <Content Include="Resources\ganzenBordGansRoodEnGeelEnBlauw.png" />
+    <Content Include="Resources\ganzenBordGansRoodEnGeelEnGroen.png" />
+    <Content Include="Resources\ganzenBordGansRoodEnGroen.png" />
+    <Content Include="Resources\ganzenBordGansRoodEnGroenEnBlauw.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

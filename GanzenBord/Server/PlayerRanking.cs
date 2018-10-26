@@ -30,7 +30,7 @@ namespace Server
 
         private bool CanRankUp()
         {
-            int NeededXP = (int)((PreviousRankingXP / 4) + (PreviousRankingXP * 0.1));
+            int NeededXP = (int)((PreviousRankingXP / 2) + (PreviousRankingXP * 1.25));
             if (NeededXP < Experiance)
                 return true;
             else
@@ -39,7 +39,7 @@ namespace Server
 
         private void RankUp()
         {
-            PreviousRankingXP = (int)((PreviousRankingXP / 4) + (PreviousRankingXP * 0.1));
+            PreviousRankingXP = (int)((PreviousRankingXP / 2) + (PreviousRankingXP * 1.25));
             // Your Duck Has Ranked UP, he is now a Goose!
 
             Ranking++;

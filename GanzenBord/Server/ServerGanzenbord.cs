@@ -224,7 +224,10 @@ namespace Server
             if (client3 != null) { WriteMessage(client3, "turnPlayer1"); }
             if (client4 != null) { WriteMessage(client4, "turnPlayer1"); }
 
-            //Hier moet die ranking ontvangen van het bord, en OVERSCHRIJVEN in de File
+            var path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient1 + ".txt");
+            string data = ReadMessage(client1);
+            File.WriteAllText(path, data);
+
             positionClient1 = Convert.ToInt32(ReadMessage(client1));
             Console.WriteLine("leest hier van de client wat zijn positie is na het gooien: ");
             Console.WriteLine(positionClient1);
@@ -249,6 +252,10 @@ namespace Server
             if (client3 != null) { WriteMessage(client3, "turnPlayer2"); }
             if (client4 != null) { WriteMessage(client4, "turnPlayer2"); }
 
+            var path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient2 + ".txt");
+            string data = ReadMessage(client2);
+            File.WriteAllText(path, data);
+
             positionClient2 = Convert.ToInt32(ReadMessage(client2));
 
             WriteMessage(client1, positionClient2.ToString());
@@ -269,6 +276,10 @@ namespace Server
             if (client3 != null) { WriteMessage(client3, "yourTurn"); }
             if (client4 != null) { WriteMessage(client4, "turnPlayer3"); }
 
+            var path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient3 + ".txt");
+            string data = ReadMessage(client3);
+            File.WriteAllText(path, data);
+
             positionClient3 = Convert.ToInt32(ReadMessage(client3));
 
             WriteMessage(client1, positionClient3.ToString());
@@ -287,6 +298,10 @@ namespace Server
             WriteMessage(client2, "turnPlayer4");
             if (client3 != null) { WriteMessage(client3, "turnPlayer4"); }
             if (client4 != null) { WriteMessage(client4, "yourTurn"); }
+
+            var path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient4 + ".txt");
+            string data = ReadMessage(client4);
+            File.WriteAllText(path, data);
 
             positionClient4 = Convert.ToInt32(ReadMessage(client4));
 

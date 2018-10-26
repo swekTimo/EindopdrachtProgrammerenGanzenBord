@@ -31,7 +31,8 @@ namespace GanzenBord
 
         public void MoveGoose()
         {
-            int amountOfSpaces = Logics.RollDice();
+            int amountOfSpaces;
+            Logics.RollDice(out amountOfSpaces);
             if (PlayNextTrun == false)
             {
                 if (Wait == false)

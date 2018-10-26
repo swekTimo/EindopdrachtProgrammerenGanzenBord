@@ -15,6 +15,7 @@ namespace GanzenBord
         private int currentPosition = 0;
         private GameLogics gameLogics;
         private PlayerRanking ranking;
+
         private string userName;
         private string winnerUserName;
 
@@ -23,12 +24,13 @@ namespace GanzenBord
         private int currentPositionPlayer3 = 0;
         private int currentPositionPlayer4 = 0;
 
-        private string playerColor;
+        private string playerColour = "red";
 
         private bool DiceRolled = false;
         private bool waitForDice = false;
         bool PlayNextTrun = true;
         bool Wait = false;
+        bool firstTurn = true;
 
         public Bord()
         {
@@ -39,6 +41,7 @@ namespace GanzenBord
             ranking = new PlayerRanking();
             pictures = new List<PictureBox>();
             generatePictureList();
+            firstTurn = true;
             RulesBox.Visible = false;
             howManyPlayersLabel.Visible = false;
             playerNameLabel.Visible = false;
@@ -59,10 +62,13 @@ namespace GanzenBord
 
         private void SendAllPicturesToBack()
         {
-            foreach (PictureBox picture in pictures)
+            foreach (PictureBox image in pictures)
             {
-                picture.SendToBack();
+                image.SendToBack();
             }
+            PictureBox picture = pictures.ElementAt(0);
+            picture.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood");
+            picture.BringToFront();
         }
 
         private void generatePictureList()
@@ -149,13 +155,13 @@ namespace GanzenBord
                 twoPlayerGameButton.Visible = true;
                 threePlayerGameButton.Visible = true;
                 fourPlayerGameButton.Visible = true;
-                playerColor = "red";
+                playerColour = "red";
             }
             else
             {
-                if (playerNumber == 2) { playerColor = "green"; }
-                if (playerNumber == 3) { playerColor = "blue"; }
-                if (playerNumber == 4) { playerColor = "yellow"; }
+                if (playerNumber == 2) { playerColour = "green"; }
+                if (playerNumber == 3) { playerColour = "blue"; }
+                if (playerNumber == 4) { playerColour = "yellow"; }
                 waitForAllPlayersLabel.Visible = true;
                 this.Update();
                 waitForGameToStart();
@@ -240,6 +246,8 @@ namespace GanzenBord
                 beurtInfoLabel.Text = "Player 1 is now throwing";
                 int positionPlayer1 = Convert.ToInt32(client.ReadMessage());
                 //move de rode gans naar het nummer wat door komt
+                MoveGooseTile("red", currentPositionPlayer1, positionPlayer1);
+                currentPositionPlayer1 = positionPlayer1;
 
 
                 client.WriteMessage("DONE");
@@ -250,6 +258,8 @@ namespace GanzenBord
                 beurtInfoLabel.Text = "Player 2 is now throwing";
                 int positionPlayer2 = Convert.ToInt32(client.ReadMessage());
                 //move de groene gans naar het nummer wat door komt
+                MoveGooseTile("green", currentPositionPlayer2, positionPlayer2);
+                currentPositionPlayer2 = positionPlayer2;
 
                 client.WriteMessage("DONE");
                 //hij moet hier iets sturen anders doen de read/write het niet meer
@@ -259,6 +269,8 @@ namespace GanzenBord
                 beurtInfoLabel.Text = "Player 3 is now throwing";
                 int positionPlayer3 = Convert.ToInt32(client.ReadMessage());
                 //move de blauwe gans naar het nummer wat doorkomt
+                MoveGooseTile("blue", currentPositionPlayer3, positionPlayer3);
+                currentPositionPlayer3 = positionPlayer3;
 
                 client.WriteMessage("DONE");
                 //hij moet hier iets sturen anders doen de read/write het niet meer
@@ -268,6 +280,8 @@ namespace GanzenBord
                 beurtInfoLabel.Text = "Player 4 is now throwing";
                 int positionPlayer4 = Convert.ToInt32(client.ReadMessage());
                 //move de gele gans naar het nummer wat doorkomt
+                MoveGooseTile("yellow", currentPositionPlayer4, positionPlayer4);
+                currentPositionPlayer4 = positionPlayer4;
 
                 client.WriteMessage("DONE");
                 //hij moet hier iets sturen anders doen de read/write het niet meer
@@ -305,43 +319,24 @@ namespace GanzenBord
             RulesBox.Visible = false;
         }
 
-        public void moveGoosePosition(int player, int currentTile, int toTile)
+        public void moveGoosePosition(string duckColour, int currentTile, int toTile)
         {
-            String DuckColour = "rood";
-            switch (player) {
-                case 1:
-                    DuckColour = "rood";
-                    break;
-                case 2:
-                    DuckColour = "blauw";
-                    break;
-                case 3:
-                    DuckColour = "geel";
-                    break;
-                case 4:
-                    DuckColour = "groen";
-                    break;
-            }
 
-            MoveGooseTile(DuckColour, currentTile, toTile);
+            MoveGooseTile(duckColour, currentTile, toTile);
             currentTile = toTile;
         }
 
         public void MoveGooseTile(string DuckColour, int previousDuckTile, int nextDuckTile)
         {
-            //TODO: complete resources and change the naming of the ChangeDuck to and form tile classes
-            PictureBox duckTile = pictures.ElementAt(previousDuckTile);
-            ChangeDuckFromTile(DuckColour, duckTile);
+            ChangeDuckFromTile(DuckColour, previousDuckTile);
 
-            duckTile = pictures.ElementAt(nextDuckTile);
-
-            ChangeDuckToTile(DuckColour, duckTile);
-            duckTile.BringToFront();
+            ChangeDuckToTile(DuckColour, nextDuckTile);
 
         }
 
-        private void ChangeDuckFromTile(string duckColour, PictureBox duckTile)
+        private void ChangeDuckFromTile(string duckColour, int duckTileID)
         {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
             if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansBlauw")
                 || duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeel")
                 || duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen")
@@ -350,31 +345,32 @@ namespace GanzenBord
                 duckTile.Image = null;
                 duckTile.SendToBack();
             }
-            else if (duckColour == "rood")
-                RedDuckFromTile(duckTile);
-            else if (duckColour == "Blauw")
-                BlueDuckFromTile(duckTile);
-            else if (duckColour == "geel")
-                YellowDuckFromTile(duckTile);
-            else if (duckColour == "groen")
-                GreenDuckFromTile(duckTile);
+            else if (duckColour == "red")
+                RedDuckFromTile(duckTileID);
+            else if (duckColour == "blue")
+                BlueDuckFromTile(duckTileID);
+            else if (duckColour == "yellow")
+                YellowDuckFromTile(duckTileID);
+            else if (duckColour == "green")
+                GreenDuckFromTile(duckTileID);
 
         }
 
-        private void ChangeDuckToTile(string duckColour, PictureBox duckTile)
+        private void ChangeDuckToTile(string duckColour, int duckTileID)
         {
-            if (duckColour == "rood")
-                RedDuckToTile(duckTile);
-            else if (duckColour == "Blauw")
-                BlueDuckToTile(duckTile);
-            else if (duckColour == "geel")
-                YellowDuckToTile(duckTile);
-            else if (duckColour == "groen")
-                GreenDuckToTile(duckTile);
+            if (duckColour == "red")
+                RedDuckToTile(duckTileID);
+            else if (duckColour == "blue")
+                BlueDuckToTile(duckTileID);
+            else if (duckColour == "yellow")
+                YellowDuckToTile(duckTileID);
+            else if (duckColour == "green")
+                GreenDuckToTile(duckTileID);
         }
 
-        private void RedDuckFromTile(PictureBox duckTile)
+        private void RedDuckFromTile(int duckTileID)
         {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
             if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw"))
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroenEnBlauw");
 
@@ -393,8 +389,9 @@ namespace GanzenBord
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansBlauw");
         }
 
-        private void RedDuckToTile(PictureBox duckTile)
+        private void RedDuckToTile(int duckTileID)
         {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
             if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroenEnBlauw"))
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw");
 
@@ -414,10 +411,13 @@ namespace GanzenBord
 
             else if (duckTile.Image == null)
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood");
+
+            duckTile.BringToFront();
         }
 
-        private void BlueDuckFromTile(PictureBox duckTile)
+        private void BlueDuckFromTile(int duckTileID)
         {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
             if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw"))
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroen");
 
@@ -436,8 +436,9 @@ namespace GanzenBord
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen");
         }
 
-        private void BlueDuckToTile(PictureBox duckTile)
+        private void BlueDuckToTile(int duckTileID)
         {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
             if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroen"))
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw");
 
@@ -457,10 +458,13 @@ namespace GanzenBord
 
             else if (duckTile.Image == null)
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansBlauw");
+
+            duckTile.BringToFront();
         }
 
-        private void YellowDuckFromTile(PictureBox duckTile)
+        private void YellowDuckFromTile(int duckTileID)
         {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
             if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw"))
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroenEnBlauw");
 
@@ -479,8 +483,9 @@ namespace GanzenBord
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood");
         }
 
-        private void YellowDuckToTile(PictureBox duckTile)
+        private void YellowDuckToTile(int duckTileID)
         {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
             if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroenEnBlauw"))
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw");
 
@@ -500,10 +505,13 @@ namespace GanzenBord
 
             else if (duckTile.Image == null)
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeel");
+
+            duckTile.BringToFront();
         }
 
-        private void GreenDuckFromTile(PictureBox duckTile)
+        private void GreenDuckFromTile(int duckTileID)
         {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
             if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw"))
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnBlauw");
 
@@ -522,8 +530,9 @@ namespace GanzenBord
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood");
         }
 
-        private void GreenDuckToTile(PictureBox duckTile)
+        private void GreenDuckToTile(int duckTileID)
         {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
             if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnBlauw"))
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw");
 
@@ -543,25 +552,80 @@ namespace GanzenBord
 
             else if (duckTile.Image == null)
                 duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen");
+
+            duckTile.BringToFront();
         }
 
         private void rollDiceButton_Click(object sender, EventArgs e)
         {
             rollDiceButton.Enabled = false;
             int thrownDiceNumber;
-            thrownDiceNumber = gameLogics.RollDice();
+            gameLogics.RollDice(out thrownDiceNumber);
             diceButton.Text = thrownDiceNumber.ToString();
             Console.WriteLine("dice rolled");
 
-            int newPosition = currentPosition + thrownDiceNumber;
-            if (newPosition > 63)
+            if (Wait == true)
             {
-                newPosition = 63;
+                if (!isSameTile())
+                    PlayNextTrun = false;
+                else Wait = false;
             }
-            moveGoosePosition(playerNumber, currentPosition, newPosition);
-            currentPosition = newPosition;
+
+            if (PlayNextTrun)
+            {
+                int newPosition = currentPosition + thrownDiceNumber;
+                if (newPosition > 63)
+                {
+                    newPosition = 63 - (thrownDiceNumber - (63 - currentPosition));
+                }
+                moveGoosePosition(playerColour, currentPosition, newPosition);
+                currentPosition = newPosition;
+                specialFieldAction();
 
 
+
+                ranking.AddPoints(currentPosition);
+            }
+            else
+                PlayNextTrun = true;
+
+            client.WriteMessage(ranking.Ranking.ToString());
+
+            Console.WriteLine("stuur hier naar de server op welke positie de Client staat");
+            Console.WriteLine(currentPosition.ToString());
+            Console.WriteLine("");
+            client.WriteMessage(currentPosition.ToString());
+            game();
+        }
+
+        private bool isSameTile()
+        {
+            if (playerNumber == 1
+                && currentPosition != currentPositionPlayer2
+                && currentPosition != currentPositionPlayer3
+                && currentPosition != currentPositionPlayer4)
+                return false;
+            else if (playerNumber == 2
+                && currentPosition != currentPositionPlayer1
+                && currentPosition != currentPositionPlayer3
+                && currentPosition != currentPositionPlayer4)
+                return false;
+            else if (playerNumber == 3
+                && currentPosition != currentPositionPlayer1
+                && currentPosition != currentPositionPlayer2
+                && currentPosition != currentPositionPlayer4)
+                return false;
+            else if (playerNumber == 4
+                && currentPosition != currentPositionPlayer1
+                && currentPosition != currentPositionPlayer2
+                && currentPosition != currentPositionPlayer3)
+                return false;
+            else
+                return true;
+        }
+
+        private void specialFieldAction()
+        {
             Tuple<bool, SpecialField> tuple = gameLogics.IsSpecialField(currentPosition);
             if (tuple.Item1)
             {
@@ -569,7 +633,7 @@ namespace GanzenBord
                 switch (field.Command)
                 {
                     case SpecialField.CommandOptions.GoTO:
-                        moveGoosePosition(playerNumber, currentPosition, field.FieldNumber);
+                        moveGoosePosition(playerColour, currentPosition, field.FieldNumber);
                         break;
                     case SpecialField.CommandOptions.SkipTurn:
                         PlayNextTrun = false;
@@ -581,15 +645,6 @@ namespace GanzenBord
                         break;
                 }
             }
-
-            ranking.AddPoints(currentPosition);
-            //schrijf de ranking naar de server
-
-            Console.WriteLine("stuur hier naar de server op welke positie de Client staat");
-            Console.WriteLine(currentPosition.ToString());
-            Console.WriteLine("");
-            client.WriteMessage(currentPosition.ToString());
-            game();
         }
 
         private void userNameButton_Click(object sender, EventArgs e)

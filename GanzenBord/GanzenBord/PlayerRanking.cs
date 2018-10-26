@@ -31,7 +31,7 @@ namespace GanzenBord
 
         private bool CanRankUp()
         {
-            int NeededXP = (int)((PreviousRankingXP / 4) + (PreviousRankingXP * 0.1));
+            int NeededXP = (int)((PreviousRankingXP / 2) + (PreviousRankingXP * 1.25));
             if (NeededXP < Experiance)
                 return true;
             else
@@ -40,8 +40,8 @@ namespace GanzenBord
 
         private void RankUp()
         {
-            PreviousRankingXP = (int)((PreviousRankingXP / 4) + (PreviousRankingXP * 0.1));
-            MessageBox.Show("Your Duck Has Ranked UP, he is now a Goose!", "rank Up!");
+            PreviousRankingXP = (int)((PreviousRankingXP / 2) + (PreviousRankingXP * 1.25));
+            MessageBox.Show($"Your Duck Has Ranked UP, he is now rank {Ranking}!", "rank Up!");
 
             Ranking++;
         }
