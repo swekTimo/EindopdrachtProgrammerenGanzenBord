@@ -563,7 +563,7 @@ namespace GanzenBord
                         {
                             currentPositionPlayer1 = 63;
                         }
-                specialFieldAction();
+                specialFieldAction(1);
                     pictures[currentPositionPlayer1].Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood");
                 pictures[currentPositionPlayer1].BringToFront();
                 //deze plaatjes moeten allemaal nog aangepast worden
@@ -678,7 +678,7 @@ namespace GanzenBord
                 return true;
         }
 
-        private void specialFieldAction()
+        private void specialFieldAction(int playerPosition)
         {
             Tuple<bool, SpecialField> tuple = gameLogics.IsSpecialField(currentPosition);
             if (tuple.Item1)
@@ -687,7 +687,12 @@ namespace GanzenBord
                 switch (field.Command)
                 {
                     case SpecialField.CommandOptions.GoTO:
-                        moveGoosePosition(playerColour, currentPosition, field.FieldNumber);
+                        //moveGoosePosition(playerColour, currentPosition, field.FieldNumber);
+                        switch (playerPosition)
+                        {
+                           // case 1:
+                                
+                        }
                         break;
                     case SpecialField.CommandOptions.SkipTurn:
                         PlayNextTrun = false;
@@ -707,10 +712,7 @@ namespace GanzenBord
             userNameLabel.Visible = false;
             userNameButton.Visible = false;
             userNameTextBox.Visible = false;
-            if (playerNumber == 1)
-            {
                 startGameButton.Visible = true;
-            }
                 client.WriteMessage(userName);
             
         }
