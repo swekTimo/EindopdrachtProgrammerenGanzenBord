@@ -26,88 +26,103 @@ namespace Server
         private string gameWinner;
         private string gameWinnerUsername;
 
-        //server is AF, alleen alle player 2's  moeten uitgecomment worden
-
         public ServerGanzenbord()
         {
             TcpListener listener = new TcpListener(IPAddress.Any, 6666);
             listener.Start();
-
+            Console.WriteLine("This is the SERVER console!!!" + Environment.NewLine);
             while (playerCount < howMuchPlayersDoesClientWant)
-            {
+            { 
                 TcpClient client = listener.AcceptTcpClient();
                 playerCount++;
+
+
                 if (playerCount == 1)
                 {
                     client1 = client;
-                    userNameClient1 = ReadMessage(client1);
-                    var path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient1 + ".txt");
-                    if (!File.Exists(path))
-                    {
-                        var myFile = File.Create(path);
-                        myFile.Close();
-                    }
-                        Thread thread = new Thread(HandleClient);
+                    Thread thread = new Thread(HandleClient);
                     thread.Start(client1);
+                    Console.WriteLine("Started thread for client1");
                 }
                 if (playerCount == 2)
-                { 
+                {
                     client2 = client;
-                    userNameClient2 = ReadMessage(client2);
-                    var path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient2 + ".txt");
-                    if (!File.Exists(path))
-                    {
-                        var myFile = File.Create(path);
-                        myFile.Close();
-                    }
                     Thread thread = new Thread(HandleClient);
                     thread.Start(client2);
-            }
-            if (playerCount == 3)
-                { 
+                    Console.WriteLine("Started thread for client2");
+                }
+                if (playerCount == 3)
+                {
                     client3 = client;
-                    userNameClient3 = ReadMessage(client3);
-                    var path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient3 + ".txt");
-                    if (!File.Exists(path))
-                    {
-                        var myFile = File.Create(path);
-                        myFile.Close();
-                    }
                     Thread thread = new Thread(HandleClient);
                     thread.Start(client3);
-            }
-            if (playerCount == 4)
-                { 
+                }
+                if (playerCount == 4)
+                {
                     client4 = client;
-                    userNameClient4 = ReadMessage(client4);
-                    var path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient4 + ".txt");
-                    if (!File.Exists(path))
-                    {
-                        var myFile = File.Create(path);
-                        myFile.Close();
-                    }
                     Thread thread = new Thread(HandleClient);
                     thread.Start(client4);
+                }
+
             }
-        }
     }
 
         public void HandleClient(object obj)
         {
-            Console.WriteLine("SERVER");
-            Console.WriteLine("");
-
-            TcpClient client = obj as TcpClient;
-            WriteMessage(client1, playerCount.ToString());
-
-            if (playerCount == 1)
+            if (obj.Equals(client1))
             {
-
+                Console.WriteLine("Now in the handleclient from client1");
+                userNameClient1 = ReadMessage(client1);
+                Console.WriteLine("Username From client1: " + userNameClient1);
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient1 + ".txt");
+                if (!File.Exists(path))
+                {
+                    FileStream myFile = File.Create(path);
+                    myFile.Close();
+                }
+                WriteMessage(client1, "1");
+                Console.WriteLine("Message send to client1: 1" );
+                Console.WriteLine("Waiting for player1 to answer, with how much players he wants to play");
                 howMuchPlayersDoesClientWant = Convert.ToInt32(ReadMessage(client1));
-                Console.WriteLine("leest hier van de client hoeveel spelers hij mee wilt spelen: ");
-                Console.WriteLine(howMuchPlayersDoesClientWant);
-                Console.WriteLine(" ");
+                Console.WriteLine("Hij heeft nu binnen van player1 dat hij met " + howMuchPlayersDoesClientWant + " wilt spelen");
             }
+            if (obj.Equals(client2))
+            {
+                Console.WriteLine("Now in the handleclient from client2");
+                userNameClient2 = ReadMessage(client2);
+                Console.WriteLine("Username From client2: " + userNameClient2);
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient2 + ".txt");
+                if (!File.Exists(path))
+                {
+                    FileStream myFile = File.Create(path);
+                    myFile.Close();
+                }
+                WriteMessage(client1, "2");
+                Console.WriteLine("Message send to client1: 1");
+            }
+            if (obj.Equals(client3))
+            { 
+                userNameClient3 = ReadMessage(client3);
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient3 + ".txt");
+                if (!File.Exists(path))
+                {
+                    FileStream myFile = File.Create(path);
+                    myFile.Close();
+                }
+                WriteMessage(client1, "3");
+            }
+            if (obj.Equals(client4))
+            {
+                userNameClient4 = ReadMessage(client4);
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), userNameClient4 + ".txt");
+                if (!File.Exists(path))
+                {
+                    FileStream myFile = File.Create(path);
+                    myFile.Close();
+                }
+                WriteMessage(client1, "4");
+            }
+
 
             bool waitingForAllThePlayers = true;
             while (waitingForAllThePlayers)
@@ -136,12 +151,12 @@ namespace Server
                     writeAllClients(gameWinnerUsername);
                 }
 
-                turnPlayer2();
-                if (checkForWinner() == true) 
-                { 
-                writeAllClients(gameWinner);
-                writeAllClients(gameWinnerUsername);
-                }
+                //turnPlayer2();
+                //if (checkForWinner() == true) 
+                //{ 
+                //writeAllClients(gameWinner);
+                //writeAllClients(gameWinnerUsername);
+                //}
 
                 if (client3 != null)
                 {
@@ -168,7 +183,7 @@ namespace Server
         public void writeAllClients(string message)
         {
             WriteMessage(client1, message);
-            WriteMessage(client2, message);
+            //WriteMessage(client2, message);
             if (client3 != null) WriteMessage(client3, message);
             if (client4 != null) WriteMessage(client4, message);
         }
@@ -209,7 +224,7 @@ namespace Server
             Console.WriteLine("stuurt hier naar de client1 dat de game kan beginnen : ");
             Console.WriteLine("startGame");
             Console.WriteLine(" ");
-            WriteMessage(client2, "startGame");
+            //WriteMessage(client2, "startGame");
             if (client3 != null) WriteMessage(client3, "startGame");
             if (client4 != null) WriteMessage(client4, "startGame");
         }
@@ -220,7 +235,7 @@ namespace Server
             Console.WriteLine("stuurt hier naar de client dat het zijn beurt is of van andere client: ");
             Console.WriteLine("yourturn");
             Console.WriteLine(" ");
-            WriteMessage(client2, "turnPlayer1");
+            //WriteMessage(client2, "turnPlayer1");
             if (client3 != null) { WriteMessage(client3, "turnPlayer1"); }
             if (client4 != null) { WriteMessage(client4, "turnPlayer1"); }
 
@@ -233,12 +248,12 @@ namespace Server
             Console.WriteLine(positionClient1);
             Console.WriteLine(" ");
 
-            WriteMessage(client2, positionClient1.ToString());
+            //WriteMessage(client2, positionClient1.ToString());
             if (client3 != null) { WriteMessage(client3, positionClient1.ToString()); }
             if (client4 != null) { WriteMessage(client4, positionClient1.ToString()); }
 
 
-            if (ReadMessage(client2) == "DONE") { Console.WriteLine("client2 heeft succesvol de positie van clinent 1 ontvangen"); }
+            //if (ReadMessage(client2) == "DONE") { Console.WriteLine("client2 heeft succesvol de positie van clinent 1 ontvangen"); }
             if (client3 != null)
                 if (ReadMessage(client3) == "DONE") { Console.WriteLine("client3 heeft succesvol de positie van clinent 1 ontvangen"); }
             if (client4 != null)

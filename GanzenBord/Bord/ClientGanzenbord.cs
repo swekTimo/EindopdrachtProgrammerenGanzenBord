@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GanzenBord
+namespace Bord
 {
     class ClientGanzenbord
     {
@@ -14,7 +14,7 @@ namespace GanzenBord
         public void makeConnectionWithTheServer()
         {
             client = new TcpClient(GetLocalIPAddress(), 6666);
-            //client = new TcpClient("145.49.18.89" , 6666);    
+                //"145.49.18.89", 6666);
         }
 
         public string ReadMessage()
@@ -32,8 +32,8 @@ namespace GanzenBord
 
         public static string GetLocalIPAddress()
         {
-            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (IPAddress ip in host.AddressList)
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
             {
                 if (ip.AddressFamily == AddressFamily.InterNetwork)
                 {

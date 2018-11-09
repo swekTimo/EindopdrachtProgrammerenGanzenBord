@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace GanzenBord
+namespace Bord
 {
     public partial class Bord : Form
     {
@@ -24,7 +24,7 @@ namespace GanzenBord
         private int currentPositionPlayer3 = 0;
         private int currentPositionPlayer4 = 0;
 
-        private string playerColour;
+        private string playerColour = "red";
 
         private bool DiceRolled = false;
         private bool waitForDice = false;
@@ -34,8 +34,8 @@ namespace GanzenBord
 
         public Bord()
         {
-            Console.WriteLine("this is the CLIENT console" + Environment.NewLine);
-
+            Console.WriteLine("CLIENT");
+            Console.WriteLine("");
             InitializeComponent();
             gameLogics = GameLogics.GetInstance();
             ranking = new PlayerRanking();
@@ -139,21 +139,13 @@ namespace GanzenBord
             pictures.Add(sixtythreePictureBox);
         }
 
-        private void userNameButton_Click(object sender, EventArgs e)
-        {
-            userName = userNameTextBox.Text;
-            userNameLabel.Visible = false;
-            userNameButton.Visible = false;
-            userNameTextBox.Visible = false;
-            startGameButton.Visible = true;
-            client.WriteMessage(userName);
-        }
 
         private void startGameButton_Click(object sender, EventArgs e)
         {
             playerNumber = Convert.ToInt32(client.ReadMessage());
-            Console.WriteLine("We are client" + playerNumber + Environment.NewLine);
-
+            Console.WriteLine("leest hier van de server: welk nummer client we zijn: client nummer: ");
+            Console.Write(playerNumber);
+            Console.WriteLine(" ");
             playerNameLabel.Text = "Player " + playerNumber + "  :  " + userName;
             playerNameLabel.Visible = true;
             startGameButton.Visible = false;
@@ -167,12 +159,11 @@ namespace GanzenBord
             }
             else
             {
-                Update();
                 if (playerNumber == 2) { playerColour = "green"; }
                 if (playerNumber == 3) { playerColour = "blue"; }
                 if (playerNumber == 4) { playerColour = "yellow"; }
                 waitForAllPlayersLabel.Visible = true;
-                
+                this.Update();
                 waitForGameToStart();
             }
 
@@ -255,7 +246,7 @@ namespace GanzenBord
                 beurtInfoLabel.Text = "Player 1 is now throwing";
                 int positionPlayer1 = Convert.ToInt32(client.ReadMessage());
                 //dit werkt dus nieet
-                //MoveGooseTile("red", currentPositionPlayer1, positionPlayer1);
+                MoveGooseTile("red", currentPositionPlayer1, positionPlayer1);
                 currentPositionPlayer1 = positionPlayer1;
                 client.WriteMessage("DONE");
             }
@@ -264,7 +255,7 @@ namespace GanzenBord
                 beurtInfoLabel.Text = "Player 2 is now throwing";
                 int positionPlayer2 = Convert.ToInt32(client.ReadMessage());
                 //werkt niet
-                //MoveGooseTile("green", currentPositionPlayer2, positionPlayer2);
+                MoveGooseTile("green", currentPositionPlayer2, positionPlayer2);
                 currentPositionPlayer2 = positionPlayer2;
                 client.WriteMessage("DONE");
             }
@@ -273,7 +264,7 @@ namespace GanzenBord
                 beurtInfoLabel.Text = "Player 3 is now throwing";
                 int positionPlayer3 = Convert.ToInt32(client.ReadMessage());
                 //werkt niet
-                //MoveGooseTile("blue", currentPositionPlayer3, positionPlayer3);
+                MoveGooseTile("blue", currentPositionPlayer3, positionPlayer3);
                 currentPositionPlayer3 = positionPlayer3;
                 client.WriteMessage("DONE");
             }
@@ -282,7 +273,7 @@ namespace GanzenBord
                 beurtInfoLabel.Text = "Player 4 is now throwing";
                 int positionPlayer4 = Convert.ToInt32(client.ReadMessage());
                 //werkt niet
-                //MoveGooseTile("yellow", currentPositionPlayer4, positionPlayer4);
+                MoveGooseTile("yellow", currentPositionPlayer4, positionPlayer4);
                 currentPositionPlayer4 = positionPlayer4;
                 client.WriteMessage("DONE");
             }
@@ -317,6 +308,243 @@ namespace GanzenBord
         private void rulesButton_MouseLeave(object sender, EventArgs e)
         {
             RulesBox.Visible = false;
+        }
+
+        public void moveGoosePosition(string duckColour, int currentTile, int toTile)
+        {
+
+            MoveGooseTile(duckColour, currentTile, toTile);
+            currentTile = toTile;
+        }
+
+        public void MoveGooseTile(string DuckColour, int previousDuckTile, int nextDuckTile)
+        {
+            ChangeDuckFromTile(DuckColour, previousDuckTile);
+
+            ChangeDuckToTile(DuckColour, nextDuckTile);
+
+        }
+
+        private void ChangeDuckFromTile(string duckColour, int duckTileID)
+        {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
+            if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansBlauw")
+                || duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeel")
+                || duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen")
+                || duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood"))
+            {
+                duckTile.Image = null;
+                duckTile.SendToBack();
+            }
+            else if (duckColour == "red")
+                RedDuckFromTile(duckTileID);
+            else if (duckColour == "blue")
+                BlueDuckFromTile(duckTileID);
+            else if (duckColour == "yellow")
+                YellowDuckFromTile(duckTileID);
+            else if (duckColour == "green")
+                GreenDuckFromTile(duckTileID);
+
+        }
+
+        private void ChangeDuckToTile(string duckColour, int duckTileID)
+        {
+            if (duckColour == "red")
+                RedDuckToTile(duckTileID);
+            else if (duckColour == "blue")
+                BlueDuckToTile(duckTileID);
+            else if (duckColour == "yellow")
+                YellowDuckToTile(duckTileID);
+            else if (duckColour == "green")
+                GreenDuckToTile(duckTileID);
+        }
+
+        private void RedDuckFromTile(int duckTileID)
+        {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
+            if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroenEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroen");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGanGroenEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeel"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeel");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansBlauw");
+        }
+
+        private void RedDuckToTile(int duckTileID)
+        {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
+            if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroen");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGanGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroenEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeel"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeel");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroen");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnBlauw");
+
+            else if (duckTile.Image == null)
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood");
+
+            duckTile.BringToFront();
+        }
+
+        private void BlueDuckFromTile(int duckTileID)
+        {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
+            if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroen");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroen");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeel");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroen");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeel");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen");
+        }
+
+        private void BlueDuckToTile(int duckTileID)
+        {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
+            if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroenEnBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeel"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroenEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeel"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroenEnBlauw");
+
+            else if (duckTile.Image == null)
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansBlauw");
+
+            duckTile.BringToFront();
+        }
+
+        private void YellowDuckFromTile(int duckTileID)
+        {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
+            if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroenEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroenEnBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroen");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeel"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood");
+        }
+
+        private void YellowDuckToTile(int duckTileID)
+        {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
+            if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroenEnBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroen");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeel");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroen");
+
+            else if (duckTile.Image == null)
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeel");
+
+            duckTile.BringToFront();
+        }
+
+        private void GreenDuckFromTile(int duckTileID)
+        {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
+            if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeel");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroenEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeel");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroen"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood");
+        }
+
+        private void GreenDuckToTile(int duckTileID)
+        {
+            PictureBox duckTile = pictures.ElementAt(duckTileID);
+            if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroenEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroenEnBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeel"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGeelEnGroen");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroenEnBlauw");
+
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansBlauw"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroenEnBlauw");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeel"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGeelEnGroen");
+            else if (duckTile.Image == (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRood"))
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansRoodEnGroen");
+
+            else if (duckTile.Image == null)
+                duckTile.Image = (Image)Properties.Resources.ResourceManager.GetObject("ganzenBordGansGroen");
+
+            duckTile.BringToFront();
         }
 
         private void rollDiceButton_Click(object sender, EventArgs e)
@@ -419,6 +647,8 @@ namespace GanzenBord
                             //    PlayNextTrun = true;
 
                             //client.WriteMessage(ranking.Ranking.ToString());
+
+
             game();
         }
 
@@ -484,6 +714,17 @@ namespace GanzenBord
                         break;
                 }
             }
+        }
+
+        private void userNameButton_Click(object sender, EventArgs e)
+        {
+            userName = userNameTextBox.Text;
+            userNameLabel.Visible = false;
+            userNameButton.Visible = false;
+            userNameTextBox.Visible = false;
+                startGameButton.Visible = true;
+                client.WriteMessage(userName);
+            
         }
     }
 }
